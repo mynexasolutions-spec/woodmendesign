@@ -95,7 +95,6 @@ export default function ProductDetailPage() {
       message: `${product.name} - ₹${(product.price * quantity).toLocaleString('en-IN')}`,
       type: 'cart',
     });
-    router.push('/cart');
   };
 
   const handleBuyNow = () => {
@@ -522,7 +521,6 @@ export default function ProductDetailPage() {
                               message: `${rel.name} - ₹${rel.price.toLocaleString('en-IN')}`,
                               type: 'cart',
                             });
-                            router.push('/cart');
                           }}
                           className="w-8 h-8 rounded-lg bg-[#3D2516] hover:bg-[#52331F] text-[#FAF6F0] flex items-center justify-center transition-colors shadow-sm"
                           title="Quick Add to Cart"

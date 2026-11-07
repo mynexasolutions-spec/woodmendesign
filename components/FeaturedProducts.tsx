@@ -192,7 +192,6 @@ export default function FeaturedProducts({
                           message: `${product.name} (₹${product.price.toLocaleString('en-IN')})`,
                           type: 'cart',
                         });
-                        router.push('/cart');
                       }}
                       className="w-8 h-8 rounded-lg bg-[#4D2F1A] hover:bg-[#6E4526] active:scale-90 text-[#FAF6F0] flex items-center justify-center transition-all shadow hover:shadow-md"
                       aria-label={`Add ${product.name} to cart`}

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useMemo, useEffect, Suspense } from 'react';
+import React, { useState, useMemo, useEffect, useRef, Suspense } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useSearchParams, useRouter } from 'next/navigation';
@@ -38,7 +38,9 @@ function ProductsContent() {
   const { showToast } = useToast();
 
   const [selectedCategory, setSelectedCategory] = useState<string>(urlCategory || 'All');
-  const [searchQuery, setSearchQuery] = useState<string>('');
+  const [searchQuery, setSearchQuery] = useState<string>(urlSearch || '');
+  const [isSearchExpanded, setIsSearchExpanded] = useState<boolean>(!!urlSearch);
+  const searchInputRef = useRef<HTMLInputElement>(null);
   const [sortBy, setSortBy] = useState<SortOption>('featured');
   const [isSearchOpen, setIsSearchOpen] = useState(false);
 
@@ -65,6 +67,7 @@ function ProductsContent() {
   useEffect(() => {
     if (urlSearch) {
       setSearchQuery(urlSearch);
+      setIsSearchExpanded(true);
     }
   }, [urlSearch]);
 
@@ -201,33 +204,84 @@ function ProductsContent() {
             </div>
 
             {/* Search Input & Sort Dropdown */}
-            <div className="flex items-center gap-2.5 shrink-0">
-              {/* Search Bar */}
-              <div className="relative flex-1 sm:w-56 md:w-64">
-                <Search className="w-4 h-4 text-stone-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
-                <input
-                  type="text"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder="Search products..."
-                  className="w-full pl-9 pr-8 py-2 rounded-full text-xs bg-white border border-[#DFCFC0] text-[#2A180E] placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-[#3D2516]/30 transition-all"
-                />
-                {searchQuery && (
+            <div className="flex items-center gap-2.5 shrink-0 justify-end">
+              {/* Expandable Search Bar */}
+              <div
+                className={`relative flex items-center transition-all duration-300 ease-in-out ${
+                  isSearchExpanded || searchQuery
+                    ? 'w-48 sm:w-60 md:w-64'
+                    : 'w-9'
+                }`}
+              >
+                <div className="relative w-full h-9 flex items-center">
+                  {/* Search Icon / Trigger Button */}
                   <button
-                    onClick={() => setSearchQuery('')}
-                    className="absolute right-2.5 top-1/2 -translate-y-1/2 text-stone-400 hover:text-stone-700"
-                    aria-label="Clear search"
+                    type="button"
+                    onClick={() => {
+                      if (!isSearchExpanded && !searchQuery) {
+                        setIsSearchExpanded(true);
+                        setTimeout(() => searchInputRef.current?.focus(), 80);
+                      }
+                    }}
+                    className={`absolute left-0 top-0 w-9 h-9 flex items-center justify-center rounded-full text-[#5C4535] hover:text-[#2A180E] transition-all z-10 ${
+                      isSearchExpanded || searchQuery
+                        ? 'pointer-events-none text-stone-400'
+                        : 'cursor-pointer bg-white border border-[#DFCFC0] shadow-sm hover:border-[#3D2516] hover:bg-[#FAF6F0]'
+                    }`}
+                    aria-label="Search products"
+                    title="Search products"
                   >
-                    <X className="w-3.5 h-3.5" />
+                    <Search className="w-4 h-4" />
                   </button>
-                )}
+
+                  {/* Expandable Input Field */}
+                  <input
+                    ref={searchInputRef}
+                    type="text"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    onFocus={() => setIsSearchExpanded(true)}
+                    onBlur={() => {
+                      if (!searchQuery.trim()) {
+                        setIsSearchExpanded(false);
+                      }
+                    }}
+                    placeholder={isSearchExpanded || searchQuery ? 'Search products...' : ''}
+                    className={`w-full h-9 rounded-full text-xs bg-white text-[#2A180E] placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-[#3D2516]/30 transition-all duration-300 ${
+                      isSearchExpanded || searchQuery
+                        ? 'pl-9 pr-8 border border-[#DFCFC0] shadow-sm opacity-100 cursor-text'
+                        : 'pl-9 pr-0 border-transparent opacity-0 pointer-events-none cursor-pointer'
+                    }`}
+                  />
+
+                  {/* Clear / Collapse Button */}
+                  {(isSearchExpanded || searchQuery) && (
+                    <button
+                      type="button"
+                      onMouseDown={(e) => {
+                        e.preventDefault();
+                        if (searchQuery) {
+                          setSearchQuery('');
+                          searchInputRef.current?.focus();
+                        } else {
+                          setIsSearchExpanded(false);
+                        }
+                      }}
+                      className="absolute right-2.5 top-1/2 -translate-y-1/2 text-stone-400 hover:text-stone-700 p-0.5 z-10 transition-colors"
+                      aria-label="Close search"
+                      title={searchQuery ? 'Clear search' : 'Close search'}
+                    >
+                      <X className="w-3.5 h-3.5" />
+                    </button>
+                  )}
+                </div>
               </div>
 
               {/* Sort By Select */}
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value as SortOption)}
-                className="py-2 px-3 rounded-full text-xs font-semibold bg-white border border-[#DFCFC0] text-[#2A180E] focus:outline-none focus:ring-2 focus:ring-[#3D2516]/30 cursor-pointer"
+                className="py-2 px-3 rounded-full text-xs font-semibold bg-white border border-[#DFCFC0] text-[#2A180E] focus:outline-none focus:ring-2 focus:ring-[#3D2516]/30 cursor-pointer shadow-sm"
                 aria-label="Sort products"
               >
                 <option value="featured">Sort: Featured</option>
@@ -410,7 +464,6 @@ function ProductsContent() {
                             message: `${product.name} - ₹${product.price.toLocaleString('en-IN')}`,
                             type: 'cart',
                           });
-                          router.push('/cart');
                         }}
                         className="p-2.5 rounded-xl bg-[#3D2516] hover:bg-[#5C3B24] text-[#FAF6F0] hover:scale-105 active:scale-95 transition-all shadow"
                         aria-label={`Add ${product.name} to cart`}

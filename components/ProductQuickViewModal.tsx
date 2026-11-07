@@ -55,8 +55,10 @@ export default function ProductQuickViewModal({
   const handleAddToCart = () => {
     addToCart(product, quantity);
     setAdded(true);
-    onClose();
-    router.push('/cart');
+    setTimeout(() => {
+      setAdded(false);
+      onClose();
+    }, 600);
   };
 
   return (
