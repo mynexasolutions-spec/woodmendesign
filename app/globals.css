@@ -1,0 +1,82 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg-parchment: #FAF6F0;
+  --bg-cream: #F5EFEB;
+  --bg-card: #FFFFFF;
+  --text-dark: #20150F;
+  --text-muted: #6B5547;
+  --wood-primary: #3A2315;
+  --wood-dark: #24140B;
+  --wood-amber: #D49344;
+  --gold-accent: #E5A855;
+}
+
+body {
+  background-color: #FAF6F0;
+  color: #20150F;
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  overflow-x: hidden;
+}
+
+*,
+*::before,
+*::after,
+h1, h2, h3, h4, h5, h6, p, span, a, button, input, textarea, select {
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #F2E9DE;
+}
+::-webkit-scrollbar-thumb {
+  background: #A67B52;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #8C5E37;
+}
+
+.font-serif-display,
+.font-cinzel,
+.font-serif {
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+}
+
+/* Subtle wood texture or gradients */
+.wood-gradient-hero {
+  background: radial-gradient(circle at 75% 35%, rgba(68, 42, 25, 0.92) 0%, rgba(32, 20, 14, 0.98) 70%, #150B06 100%);
+}
+
+.wood-gradient-dark {
+  background: linear-gradient(135deg, #2A180E 0%, #1B0F09 100%);
+}
+
+.wood-gradient-card {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.95) 0%, rgba(250, 246, 240, 0.9) 100%);
+}
+
+.gold-gradient-button {
+  background: linear-gradient(135deg, #E5A855 0%, #C98A36 100%);
+}
+
+.gold-gradient-button:hover {
+  background: linear-gradient(135deg, #F0B86B 0%, #D49540 100%);
+}
+
+/* Hide scrollbar for category scroll */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
