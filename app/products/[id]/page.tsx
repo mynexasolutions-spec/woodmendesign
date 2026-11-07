@@ -313,12 +313,12 @@ export default function ProductDetailPage() {
                 </button>
               </div>
 
-              {/* Row 2: Instant Buy Now */}
+              {/* Row 2: Instant Buy Now (WhatsApp Green) */}
               <button
                 onClick={handleBuyNow}
-                className="w-full py-3.5 sm:py-4 rounded-2xl bg-gradient-to-r from-[#E5A855] via-[#DE983C] to-[#C9842C] hover:brightness-105 text-[#1E120A] font-bold text-sm sm:text-base shadow-md hover:shadow-lg transition-all active:scale-[0.99] flex items-center justify-center gap-2"
+                className="w-full py-3.5 sm:py-4 rounded-2xl bg-[#25D366] hover:bg-[#20BD5A] text-white font-bold text-sm sm:text-base shadow-md hover:shadow-lg transition-all active:scale-[0.99] flex items-center justify-center gap-2"
               >
-                <WhatsAppIcon className="w-5 h-5 text-[#1E120A] shrink-0" />
+                <WhatsAppIcon className="w-5 h-5 text-white shrink-0" />
                 <span>Buy Now with Instant Checkout (₹{(product.price * quantity).toLocaleString('en-IN')})</span>
               </button>
             </div>
