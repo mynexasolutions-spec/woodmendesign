@@ -1,13 +1,11 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { Star, Heart, CheckCircle2, PenLine, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Star, Heart, CheckCircle2, ChevronLeft, ChevronRight } from 'lucide-react';
 import { TESTIMONIALS, Testimonial } from '@/data/testimonials';
-import WriteReviewModal from '@/components/WriteReviewModal';
 
 export default function Testimonials() {
-  const [reviewsList, setReviewsList] = useState<Testimonial[]>(TESTIMONIALS);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [reviewsList] = useState<Testimonial[]>(TESTIMONIALS);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [itemsPerPage, setItemsPerPage] = useState(3);
   const [isPaused, setIsPaused] = useState(false);
@@ -73,27 +71,6 @@ export default function Testimonials() {
     setTouchStartX(null);
   };
 
-  const handleAddReview = (newReview: {
-    name: string;
-    location: string;
-    rating: number;
-    product: string;
-    quote: string;
-  }) => {
-    const created: Testimonial = {
-      id: `review-${Date.now()}`,
-      name: newReview.name,
-      location: newReview.location,
-      avatar: `https://ui-avatars.com/api/?name=${encodeURIComponent(newReview.name)}&background=3d2516&color=e5a855&bold=true`,
-      rating: newReview.rating,
-      product: newReview.product,
-      quote: newReview.quote,
-      verified: true,
-    };
-    setReviewsList((prev) => [created, ...prev]);
-    setCurrentIndex(0);
-  };
-
   const totalDots = maxIndex + 1;
 
   return (
@@ -120,35 +97,24 @@ export default function Testimonials() {
               Real feedback from over 10,000+ happy households enjoying genuine Indian handcrafted kitchenware.
             </p>
 
-            <div className="flex items-center gap-2">
+            {/* Header Navigation Buttons */}
+            <div className="flex items-center gap-1.5 shrink-0">
               <button
                 type="button"
-                onClick={() => setIsModalOpen(true)}
-                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full border border-amber-700/40 bg-white hover:bg-[#FAF6F0] text-amber-900 text-xs font-bold shadow-sm transition-colors shrink-0"
+                onClick={handlePrev}
+                aria-label="Previous testimonial"
+                className="w-8 h-8 rounded-full border border-[#D5C2B0] bg-white hover:bg-[#F2ECE3] text-[#2A180E] flex items-center justify-center transition-colors shadow-sm"
               >
-                <PenLine className="w-3.5 h-3.5" />
-                <span>Write a Review</span>
+                <ChevronLeft className="w-4 h-4" />
               </button>
-
-              {/* Header Navigation Buttons */}
-              <div className="flex items-center gap-1.5">
-                <button
-                  type="button"
-                  onClick={handlePrev}
-                  aria-label="Previous testimonial"
-                  className="w-8 h-8 rounded-full border border-[#D5C2B0] bg-white hover:bg-[#F2ECE3] text-[#2A180E] flex items-center justify-center transition-colors shadow-sm"
-                >
-                  <ChevronLeft className="w-4 h-4" />
-                </button>
-                <button
-                  type="button"
-                  onClick={handleNext}
-                  aria-label="Next testimonial"
-                  className="w-8 h-8 rounded-full border border-[#D5C2B0] bg-white hover:bg-[#F2ECE3] text-[#2A180E] flex items-center justify-center transition-colors shadow-sm"
-                >
-                  <ChevronRight className="w-4 h-4" />
-                </button>
-              </div>
+              <button
+                type="button"
+                onClick={handleNext}
+                aria-label="Next testimonial"
+                className="w-8 h-8 rounded-full border border-[#D5C2B0] bg-white hover:bg-[#F2ECE3] text-[#2A180E] flex items-center justify-center transition-colors shadow-sm"
+              >
+                <ChevronRight className="w-4 h-4" />
+              </button>
             </div>
           </div>
         </div>
@@ -280,13 +246,6 @@ export default function Testimonials() {
             ))}
           </div>
         )}
-
-        {/* Write Review Modal */}
-        <WriteReviewModal
-          isOpen={isModalOpen}
-          onClose={() => setIsModalOpen(false)}
-          onSubmitReview={handleAddReview}
-        />
       </div>
     </section>
   );
