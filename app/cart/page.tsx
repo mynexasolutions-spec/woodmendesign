@@ -50,7 +50,7 @@ export default function CartPage() {
           <h1 className="text-3xl sm:text-4xl font-bold text-[#FAF5EE] tracking-tight">
             Your Shopping Cart
           </h1>
-          <p className="mt-2 text-xs sm:text-sm text-[#D0BEB0]">
+          <p className="mt-2 text-xs sm:text-sm text-[#D0BEB0] max-w-xl mx-auto">
             Review your handcrafted wooden pieces before proceeding to checkout.
           </p>
         </div>

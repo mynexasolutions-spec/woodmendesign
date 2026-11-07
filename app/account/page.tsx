@@ -52,8 +52,8 @@ export default function AccountPage() {
 
       {/* Header Banner */}
       <section className="bg-[#180E09] text-white pt-24 sm:pt-28 pb-10 sm:pb-14 border-b border-[#311E13] relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <nav className="flex items-center gap-2 text-xs text-amber-200/70 mb-3" aria-label="Breadcrumb">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <nav className="flex items-center justify-center gap-2 text-xs text-amber-200/70 mb-3" aria-label="Breadcrumb">
             <Link href="/" className="hover:text-amber-300 transition-colors">
               Home
             </Link>
@@ -64,7 +64,7 @@ export default function AccountPage() {
           <h1 className="text-3xl sm:text-4xl font-bold text-[#FAF5EE] tracking-tight">
             My Account &amp; Orders
           </h1>
-          <p className="mt-2 text-xs sm:text-sm text-[#D0BEB0]">
+          <p className="mt-2 text-xs sm:text-sm text-[#D0BEB0] max-w-xl mx-auto">
             Manage your profile, view recent consignments, and track handcrafted orders.
           </p>
         </div>

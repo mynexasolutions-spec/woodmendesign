@@ -58,7 +58,7 @@ export default function WishlistPage() {
           <h1 className="text-3xl sm:text-4xl font-bold text-[#FAF5EE] tracking-tight">
             Your Saved Wishlist
           </h1>
-          <p className="mt-2 text-xs sm:text-sm text-[#D0BEB0]">
+          <p className="mt-2 text-xs sm:text-sm text-[#D0BEB0] max-w-xl mx-auto">
             Handcrafted pieces you&apos;ve shortlisted for your home or thoughtful gifting.
           </p>
         </div>
