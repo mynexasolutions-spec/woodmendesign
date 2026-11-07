@@ -14,7 +14,6 @@ import {
   Sparkles,
   Phone,
   CheckCircle2,
-  Share2,
   Plus,
   Minus
 } from 'lucide-react';
@@ -47,8 +46,8 @@ export default function ProductDetailPage() {
     return (
       <div className="min-h-screen bg-[#FAF6F0] flex flex-col justify-between">
         <Navbar onOpenSearch={() => setIsSearchOpen(true)} />
-        <div className="max-w-md mx-auto text-center py-20 px-4 space-y-4">
-          <h2 className="font-serif-display text-2xl font-bold text-[#2A180E]">
+        <div className="max-w-md mx-auto text-center py-28 px-4 space-y-4">
+          <h2 className="text-2xl font-bold text-[#2A180E]">
             Product Not Found
           </h2>
           <p className="text-xs text-stone-600">
@@ -56,7 +55,7 @@ export default function ProductDetailPage() {
           </p>
           <Link
             href="/products"
-            className="inline-flex items-center justify-center px-5 py-2.5 rounded-full bg-[#3D2516] text-white text-xs font-bold"
+            className="inline-flex items-center justify-center px-6 py-3 rounded-full bg-[#3D2516] text-white text-xs font-bold hover:bg-[#52331F] transition-colors"
           >
             Back to All Products
           </Link>
@@ -85,13 +84,18 @@ export default function ProductDetailPage() {
     setIsCheckoutOpen(true);
   };
 
+  const discountAmount = product.originalPrice ? product.originalPrice - product.price : 0;
+  const discountPercent = product.originalPrice
+    ? Math.round((discountAmount / product.originalPrice) * 100)
+    : 0;
+
   return (
     <div className="min-h-screen flex flex-col bg-[#FAF6F0]">
       <Navbar onOpenSearch={() => setIsSearchOpen(true)} />
 
-      {/* Breadcrumb Bar - padded down to sit gracefully under semi-transparent fixed navbar */}
-      <div className="pt-20 sm:pt-24 pb-3 bg-[#F0E6DB] border-b border-[#DFD1C2] text-xs text-[#6B5547]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center gap-2">
+      {/* Breadcrumb Bar */}
+      <div className="pt-24 sm:pt-28 pb-4 bg-[#F5ECE1]/70 border-b border-[#E8DCCE] text-xs text-[#6B5547]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center gap-2 flex-wrap">
           <Link href="/" className="hover:text-[#2A180E] transition-colors">
             Home
           </Link>
@@ -100,7 +104,10 @@ export default function ProductDetailPage() {
             Products
           </Link>
           <span className="opacity-40">/</span>
-          <Link href="/products" className="hover:text-[#2A180E] transition-colors">
+          <Link
+            href={`/products?category=${encodeURIComponent(product.category)}`}
+            className="hover:text-[#2A180E] transition-colors"
+          >
             {product.category}
           </Link>
           <span className="opacity-40">/</span>
@@ -110,53 +117,51 @@ export default function ProductDetailPage() {
         </div>
       </div>
 
-      {/* Main Product Layout */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14 flex-1">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
-          {/* Left Column: Image Showcase */}
+      {/* Main Product Layout with Generous Breathing Room */}
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16 flex-1 w-full">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 xl:gap-16 items-start">
+          {/* Left Column: Spacious, Bright Photography Stage */}
           <div className="lg:col-span-6 space-y-4">
-            <div className="relative aspect-square rounded-3xl overflow-hidden bg-gradient-to-b from-[#241710] to-[#170E09] border border-[#483020] shadow-xl p-8 flex items-center justify-center group">
+            {/* Main Image Showcase */}
+            <div className="relative aspect-square w-full rounded-3xl overflow-hidden bg-white border border-[#E8DCCE] shadow-sm hover:shadow-md transition-all duration-300 p-6 sm:p-10 flex items-center justify-center group">
               {product.badge && (
-                <span className="absolute top-5 left-5 z-10 px-3 py-1 rounded-md bg-[#E5A855] text-stone-950 text-xs font-bold uppercase tracking-wider shadow">
+                <span className="absolute top-5 left-5 z-10 px-3.5 py-1.5 rounded-full bg-[#E5A855] text-stone-950 text-xs font-bold uppercase tracking-wider shadow-sm">
                   {product.badge}
                 </span>
               )}
 
-              <div
-                className="relative w-72 h-72 sm:w-80 sm:h-80 rounded-2xl overflow-hidden bg-white/5 backdrop-blur-sm p-4 border border-white/10 group-hover:scale-105 transition-transform duration-500"
-                style={{ position: 'relative', width: '320px', height: '320px', maxWidth: '100%' }}
-              >
+              <div className="relative w-full h-full max-w-[440px] max-h-[440px] transition-transform duration-500 group-hover:scale-105 flex items-center justify-center">
                 <Image
                   src={product.image}
                   alt={product.name}
                   fill
-                  sizes="320px"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
                   className="object-contain p-2"
                   priority
                 />
               </div>
 
-              {/* Watermark seal */}
-              <div className="absolute bottom-4 right-4 bg-[#1B110A]/80 backdrop-blur-md px-3 py-1.5 rounded-xl border border-amber-500/20 text-[10px] text-amber-300 font-mono">
-                100% Solid Seasoned Timber
+              {/* Timber Seal Pill */}
+              <div className="absolute bottom-4 right-4 bg-white/95 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-[#E8DCCE] text-[11px] text-[#5C4535] font-medium shadow-sm">
+                100% Solid {product.woodType}
               </div>
             </div>
 
-            {/* Quick feature highlights beneath image */}
-            <div className="grid grid-cols-3 gap-3">
-              <div className="p-3 rounded-xl bg-white border border-[#EADBCC] text-center space-y-1">
-                <ShieldCheck className="w-4 h-4 text-amber-700 mx-auto" />
-                <span className="text-[11px] font-bold text-[#2A180E] block">
+            {/* Unified Trust Strip */}
+            <div className="grid grid-cols-3 divide-x divide-[#E8DCCE] rounded-2xl bg-white border border-[#E8DCCE] p-3.5 shadow-sm text-center">
+              <div className="px-2 space-y-1">
+                <ShieldCheck className="w-5 h-5 text-amber-700 mx-auto" />
+                <span className="text-[11px] sm:text-xs font-bold text-[#2A180E] block">
                   Food-Safe Oil
                 </span>
                 <span className="text-[10px] text-stone-500 block">
-                  Non-toxic polish
+                  Non-toxic finish
                 </span>
               </div>
 
-              <div className="p-3 rounded-xl bg-white border border-[#EADBCC] text-center space-y-1">
-                <Truck className="w-4 h-4 text-amber-700 mx-auto" />
-                <span className="text-[11px] font-bold text-[#2A180E] block">
+              <div className="px-2 space-y-1">
+                <Truck className="w-5 h-5 text-amber-700 mx-auto" />
+                <span className="text-[11px] sm:text-xs font-bold text-[#2A180E] block">
                   Free Shipping
                 </span>
                 <span className="text-[10px] text-stone-500 block">
@@ -164,9 +169,9 @@ export default function ProductDetailPage() {
                 </span>
               </div>
 
-              <div className="p-3 rounded-xl bg-white border border-[#EADBCC] text-center space-y-1">
-                <RotateCcw className="w-4 h-4 text-amber-700 mx-auto" />
-                <span className="text-[11px] font-bold text-[#2A180E] block">
+              <div className="px-2 space-y-1">
+                <RotateCcw className="w-5 h-5 text-amber-700 mx-auto" />
+                <span className="text-[11px] sm:text-xs font-bold text-[#2A180E] block">
                   7-Day Returns
                 </span>
                 <span className="text-[10px] text-stone-500 block">
@@ -178,17 +183,18 @@ export default function ProductDetailPage() {
 
           {/* Right Column: Buying Details & Info */}
           <div className="lg:col-span-6 space-y-6">
+            {/* Header info */}
             <div>
-              <span className="text-xs uppercase tracking-widest text-[#8C5E37] font-bold block mb-1">
+              <span className="inline-block px-3 py-1 rounded-full bg-[#EFE4D6] text-[#8C5E37] text-xs font-bold tracking-wider uppercase mb-2.5">
                 {product.category}
               </span>
-              <h1 className="font-serif-display text-3xl sm:text-4xl font-bold text-[#2A180E] leading-tight">
+              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#2A180E] leading-tight">
                 {product.name}
               </h1>
 
-              {/* Rating */}
-              <div className="flex items-center gap-3 mt-3">
-                <div className="flex items-center text-amber-500">
+              {/* Rating & Stock Status */}
+              <div className="flex flex-wrap items-center gap-3 mt-3">
+                <div className="flex items-center gap-0.5 text-amber-500">
                   {[...Array(5)].map((_, i) => (
                     <Star
                       key={i}
@@ -196,20 +202,25 @@ export default function ProductDetailPage() {
                     />
                   ))}
                 </div>
-                <span className="text-xs font-bold text-[#2A180E]">
+                <span className="text-xs sm:text-sm font-bold text-[#2A180E]">
                   {product.rating}
                 </span>
                 <span className="text-xs text-stone-500">
                   ({product.reviewsCount} verified reviews)
                 </span>
+                <span className="text-stone-300 hidden sm:inline">•</span>
+                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-800 text-xs font-bold border border-emerald-200">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                  In Stock &amp; Ready to Ship
+                </span>
               </div>
             </div>
 
             {/* Price Box */}
-            <div className="p-4 rounded-2xl bg-white border border-[#EADBCC] flex items-center justify-between">
+            <div className="p-4 sm:p-5 rounded-2xl bg-white border border-[#EADBCC] shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-3">
               <div>
-                <div className="flex items-baseline gap-2.5">
-                  <span className="text-3xl font-bold text-[#2A180E]">
+                <div className="flex items-baseline gap-3 flex-wrap">
+                  <span className="text-3xl sm:text-4xl font-bold text-[#2A180E]">
                     ₹{product.price.toLocaleString('en-IN')}
                   </span>
                   {product.originalPrice && (
@@ -217,48 +228,52 @@ export default function ProductDetailPage() {
                       ₹{product.originalPrice.toLocaleString('en-IN')}
                     </span>
                   )}
+                  {discountPercent > 0 && (
+                    <span className="px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-xs font-bold">
+                      Save ₹{discountAmount.toLocaleString('en-IN')} ({discountPercent}% OFF)
+                    </span>
+                  )}
                 </div>
-                <span className="text-[11px] text-stone-500">
-                  Inclusive of all taxes • Ready to ship from Saharanpur
+                <span className="text-xs text-stone-500 mt-1 block">
+                  Inclusive of all taxes • Handcrafted in Saharanpur
                 </span>
               </div>
-
-              <span className="px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 text-xs font-bold border border-emerald-200">
-                In Stock
-              </span>
             </div>
 
-            {/* Short description */}
-            <p className="text-sm text-[#5C4535] leading-relaxed font-light">
+            {/* Description */}
+            <p className="text-sm sm:text-base text-[#5C4535] leading-relaxed font-light">
               {product.description}
             </p>
 
-            {/* Features checkmarks */}
-            <div className="space-y-2 pt-1">
+            {/* Key Features Bullet Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 p-4 rounded-2xl bg-[#F6EFE6]/70 border border-[#EADBCC]">
               {product.features.map((feat, idx) => (
-                <div key={idx} className="flex items-center gap-2 text-xs text-stone-800">
-                  <CheckCircle2 className="w-4 h-4 text-amber-700 shrink-0" />
+                <div key={idx} className="flex items-start gap-2 text-xs sm:text-sm text-[#3E2B1F]">
+                  <CheckCircle2 className="w-4 h-4 text-amber-700 shrink-0 mt-0.5" />
                   <span>{feat}</span>
                 </div>
               ))}
             </div>
 
-            {/* Quantity & CTAs */}
-            <div className="space-y-3 pt-3 border-t border-[#EADBCC]">
+            {/* Quantity & Ordering CTAs */}
+            <div className="space-y-3 pt-4 border-t border-[#EADBCC]">
+              {/* Row 1: Quantity + Add to Cart + Wishlist */}
               <div className="flex items-center gap-3">
-                <div className="flex items-center border border-[#DFD1C2] rounded-xl bg-white p-1">
+                <div className="flex items-center border border-[#DFD1C2] rounded-2xl bg-white p-1">
                   <button
                     onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                    className="p-2 hover:bg-[#FAF6F0] rounded text-stone-700 transition-colors"
+                    className="w-9 h-9 flex items-center justify-center hover:bg-[#FAF6F0] rounded-xl text-stone-700 transition-colors"
+                    aria-label="Decrease quantity"
                   >
                     <Minus className="w-3.5 h-3.5" />
                   </button>
-                  <span className="px-4 text-xs font-bold text-[#2A180E] min-w-[32px] text-center">
+                  <span className="w-10 text-center text-xs sm:text-sm font-bold text-[#2A180E]">
                     {quantity}
                   </span>
                   <button
                     onClick={() => setQuantity(quantity + 1)}
-                    className="p-2 hover:bg-[#FAF6F0] rounded text-stone-700 transition-colors"
+                    className="w-9 h-9 flex items-center justify-center hover:bg-[#FAF6F0] rounded-xl text-stone-700 transition-colors"
+                    aria-label="Increase quantity"
                   >
                     <Plus className="w-3.5 h-3.5" />
                   </button>
@@ -266,7 +281,7 @@ export default function ProductDetailPage() {
 
                 <button
                   onClick={handleAddToCart}
-                  className="flex-1 py-3.5 px-6 rounded-xl bg-[#3D2516] hover:bg-[#5C3B24] text-[#FAF6F0] font-bold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-md transition-colors"
+                  className="flex-1 py-3.5 sm:py-4 px-6 rounded-2xl bg-[#3D2516] hover:bg-[#5C3B24] text-[#FAF6F0] font-bold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-md hover:shadow-lg transition-all active:scale-[0.99]"
                 >
                   <ShoppingBag className="w-4 h-4" />
                   <span>Add to Cart</span>
@@ -274,8 +289,8 @@ export default function ProductDetailPage() {
 
                 <button
                   onClick={() => toggleWishlist(product)}
-                  className={`p-3.5 rounded-xl border border-[#DFD1C2] bg-white transition-colors ${
-                    inWishlist ? 'text-rose-600 bg-rose-50' : 'text-stone-600 hover:bg-stone-50'
+                  className={`w-12 sm:w-14 h-12 sm:h-14 rounded-2xl border border-[#DFD1C2] bg-white transition-all flex items-center justify-center shrink-0 ${
+                    inWishlist ? 'text-rose-600 bg-rose-50 border-rose-300' : 'text-stone-600 hover:bg-stone-50'
                   }`}
                   aria-label="Wishlist"
                 >
@@ -283,34 +298,34 @@ export default function ProductDetailPage() {
                 </button>
               </div>
 
-              {/* Instant Buy Now Button */}
+              {/* Row 2: Instant Buy Now */}
               <button
                 onClick={handleBuyNow}
-                className="w-full py-3.5 rounded-xl bg-gradient-to-r from-[#E5A855] via-[#DE983C] to-[#C9842C] text-[#1E120A] font-bold text-sm shadow-lg shadow-amber-900/20 hover:scale-[1.01] active:scale-[0.99] transition-all"
+                className="w-full py-3.5 sm:py-4 rounded-2xl bg-gradient-to-r from-[#E5A855] via-[#DE983C] to-[#C9842C] hover:brightness-105 text-[#1E120A] font-bold text-sm sm:text-base shadow-md hover:shadow-lg transition-all active:scale-[0.99] flex items-center justify-center gap-2"
               >
-                Buy Now with Instant Checkout (₹{(product.price * quantity).toLocaleString('en-IN')})
+                <span>Buy Now with Instant Checkout (₹{(product.price * quantity).toLocaleString('en-IN')})</span>
               </button>
 
-              {/* Direct WhatsApp Order */}
+              {/* Row 3: WhatsApp Direct */}
               <a
                 href={`https://wa.me/919720975271?text=Hi%20Woodmen,%20I%20would%20like%20to%20order%20${encodeURIComponent(product.name)}%20(Quantity:%20${quantity})`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full py-2.5 rounded-xl border border-emerald-500/40 bg-emerald-50 hover:bg-emerald-100 text-emerald-900 font-bold text-xs flex items-center justify-center gap-2 transition-colors"
+                className="w-full py-2.5 px-4 rounded-2xl border border-emerald-600/30 bg-emerald-50 hover:bg-emerald-100 text-emerald-950 font-medium text-xs flex items-center justify-center gap-2 transition-colors"
               >
                 <Phone className="w-3.5 h-3.5 text-emerald-700" />
-                <span>Order via WhatsApp Direct: 9720975271</span>
+                <span>Need custom engraving or bulk order? Order via WhatsApp: <strong>9720975271</strong></span>
               </a>
             </div>
 
             {/* Tabs: Specifications, Care, Details */}
-            <div className="pt-4">
-              <div className="flex border-b border-[#DFCFC0] gap-4 text-xs font-semibold">
+            <div className="mt-8 rounded-2xl bg-white border border-[#EADBCC] p-5 sm:p-6 shadow-sm">
+              <div className="flex border-b border-[#F0E4D7] gap-4 sm:gap-6 text-xs sm:text-sm font-semibold">
                 <button
                   onClick={() => setActiveTab('desc')}
-                  className={`pb-2 transition-colors ${
+                  className={`pb-2.5 transition-colors relative ${
                     activeTab === 'desc'
-                      ? 'border-b-2 border-amber-700 text-[#2A180E]'
+                      ? 'border-b-2 border-amber-700 text-[#2A180E] font-bold'
                       : 'text-stone-500 hover:text-stone-800'
                   }`}
                 >
@@ -318,9 +333,9 @@ export default function ProductDetailPage() {
                 </button>
                 <button
                   onClick={() => setActiveTab('specs')}
-                  className={`pb-2 transition-colors ${
+                  className={`pb-2.5 transition-colors relative ${
                     activeTab === 'specs'
-                      ? 'border-b-2 border-amber-700 text-[#2A180E]'
+                      ? 'border-b-2 border-amber-700 text-[#2A180E] font-bold'
                       : 'text-stone-500 hover:text-stone-800'
                   }`}
                 >
@@ -328,17 +343,17 @@ export default function ProductDetailPage() {
                 </button>
                 <button
                   onClick={() => setActiveTab('care')}
-                  className={`pb-2 transition-colors ${
+                  className={`pb-2.5 transition-colors relative ${
                     activeTab === 'care'
-                      ? 'border-b-2 border-amber-700 text-[#2A180E]'
+                      ? 'border-b-2 border-amber-700 text-[#2A180E] font-bold'
                       : 'text-stone-500 hover:text-stone-800'
                   }`}
                 >
-                  Care & Maintenance
+                  Care &amp; Maintenance
                 </button>
               </div>
 
-              <div className="pt-3 text-xs text-[#5C4535] leading-relaxed">
+              <div className="pt-4 text-xs sm:text-sm text-[#5C4535] leading-relaxed">
                 {activeTab === 'desc' && (
                   <p>
                     Every piece of {product.woodType} is personally inspected for natural grain balance.
@@ -348,20 +363,20 @@ export default function ProductDetailPage() {
                 )}
 
                 {activeTab === 'specs' && (
-                  <div className="space-y-1.5 p-3 rounded-xl bg-white border border-[#EADBCC]">
-                    <div className="flex justify-between">
+                  <div className="space-y-2 p-3.5 rounded-xl bg-[#FAF6F0] border border-[#EADBCC]">
+                    <div className="flex justify-between py-1 border-b border-[#EADBCC]/60">
                       <span className="text-stone-500">Wood Species:</span>
                       <strong className="text-stone-800">{product.woodType}</strong>
                     </div>
-                    <div className="flex justify-between">
+                    <div className="flex justify-between py-1 border-b border-[#EADBCC]/60">
                       <span className="text-stone-500">Dimensions:</span>
                       <strong className="text-stone-800">{product.dimensions}</strong>
                     </div>
-                    <div className="flex justify-between">
+                    <div className="flex justify-between py-1 border-b border-[#EADBCC]/60">
                       <span className="text-stone-500">Protective Coating:</span>
                       <strong className="text-stone-800">{product.finish}</strong>
                     </div>
-                    <div className="flex justify-between">
+                    <div className="flex justify-between py-1">
                       <span className="text-stone-500">Origin:</span>
                       <strong className="text-stone-800">Saharanpur, Uttar Pradesh, India</strong>
                     </div>
@@ -369,7 +384,7 @@ export default function ProductDetailPage() {
                 )}
 
                 {activeTab === 'care' && (
-                  <ul className="list-disc pl-4 space-y-1 text-stone-700">
+                  <ul className="list-disc pl-5 space-y-1.5 text-stone-700">
                     <li>Wash with mild soapy water and a soft sponge. Never soak in water.</li>
                     <li>Not recommended for dishwasher or microwave use.</li>
                     <li>Towel dry immediately after washing and let air dry in an open space.</li>
@@ -384,7 +399,7 @@ export default function ProductDetailPage() {
         {/* Related Products */}
         {relatedProducts.length > 0 && (
           <div className="mt-16 sm:mt-24 pt-10 border-t border-[#DFCFC0]">
-            <h3 className="font-serif-display text-2xl font-bold text-[#2A180E] mb-6">
+            <h3 className="text-2xl font-bold text-[#2A180E] mb-6">
               More from {product.category}
             </h3>
 
@@ -407,7 +422,7 @@ export default function ProductDetailPage() {
                       className="object-contain p-2"
                     />
                   </div>
-                  <h4 className="font-serif-display text-xs sm:text-sm font-bold text-[#2A180E] group-hover:text-amber-800 transition-colors line-clamp-1">
+                  <h4 className="text-xs sm:text-sm font-bold text-[#2A180E] group-hover:text-amber-800 transition-colors line-clamp-1">
                     {rel.name}
                   </h4>
                   <div className="flex items-center justify-between mt-2 pt-2 border-t border-[#F2ECE3]">
@@ -439,4 +454,3 @@ export default function ProductDetailPage() {
     </div>
   );
 }
-

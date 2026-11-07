@@ -66,31 +66,28 @@ export default function ProductQuickViewModal({
         </button>
 
         <div className="grid grid-cols-1 md:grid-cols-2">
-          {/* Left Column: Image with background */}
-          <div className="relative bg-gradient-to-b from-[#251810] to-[#170E08] p-8 flex items-center justify-center min-h-[300px] md:min-h-[440px]">
+          {/* Left Column: Spacious, Bright Photography Stage */}
+          <div className="relative bg-white border-b md:border-b-0 md:border-r border-[#E8DCCE] p-6 sm:p-8 flex items-center justify-center min-h-[280px] md:min-h-[420px]">
             {product.badge && (
-              <span className="absolute top-4 left-4 z-10 px-3 py-1 rounded-full bg-[#E5A855] text-[#1A1009] text-xs font-bold uppercase tracking-wider shadow">
+              <span className="absolute top-4 left-4 z-10 px-3 py-1 rounded-full bg-[#E5A855] text-stone-950 text-xs font-bold uppercase tracking-wider shadow-sm">
                 {product.badge}
               </span>
             )}
 
-            <div
-              className="relative w-56 h-56 sm:w-64 sm:h-64 rounded-2xl overflow-hidden bg-white/10 backdrop-blur-sm p-4 border border-white/10"
-              style={{ position: 'relative', width: '240px', height: '240px' }}
-            >
+            <div className="relative w-56 h-56 sm:w-64 sm:h-64 flex items-center justify-center">
               <Image
                 src={product.image}
                 alt={product.name}
                 fill
-                sizes="240px"
+                sizes="260px"
                 className="object-contain p-2"
               />
             </div>
 
             {/* Subtle bottom tag */}
             <div className="absolute bottom-4 left-4 right-4 text-center">
-              <span className="text-[11px] text-amber-300 font-medium tracking-wide">
-                🌿 Handcrafted in India • 100% Solid Natural Wood
+              <span className="text-[11px] text-[#8C5E37] font-medium tracking-wide">
+                🌿 Handcrafted in Saharanpur • 100% Solid {product.woodType}
               </span>
             </div>
           </div>
