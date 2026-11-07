@@ -155,12 +155,13 @@ export default function Footer({ onSelectCategory }: FooterProps) {
             <ul className="space-y-2 text-xs">
               {COLLECTIONS.map((c) => (
                 <li key={c.id}>
-                  <button
-                    onClick={() => onSelectCategory && onSelectCategory(c.slug)}
-                    className="hover:text-amber-300 transition-colors text-left"
+                  <Link
+                    href={`/products?category=${encodeURIComponent(c.name)}`}
+                    onClick={() => onSelectCategory && onSelectCategory(c.name)}
+                    className="hover:text-amber-300 transition-colors text-left block"
                   >
                     {c.name}
-                  </button>
+                  </Link>
                 </li>
               ))}
             </ul>

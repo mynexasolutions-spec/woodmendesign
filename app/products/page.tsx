@@ -3,7 +3,7 @@
 import React, { useState, useMemo, useEffect, Suspense } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useSearchParams } from 'next/navigation';
+import { useSearchParams, useRouter } from 'next/navigation';
 import {
   Star,
   ShoppingBag,
@@ -30,15 +30,25 @@ type SortOption = 'featured' | 'price-low' | 'price-high' | 'rating';
 
 function ProductsContent() {
   const searchParams = useSearchParams();
+  const router = useRouter();
   const urlSearch = searchParams ? searchParams.get('search') : null;
+  const urlCategory = searchParams ? searchParams.get('category') : null;
   const { addToCart } = useCart();
   const { toggleWishlist, isInWishlist } = useWishlist();
   const { showToast } = useToast();
 
-  const [selectedCategory, setSelectedCategory] = useState<string>('All');
+  const [selectedCategory, setSelectedCategory] = useState<string>(urlCategory || 'All');
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [sortBy, setSortBy] = useState<SortOption>('featured');
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+
+  useEffect(() => {
+    if (urlCategory) {
+      setSelectedCategory(urlCategory);
+    } else {
+      setSelectedCategory('All');
+    }
+  }, [urlCategory]);
 
   useEffect(() => {
     if (urlSearch) {
@@ -104,7 +114,13 @@ function ProductsContent() {
               Home
             </Link>
             <span className="opacity-40">/</span>
-            <span className="text-white font-medium">Products</span>
+            {selectedCategory === 'All' ? (
+              <span className="text-white font-medium">Products</span>
+            ) : (
+              <Link href="/products" className="hover:text-amber-300 transition-colors">
+                Products
+              </Link>
+            )}
             {selectedCategory !== 'All' && (
               <>
                 <span className="opacity-40">/</span>
@@ -121,7 +137,7 @@ function ProductsContent() {
             </div>
 
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#FAF5EE] tracking-tight leading-tight">
-              All Handcrafted Products
+              {selectedCategory === 'All' ? 'All Handcrafted Products' : selectedCategory}
             </h1>
 
             <p className="mt-3 text-sm sm:text-base text-[#D4C3B5] leading-relaxed max-w-2xl mx-auto font-light">
@@ -143,7 +159,14 @@ function ProductsContent() {
                 return (
                   <button
                     key={cat}
-                    onClick={() => setSelectedCategory(cat)}
+                    onClick={() => {
+                      setSelectedCategory(cat);
+                      if (cat === 'All') {
+                        router.push('/products');
+                      } else {
+                        router.push(`/products?category=${encodeURIComponent(cat)}`);
+                      }
+                    }}
                     className={`whitespace-nowrap px-4 py-2 rounded-full text-xs font-semibold transition-all duration-200 shrink-0 ${
                       isSelected
                         ? 'bg-[#3D2516] text-[#FAF6F0] shadow-md scale-105'

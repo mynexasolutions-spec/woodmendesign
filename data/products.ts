@@ -1,7 +1,7 @@
 export interface Product {
   id: string;
   name: string;
-  category: 'Bowls & Serving' | 'Roti Casseroles' | 'Masala Boxes' | 'Serving Trays' | 'Cake Stands';
+  category: 'Bowls & Serving' | 'Roti Casseroles' | 'Masala Boxes' | 'Serving Trays' | 'Cake Stands' | 'Chopping Boards';
   price: number;
   originalPrice?: number;
   rating: number;
@@ -139,7 +139,7 @@ export const PRODUCTS: Product[] = [
   {
     id: 'prod-6',
     name: 'End-Grain Chopping Board',
-    category: 'Serving Trays',
+    category: 'Chopping Boards',
     price: 1399,
     originalPrice: 1899,
     rating: 4.9,
@@ -494,4 +494,5 @@ export const CATEGORIES = [
   'Masala Boxes',
   'Serving Trays',
   'Cake Stands',
+  'Chopping Boards',
 ] as const;

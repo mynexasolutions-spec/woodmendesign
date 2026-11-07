@@ -206,16 +206,23 @@ export default function Navbar({ onOpenSearch, onSelectCategory }: NavbarProps) 
                   <div className="absolute top-full -left-4 pt-3 w-60 z-50 animate-in fade-in slide-in-from-top-1 duration-150">
                     <div className="bg-[#20140D] border border-[#3E2719] rounded-xl shadow-2xl p-2.5 space-y-1 backdrop-blur-md">
                       {COLLECTIONS.map((col) => (
-                        <button
+                        <Link
                           key={col.id}
-                          onClick={() => handleCategoryClick(col.name)}
-                          className="w-full text-left px-3 py-2 rounded-lg text-xs text-[#E3D3C4] hover:bg-[#341F14] hover:text-amber-300 transition-colors flex items-center justify-between"
+                          href={`/products?category=${encodeURIComponent(col.name)}`}
+                          onClick={() => {
+                            setCollectionsDropdown(false);
+                            setMobileMenuOpen(false);
+                            if (onSelectCategory) {
+                              onSelectCategory(col.name);
+                            }
+                          }}
+                          className="w-full text-left px-3 py-2 rounded-lg text-xs text-[#E3D3C4] hover:bg-[#341F14] hover:text-amber-300 transition-colors flex items-center justify-between group"
                         >
                           <span>{col.name}</span>
-                          <span className="text-[10px] text-amber-400/60 font-mono">
+                          <span className="text-[10px] text-amber-400/60 font-mono group-hover:text-amber-400">
                             {col.itemCount}
                           </span>
-                        </button>
+                        </Link>
                       ))}
                     </div>
                   </div>
@@ -559,15 +566,30 @@ export default function Navbar({ onOpenSearch, onSelectCategory }: NavbarProps) 
           >
             Products
           </Link>
-          <Link
-            href="/collections"
-            onClick={() => setMobileMenuOpen(false)}
-            className={`block py-2 border-b border-[#2C190F] ${
-              isCollections ? 'text-amber-300 font-bold' : 'text-stone-300 hover:text-white'
-            }`}
-          >
-            Collections
-          </Link>
+          <div>
+            <Link
+              href="/collections"
+              onClick={() => setMobileMenuOpen(false)}
+              className={`block py-2 ${
+                isCollections ? 'text-amber-300 font-bold' : 'text-stone-300 hover:text-white'
+              }`}
+            >
+              Collections
+            </Link>
+            <div className="pl-2 grid grid-cols-2 gap-1.5 pb-2 border-b border-[#2C190F]">
+              {COLLECTIONS.map((col) => (
+                <Link
+                  key={col.id}
+                  href={`/products?category=${encodeURIComponent(col.name)}`}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="text-xs text-stone-400 hover:text-amber-300 py-1 transition-colors flex items-center justify-between pr-2"
+                >
+                  <span className="truncate">{col.name}</span>
+                  <span className="text-[10px] text-amber-400/60 font-mono ml-1">{col.itemCount}</span>
+                </Link>
+              ))}
+            </div>
+          </div>
           <Link
             href="/about"
             onClick={() => setMobileMenuOpen(false)}
