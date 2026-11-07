@@ -188,10 +188,10 @@ export default function ProductDetailPage() {
           <div className="lg:col-span-6 space-y-6">
             {/* Header info */}
             <div>
-              <span className="inline-block px-3 py-1 rounded-full bg-[#EFE4D6] text-[#8C5E37] text-xs font-bold tracking-wider uppercase mb-2.5">
+              <span className="inline-block px-3 py-1 rounded-full bg-[#EFE4D6] text-[#8C5E37] text-xs font-bold tracking-wider uppercase mb-2">
                 {product.category}
               </span>
-              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#2A180E] leading-tight">
+              <h1 className="text-xl sm:text-2xl lg:text-[26px] font-bold text-[#2A180E] leading-snug">
                 {product.name}
               </h1>
 
@@ -222,12 +222,12 @@ export default function ProductDetailPage() {
             {/* Price Box */}
             <div className="p-4 sm:p-5 rounded-2xl bg-white border border-[#EADBCC] shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-3">
               <div>
-                <div className="flex items-baseline gap-3 flex-wrap">
-                  <span className="text-3xl sm:text-4xl font-bold text-[#2A180E]">
+                <div className="flex items-baseline gap-2.5 flex-wrap">
+                  <span className="text-2xl sm:text-[26px] font-bold text-[#2A180E]">
                     ₹{product.price.toLocaleString('en-IN')}
                   </span>
                   {product.originalPrice && (
-                    <span className="text-base text-stone-400 line-through">
+                    <span className="text-sm sm:text-base text-stone-400 line-through">
                       ₹{product.originalPrice.toLocaleString('en-IN')}
                     </span>
                   )}
