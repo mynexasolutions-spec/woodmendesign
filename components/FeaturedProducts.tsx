@@ -26,10 +26,11 @@ export default function FeaturedProducts({
   const { toggleWishlist, isInWishlist } = useWishlist();
   const { showToast } = useToast();
 
-  const filteredProducts =
+  const filteredProducts = (
     selectedCategory === 'All'
       ? products
-      : products.filter((p) => p.category === selectedCategory);
+      : products.filter((p) => p.category === selectedCategory)
+  ).slice(0, 5);
 
   return (
     <section id="products-section" className="py-16 sm:py-20 bg-[#FAF6F0] relative">
@@ -201,6 +202,16 @@ export default function FeaturedProducts({
               </div>
             );
           })}
+        </div>
+
+        {/* Explore All Link Button */}
+        <div className="mt-10 sm:mt-12 text-center">
+          <Link
+            href="/products"
+            className="inline-flex items-center justify-center px-7 py-3 rounded-full bg-[#FAF0E4] hover:bg-[#3D2516] text-[#8C5E37] hover:text-white border border-[#DFD1C2] text-xs font-bold transition-all shadow-sm active:scale-95"
+          >
+            Explore Complete Catalog
+          </Link>
         </div>
       </div>
     </section>
