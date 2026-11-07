@@ -300,14 +300,14 @@ export default function Navbar({ onOpenSearch, onSelectCategory }: NavbarProps) 
                       type="text"
                       value={navSearchQuery}
                       onChange={(e) => setNavSearchQuery(e.target.value)}
-                      placeholder="Search handcrafted wooden pieces (e.g. bowl, tray, masala box)..."
+                      placeholder="Search products..."
                       className="w-full bg-transparent text-xs sm:text-sm text-white placeholder-stone-400 focus:outline-none"
                     />
                     {navSearchQuery && (
                       <button
                         type="button"
                         onClick={() => setNavSearchQuery('')}
-                        className="p-1 text-stone-400 hover:text-white mr-1.5 transition-colors cursor-pointer"
+                        className="p-1 text-stone-400 hover:text-white mr-1 transition-colors cursor-pointer"
                         aria-label="Clear search"
                       >
                         <X className="w-3.5 h-3.5" />
@@ -319,11 +319,11 @@ export default function Navbar({ onOpenSearch, onSelectCategory }: NavbarProps) 
                         setInlineSearchOpen(false);
                         setNavSearchQuery('');
                       }}
-                      className="text-xs text-stone-300 hover:text-[#E5A855] pl-3 pr-1 py-0.5 font-medium border-l border-white/20 shrink-0 flex items-center gap-1 transition-colors cursor-pointer"
+                      className="p-1 text-stone-400 hover:text-[#E5A855] hover:bg-white/10 rounded-full shrink-0 transition-colors cursor-pointer"
+                      aria-label="Close search"
                       title="Close search (Esc)"
                     >
-                      <span>Close</span>
-                      <X className="w-3.5 h-3.5" />
+                      <X className="w-4 h-4" />
                     </button>
                   </div>
 
@@ -473,7 +473,7 @@ export default function Navbar({ onOpenSearch, onSelectCategory }: NavbarProps) 
                   autoFocus
                   value={navSearchQuery}
                   onChange={(e) => setNavSearchQuery(e.target.value)}
-                  placeholder="Search handcrafted products..."
+                  placeholder="Search products..."
                   className="w-full bg-transparent text-xs text-white placeholder-stone-400 focus:outline-none"
                 />
                 {navSearchQuery && (
@@ -481,6 +481,7 @@ export default function Navbar({ onOpenSearch, onSelectCategory }: NavbarProps) 
                     type="button"
                     onClick={() => setNavSearchQuery('')}
                     className="p-1 text-stone-400 hover:text-white mr-1"
+                    aria-label="Clear search"
                   >
                     <X className="w-3.5 h-3.5" />
                   </button>
@@ -491,9 +492,11 @@ export default function Navbar({ onOpenSearch, onSelectCategory }: NavbarProps) 
                     setInlineSearchOpen(false);
                     setNavSearchQuery('');
                   }}
-                  className="text-xs text-stone-300 hover:text-[#E5A855] pl-2.5 font-medium border-l border-white/15 shrink-0"
+                  className="p-1 text-stone-400 hover:text-[#E5A855] hover:bg-white/10 rounded-full shrink-0 transition-colors"
+                  aria-label="Close search"
+                  title="Close search"
                 >
-                  Cancel
+                  <X className="w-4 h-4" />
                 </button>
               </div>
 
