@@ -92,31 +92,9 @@ export default function Testimonials() {
             </div>
           </div>
 
-          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
-            <p className="text-sm text-[#735D4E] max-w-md font-light">
-              Real feedback from over 10,000+ happy households enjoying genuine Indian handcrafted kitchenware.
-            </p>
-
-            {/* Header Navigation Buttons */}
-            <div className="flex items-center gap-1.5 shrink-0">
-              <button
-                type="button"
-                onClick={handlePrev}
-                aria-label="Previous testimonial"
-                className="w-8 h-8 rounded-full border border-[#D5C2B0] bg-white hover:bg-[#F2ECE3] text-[#2A180E] flex items-center justify-center transition-colors shadow-sm"
-              >
-                <ChevronLeft className="w-4 h-4" />
-              </button>
-              <button
-                type="button"
-                onClick={handleNext}
-                aria-label="Next testimonial"
-                className="w-8 h-8 rounded-full border border-[#D5C2B0] bg-white hover:bg-[#F2ECE3] text-[#2A180E] flex items-center justify-center transition-colors shadow-sm"
-              >
-                <ChevronRight className="w-4 h-4" />
-              </button>
-            </div>
-          </div>
+          <p className="text-sm text-[#735D4E] max-w-md font-light">
+            Real feedback from over 10,000+ happy households enjoying genuine Indian handcrafted kitchenware.
+          </p>
         </div>
 
         {/* Carousel Container */}
