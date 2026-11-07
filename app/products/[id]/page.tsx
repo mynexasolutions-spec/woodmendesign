@@ -66,9 +66,14 @@ export default function ProductDetailPage() {
   }
 
   const inWishlist = isInWishlist(product.id);
-  const relatedProducts = PRODUCTS.filter(
+  // Related products: priority to same category, supplemented with complementary kitchen/dining pieces
+  const categoryMatches = PRODUCTS.filter(
     (p) => p.category === product.category && p.id !== product.id
-  ).slice(0, 4);
+  );
+  const complementaryMatches = PRODUCTS.filter(
+    (p) => p.category !== product.category && p.id !== product.id
+  );
+  const relatedProducts = [...categoryMatches, ...complementaryMatches].slice(0, 4);
 
   const handleAddToCart = () => {
     addToCart(product, quantity);
@@ -397,42 +402,144 @@ export default function ProductDetailPage() {
         {/* Related Products */}
         {relatedProducts.length > 0 && (
           <div className="mt-16 sm:mt-24 pt-10 border-t border-[#DFCFC0]">
-            <h3 className="text-2xl font-bold text-[#2A180E] mb-6">
-              More from {product.category}
-            </h3>
+            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
+              <div>
+                <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.25em] text-[#8C5E37] font-bold mb-2">
+                  <span className="w-6 h-[1px] bg-[#8C5E37]/50" />
+                  <span>HANDCRAFTED COMPANIONS</span>
+                </div>
+                <h3 className="text-2xl sm:text-3xl font-bold text-[#2A180E] tracking-tight">
+                  {categoryMatches.length >= 3 ? `More from ${product.category}` : 'You May Also Like'}
+                </h3>
+              </div>
+              <p className="text-xs sm:text-sm text-[#735D4E] max-w-sm">
+                Authentic seasoned hardwood kitchenware meticulously paired for everyday culinary elegance.
+              </p>
+            </div>
 
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6">
-              {relatedProducts.map((rel) => (
-                <Link
-                  key={rel.id}
-                  href={`/products/${rel.id}`}
-                  className="p-3 sm:p-4 rounded-2xl bg-white border border-[#EADBCC] shadow-sm hover:shadow-xl transition-all group"
-                >
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+              {relatedProducts.map((rel) => {
+                const isRelInWishlist = isInWishlist(rel.id);
+                return (
                   <div
-                    className="relative aspect-square rounded-xl overflow-hidden bg-[#FAF6F0] mb-3 flex items-center justify-center p-2 group-hover:scale-105 transition-transform"
-                    style={{ position: 'relative', width: '100%', height: '160px', overflow: 'hidden' }}
+                    key={rel.id}
+                    className="rounded-2xl bg-white border border-[#EADBCC] shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col justify-between group"
                   >
-                    <Image
-                      src={rel.image}
-                      alt={rel.name}
-                      fill
-                      sizes="160px"
-                      className="object-contain p-2"
-                    />
+                    {/* Top Flush Image (Zero Padding) */}
+                    <div className="relative w-full aspect-square overflow-hidden bg-[#FAF6F0]">
+                      {rel.badge && (
+                        <span className="absolute top-3 left-3 z-10 px-2 py-0.5 rounded-md bg-[#241710] text-[#E5A855] text-[10px] font-bold tracking-wider uppercase shadow">
+                          {rel.badge}
+                        </span>
+                      )}
+
+                      {/* Wishlist toggle */}
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          toggleWishlist(rel);
+                          showToast({
+                            title: isRelInWishlist ? 'Removed from Wishlist' : 'Saved to Wishlist',
+                            message: rel.name,
+                            type: 'wishlist',
+                          });
+                        }}
+                        className={`absolute top-3 right-3 z-10 p-1.5 rounded-full backdrop-blur-md transition-all ${
+                          isRelInWishlist
+                            ? 'bg-rose-50 text-rose-500 fill-current'
+                            : 'bg-white/80 hover:bg-white text-stone-700 shadow-sm'
+                        }`}
+                        aria-label="Save to Wishlist"
+                      >
+                        <Heart
+                          className={`w-4 h-4 ${isRelInWishlist ? 'fill-rose-500 text-rose-500' : ''}`}
+                        />
+                      </button>
+
+                      <Link
+                        href={`/products/${rel.id}`}
+                        className="relative w-full h-full block cursor-pointer group-hover:scale-105 transition-transform duration-500"
+                      >
+                        <Image
+                          src={rel.image}
+                          alt={rel.name}
+                          fill
+                          sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 20vw"
+                          className="object-cover"
+                        />
+                        <div className="absolute inset-0 bg-black/15 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                          <span className="px-3 py-1.5 rounded-full bg-white/95 text-[#2A180E] text-xs font-bold shadow-md">
+                            View Piece
+                          </span>
+                        </div>
+                      </Link>
+                    </div>
+
+                    {/* Card Content */}
+                    <div className="p-3.5 sm:p-4 flex-1 flex flex-col justify-between">
+                      <div>
+                        <span className="text-[10px] uppercase tracking-wider text-[#A67B52] font-bold block mb-1">
+                          {rel.woodType.split(' ')[0]} Wood
+                        </span>
+                        <Link
+                          href={`/products/${rel.id}`}
+                          className="font-semibold text-xs sm:text-sm text-[#2A180E] group-hover:text-amber-800 transition-colors line-clamp-1 block"
+                        >
+                          {rel.name}
+                        </Link>
+                        <div className="flex items-center gap-1 mt-1.5 text-amber-500">
+                          <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
+                          <span className="text-xs font-bold text-[#2A180E]">
+                            {rel.rating}
+                          </span>
+                          <span className="text-[11px] text-stone-400">
+                            ({rel.reviewsCount})
+                          </span>
+                        </div>
+                      </div>
+
+                      <div className="flex items-center justify-between mt-3 pt-2.5 border-t border-[#F2ECE3]">
+                        <div>
+                          <span className="text-xs sm:text-sm font-bold text-[#2A180E]">
+                            ₹{rel.price.toLocaleString('en-IN')}
+                          </span>
+                          {rel.originalPrice && (
+                            <span className="text-[10px] text-stone-400 line-through ml-1.5">
+                              ₹{rel.originalPrice.toLocaleString('en-IN')}
+                            </span>
+                          )}
+                        </div>
+
+                        <button
+                          onClick={() => {
+                            addToCart(rel, 1);
+                            showToast({
+                              title: 'Added to Cart',
+                              message: `${rel.name} - ₹${rel.price.toLocaleString('en-IN')}`,
+                              type: 'cart',
+                            });
+                          }}
+                          className="w-8 h-8 rounded-lg bg-[#3D2516] hover:bg-[#52331F] text-[#FAF6F0] flex items-center justify-center transition-colors shadow-sm"
+                          title="Quick Add to Cart"
+                          aria-label={`Add ${rel.name} to cart`}
+                        >
+                          <ShoppingBag className="w-3.5 h-3.5" />
+                        </button>
+                      </div>
+                    </div>
                   </div>
-                  <h4 className="text-xs sm:text-sm font-bold text-[#2A180E] group-hover:text-amber-800 transition-colors line-clamp-1">
-                    {rel.name}
-                  </h4>
-                  <div className="flex items-center justify-between mt-2 pt-2 border-t border-[#F2ECE3]">
-                    <span className="text-xs sm:text-sm font-bold text-[#2A180E]">
-                      ₹{rel.price.toLocaleString('en-IN')}
-                    </span>
-                    <span className="text-[11px] text-amber-700 font-semibold transition-colors">
-                      View
-                    </span>
-                  </div>
-                </Link>
-              ))}
+                );
+              })}
+            </div>
+
+            {/* Bottom Explore Link */}
+            <div className="mt-10 text-center">
+              <Link
+                href="/products"
+                className="inline-flex items-center justify-center px-6 py-2.5 rounded-full border border-[#DFCFC0] bg-white hover:bg-[#F2ECE3] text-[#2A180E] text-xs font-bold transition-colors shadow-sm"
+              >
+                Explore Full Handcrafted Catalog
+              </Link>
             </div>
           </div>
         )}
