@@ -66,27 +66,25 @@ export default function ProductQuickViewModal({
         </button>
 
         <div className="grid grid-cols-1 md:grid-cols-2">
-          {/* Left Column: Spacious, Bright Photography Stage */}
-          <div className="relative bg-white border-b md:border-b-0 md:border-r border-[#E8DCCE] p-6 sm:p-8 flex items-center justify-center min-h-[280px] md:min-h-[420px]">
+          {/* Left Column: Full-bleed product image */}
+          <div className="relative bg-[#FAF6F0] border-b md:border-b-0 md:border-r border-[#E8DCCE] min-h-[280px] md:min-h-[420px] overflow-hidden group">
             {product.badge && (
               <span className="absolute top-4 left-4 z-10 px-3 py-1 rounded-full bg-[#E5A855] text-stone-950 text-xs font-bold uppercase tracking-wider shadow-sm">
                 {product.badge}
               </span>
             )}
 
-            <div className="relative w-56 h-56 sm:w-64 sm:h-64 flex items-center justify-center">
-              <Image
-                src={product.image}
-                alt={product.name}
-                fill
-                sizes="260px"
-                className="object-contain p-2"
-              />
-            </div>
+            <Image
+              src={product.image}
+              alt={product.name}
+              fill
+              sizes="(max-width: 768px) 100vw, 50vw"
+              className="object-cover transition-transform duration-500 group-hover:scale-105"
+            />
 
             {/* Subtle bottom tag */}
-            <div className="absolute bottom-4 left-4 right-4 text-center">
-              <span className="text-[11px] text-[#8C5E37] font-medium tracking-wide">
+            <div className="absolute bottom-4 left-4 right-4 z-10 text-center">
+              <span className="inline-block px-3 py-1 rounded-full bg-white/90 backdrop-blur-md border border-[#E8DCCE] text-[11px] text-[#8C5E37] font-medium tracking-wide shadow-sm">
                 🌿 Handcrafted in Saharanpur • 100% Solid {product.woodType}
               </span>
             </div>

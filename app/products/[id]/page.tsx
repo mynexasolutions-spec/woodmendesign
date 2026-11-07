@@ -122,27 +122,25 @@ export default function ProductDetailPage() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 xl:gap-16 items-start">
           {/* Left Column: Spacious, Bright Photography Stage */}
           <div className="lg:col-span-6 space-y-4">
-            {/* Main Image Showcase */}
-            <div className="relative aspect-square w-full rounded-3xl overflow-hidden bg-white border border-[#E8DCCE] shadow-sm hover:shadow-md transition-all duration-300 p-6 sm:p-10 flex items-center justify-center group">
+            {/* Main Image Showcase (Edge-to-edge full bleed, zero padding) */}
+            <div className="relative aspect-square w-full rounded-3xl overflow-hidden bg-[#FAF6F0] border border-[#E8DCCE] shadow-sm hover:shadow-md transition-all duration-300 group">
               {product.badge && (
                 <span className="absolute top-5 left-5 z-10 px-3.5 py-1.5 rounded-full bg-[#E5A855] text-stone-950 text-xs font-bold uppercase tracking-wider shadow-sm">
                   {product.badge}
                 </span>
               )}
 
-              <div className="relative w-full h-full max-w-[440px] max-h-[440px] transition-transform duration-500 group-hover:scale-105 flex items-center justify-center">
-                <Image
-                  src={product.image}
-                  alt={product.name}
-                  fill
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                  className="object-contain p-2"
-                  priority
-                />
-              </div>
+              <Image
+                src={product.image}
+                alt={product.name}
+                fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                className="object-cover transition-transform duration-500 group-hover:scale-105"
+                priority
+              />
 
               {/* Timber Seal Pill */}
-              <div className="absolute bottom-4 right-4 bg-white/95 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-[#E8DCCE] text-[11px] text-[#5C4535] font-medium shadow-sm">
+              <div className="absolute bottom-4 right-4 z-10 bg-white/95 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-[#E8DCCE] text-[11px] text-[#5C4535] font-medium shadow-sm">
                 100% Solid {product.woodType}
               </div>
             </div>
