@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { ChefHat, Users, Sparkles, Gift } from 'lucide-react';
 
 interface OccasionsProps {
@@ -68,10 +69,10 @@ export default function Occasions({ onSelectOccasion }: OccasionsProps) {
           {OCCASIONS.map((item) => {
             const Icon = item.icon;
             return (
-              <div
+              <Link
                 key={item.id}
-                onClick={() => onSelectOccasion && onSelectOccasion(item.category)}
-                className="group relative rounded-2xl overflow-hidden bg-[#241710] border border-[#DFCFC1] shadow-md hover:shadow-2xl transition-all duration-300 cursor-pointer flex flex-col justify-end"
+                href={`/products?category=${encodeURIComponent(item.category)}`}
+                className="group relative rounded-2xl overflow-hidden bg-[#241710] border border-[#DFCFC1] shadow-md hover:shadow-2xl transition-all duration-300 cursor-pointer flex flex-col justify-end block"
               >
                 {/* Image */}
                 <div
@@ -108,7 +109,7 @@ export default function Occasions({ onSelectOccasion }: OccasionsProps) {
                     <span>Explore Products</span>
                   </div>
                 </div>
-              </div>
+              </Link>
             );
           })}
         </div>

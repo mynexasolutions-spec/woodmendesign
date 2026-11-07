@@ -45,10 +45,22 @@ function ProductsContent() {
   useEffect(() => {
     if (urlCategory) {
       setSelectedCategory(urlCategory);
+      setSearchQuery('');
     } else {
       setSelectedCategory('All');
     }
   }, [urlCategory]);
+
+  useEffect(() => {
+    const handleCategoryEvent = (e: any) => {
+      if (e.detail) {
+        setSelectedCategory(e.detail);
+        setSearchQuery('');
+      }
+    };
+    window.addEventListener('categoryChange', handleCategoryEvent);
+    return () => window.removeEventListener('categoryChange', handleCategoryEvent);
+  }, []);
 
   useEffect(() => {
     if (urlSearch) {
@@ -61,8 +73,17 @@ function ProductsContent() {
     let list = [...PRODUCTS];
 
     // Category filter
-    if (selectedCategory !== 'All') {
-      list = list.filter((p) => p.category === selectedCategory);
+    if (selectedCategory && selectedCategory !== 'All') {
+      const target = selectedCategory.trim().toLowerCase();
+      list = list.filter((p) => {
+        const cat = p.category.trim().toLowerCase();
+        return (
+          cat === target ||
+          cat.replace(/&amp;/g, '&') === target ||
+          cat.startsWith(target) ||
+          target.startsWith(cat)
+        );
+      });
     }
 
     // Search query

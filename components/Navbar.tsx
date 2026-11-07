@@ -99,15 +99,13 @@ export default function Navbar({ onOpenSearch, onSelectCategory }: NavbarProps) 
     };
   }, [inlineSearchOpen]);
 
-  const handleCategoryClick = (categoryName: string) => {
+  const handleCategorySelect = (e: React.MouseEvent, categoryName: string) => {
     setCollectionsDropdown(false);
     setMobileMenuOpen(false);
-    if (onSelectCategory) {
-      onSelectCategory(categoryName);
-    }
-    const section = document.getElementById('products-section');
-    if (section) {
-      section.scrollIntoView({ behavior: 'smooth' });
+    if (pathname === '/products') {
+      e.preventDefault();
+      router.push(`/products?category=${encodeURIComponent(categoryName)}`);
+      window.dispatchEvent(new CustomEvent('categoryChange', { detail: categoryName }));
     }
   };
 
@@ -209,13 +207,7 @@ export default function Navbar({ onOpenSearch, onSelectCategory }: NavbarProps) 
                         <Link
                           key={col.id}
                           href={`/products?category=${encodeURIComponent(col.name)}`}
-                          onClick={() => {
-                            setCollectionsDropdown(false);
-                            setMobileMenuOpen(false);
-                            if (onSelectCategory) {
-                              onSelectCategory(col.name);
-                            }
-                          }}
+                          onClick={(e) => handleCategorySelect(e, col.name)}
                           className="w-full text-left px-3 py-2 rounded-lg text-xs text-[#E3D3C4] hover:bg-[#341F14] hover:text-amber-300 transition-colors flex items-center justify-between group"
                         >
                           <span>{col.name}</span>
@@ -581,7 +573,7 @@ export default function Navbar({ onOpenSearch, onSelectCategory }: NavbarProps) 
                 <Link
                   key={col.id}
                   href={`/products?category=${encodeURIComponent(col.name)}`}
-                  onClick={() => setMobileMenuOpen(false)}
+                  onClick={(e) => handleCategorySelect(e, col.name)}
                   className="text-xs text-stone-400 hover:text-amber-300 py-1 transition-colors flex items-center justify-between pr-2"
                 >
                   <span className="truncate">{col.name}</span>

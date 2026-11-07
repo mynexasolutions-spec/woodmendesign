@@ -2,6 +2,7 @@
 
 import React, { useRef } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { Sparkles } from 'lucide-react';
 import { COLLECTIONS } from '@/data/collections';
 
@@ -46,12 +47,12 @@ export default function Collections({ onSelectCategory, activeCategory }: Collec
             className="flex items-stretch gap-4 sm:gap-6 overflow-x-auto no-scrollbar py-4 px-2 snap-x snap-mandatory"
           >
             {COLLECTIONS.map((col) => {
-              const isSelected = activeCategory === col.slug;
+              const isSelected = activeCategory === col.slug || activeCategory === col.name;
               return (
-                <div
+                <Link
                   key={col.id}
-                  onClick={() => onSelectCategory(col.slug)}
-                  className={`snap-start shrink-0 w-[180px] sm:w-[210px] md:w-[220px] rounded-2xl p-4 cursor-pointer transition-all duration-300 flex flex-col items-center text-center group ${
+                  href={`/products?category=${encodeURIComponent(col.name)}`}
+                  className={`snap-start shrink-0 w-[180px] sm:w-[210px] md:w-[220px] rounded-2xl p-4 cursor-pointer transition-all duration-300 flex flex-col items-center text-center group block ${
                     isSelected
                       ? 'bg-white ring-2 ring-[#B87D4B] shadow-xl scale-[1.02]'
                       : 'bg-[#F2ECE3] hover:bg-white hover:shadow-lg border border-[#E5DACD]'
@@ -85,7 +86,7 @@ export default function Collections({ onSelectCategory, activeCategory }: Collec
                   <div className="mt-3 flex items-center justify-center text-[11px] font-semibold text-[#A67B52] opacity-0 group-hover:opacity-100 transition-opacity">
                     <span>Explore Collection</span>
                   </div>
-                </div>
+                </Link>
               );
             })}
           </div>

@@ -47,7 +47,6 @@ export default function HomePage() {
       {/* Navigation */}
       <Navbar
         onOpenSearch={() => setIsSearchOpen(true)}
-        onSelectCategory={handleSelectCategory}
       />
 
       {/* Hero Section */}
@@ -67,9 +66,9 @@ export default function HomePage() {
         onDiscoverStory={() => setIsCraftingModalOpen(true)}
       />
 
-      {/* Featured Products Section (Best Sellers - Core 5) */}
+      {/* Featured Products Section */}
       <FeaturedProducts
-        products={PRODUCTS.slice(0, 5)}
+        products={PRODUCTS}
         selectedCategory={selectedCategory}
         onSelectCategory={setSelectedCategory}
         onQuickView={(prod) => setQuickViewProduct(prod)}
