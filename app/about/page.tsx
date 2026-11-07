@@ -375,14 +375,8 @@ export default function AboutPage() {
                   </div>
                 </div>
 
-                <div className="pt-6 mt-6 border-t border-[#EADBCC] flex items-center justify-between text-xs">
-                  <span className="text-stone-500 font-light">Sustainably Harvested</span>
-                  <Link
-                    href={`/products?search=${encodeURIComponent(wood.name)}`}
-                    className="font-bold text-[#8C5E37] hover:text-[#2A180E] transition-colors"
-                  >
-                    View Pieces
-                  </Link>
+                <div className="pt-5 mt-6 border-t border-[#EADBCC] text-xs text-stone-500 font-light">
+                  <span>Sustainably Harvested</span>
                 </div>
               </div>
             ))}
