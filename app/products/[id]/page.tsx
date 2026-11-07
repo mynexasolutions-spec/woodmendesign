@@ -12,7 +12,6 @@ import {
   Truck,
   RotateCcw,
   Sparkles,
-  Phone,
   CheckCircle2,
   Plus,
   Minus
@@ -322,17 +321,6 @@ export default function ProductDetailPage() {
                 <WhatsAppIcon className="w-5 h-5 text-[#1E120A] shrink-0" />
                 <span>Buy Now with Instant Checkout (₹{(product.price * quantity).toLocaleString('en-IN')})</span>
               </button>
-
-              {/* Row 3: WhatsApp Direct */}
-              <a
-                href={`https://wa.me/919720975271?text=Hi%20Woodmen,%20I%20would%20like%20to%20order%20${encodeURIComponent(product.name)}%20(Quantity:%20${quantity})`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full py-2.5 px-4 rounded-2xl border border-emerald-600/30 bg-emerald-50 hover:bg-emerald-100 text-emerald-950 font-medium text-xs flex items-center justify-center gap-2 transition-colors"
-              >
-                <WhatsAppIcon className="w-4 h-4 text-[#25D366] shrink-0" />
-                <span>Need custom engraving or bulk order? Order via WhatsApp: <strong>9720975271</strong></span>
-              </a>
             </div>
 
             {/* Tabs: Specifications, Care, Details */}
