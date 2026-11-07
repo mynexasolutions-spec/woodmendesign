@@ -2,9 +2,10 @@
 
 import React from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 interface CraftsmanshipProps {
-  onDiscoverStory: () => void;
+  onDiscoverStory?: () => void;
 }
 
 export default function Craftsmanship({ onDiscoverStory }: CraftsmanshipProps) {
@@ -69,12 +70,12 @@ export default function Craftsmanship({ onDiscoverStory }: CraftsmanshipProps) {
 
               {/* CTA Button: Filled Gold Pill Button */}
               <div className="pt-2 sm:pt-3">
-                <button
-                  onClick={onDiscoverStory}
+                <Link
+                  href="/about"
                   className="inline-flex items-center justify-center px-6 sm:px-7 py-3 sm:py-3.5 rounded-full bg-gradient-to-r from-[#E5A855] via-[#DF9D44] to-[#CC882E] text-[#180E09] font-bold text-xs sm:text-sm tracking-wide shadow-xl shadow-black/40 hover:scale-105 active:scale-95 transition-all"
                 >
                   <span>Discover Our Story</span>
-                </button>
+                </Link>
               </div>
             </div>
           </div>

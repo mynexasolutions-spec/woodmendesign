@@ -62,9 +62,7 @@ export default function HomePage() {
       />
 
       {/* Craftsmanship Section */}
-      <Craftsmanship
-        onDiscoverStory={() => setIsCraftingModalOpen(true)}
-      />
+      <Craftsmanship />
 
       {/* Featured Products Section */}
       <FeaturedProducts
