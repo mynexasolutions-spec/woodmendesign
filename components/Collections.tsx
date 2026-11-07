@@ -2,7 +2,7 @@
 
 import React, { useRef } from 'react';
 import Image from 'next/image';
-import { ChevronLeft, ChevronRight, Sparkles } from 'lucide-react';
+import { Sparkles } from 'lucide-react';
 import { COLLECTIONS } from '@/data/collections';
 
 interface CollectionsProps {
@@ -12,13 +12,6 @@ interface CollectionsProps {
 
 export default function Collections({ onSelectCategory, activeCategory }: CollectionsProps) {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
-
-  const scroll = (direction: 'left' | 'right') => {
-    if (scrollContainerRef.current) {
-      const scrollAmount = direction === 'left' ? -280 : 280;
-      scrollContainerRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-    }
-  };
 
   return (
     <section id="collections-section" className="pt-28 sm:pt-36 pb-16 sm:pb-20 bg-[#FAF6F0] relative overflow-hidden">
@@ -45,26 +38,8 @@ export default function Collections({ onSelectCategory, activeCategory }: Collec
           </p>
         </div>
 
-        {/* Carousel Container with Arrow Controls */}
+        {/* Carousel Container */}
         <div className="relative">
-          {/* Left Arrow Button */}
-          <button
-            onClick={() => scroll('left')}
-            className="absolute -left-2 sm:-left-5 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-[#4D2F1A] text-[#FAF6F0] hover:bg-[#6E4526] hover:scale-110 active:scale-95 shadow-xl flex items-center justify-center transition-all border border-[#FAF6F0]"
-            aria-label="Scroll left"
-          >
-            <ChevronLeft className="w-5 h-5" />
-          </button>
-
-          {/* Right Arrow Button */}
-          <button
-            onClick={() => scroll('right')}
-            className="absolute -right-2 sm:-right-5 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-[#4D2F1A] text-[#FAF6F0] hover:bg-[#6E4526] hover:scale-110 active:scale-95 shadow-xl flex items-center justify-center transition-all border border-[#FAF6F0]"
-            aria-label="Scroll right"
-          >
-            <ChevronRight className="w-5 h-5" />
-          </button>
-
           {/* Horizontal scroll track */}
           <div
             ref={scrollContainerRef}
