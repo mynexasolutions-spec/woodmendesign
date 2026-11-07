@@ -410,6 +410,7 @@ function ProductsContent() {
                             message: `${product.name} - ₹${product.price.toLocaleString('en-IN')}`,
                             type: 'cart',
                           });
+                          router.push('/cart');
                         }}
                         className="p-2.5 rounded-xl bg-[#3D2516] hover:bg-[#5C3B24] text-[#FAF6F0] hover:scale-105 active:scale-95 transition-all shadow"
                         aria-label={`Add ${product.name} to cart`}

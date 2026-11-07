@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import {
   Sparkles,
   Gift,
@@ -23,7 +24,8 @@ import { useCart } from '@/context/CartContext';
 import { useToast } from '@/context/ToastContext';
 
 export default function BundleBuilderPage() {
-  const { addToCart, setIsCartOpen } = useCart();
+  const router = useRouter();
+  const { addToCart } = useCart();
   const { showToast } = useToast();
 
   const [selectedBase, setSelectedBase] = useState<Product>(PRODUCTS[0]);
@@ -72,6 +74,7 @@ export default function BundleBuilderPage() {
       message: `Saved ₹${discount} with automatic 15% bundle discount!`,
       type: 'cart',
     });
+    router.push('/cart');
   };
 
   return (

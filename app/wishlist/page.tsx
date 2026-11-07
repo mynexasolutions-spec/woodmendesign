@@ -3,6 +3,7 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import {
   Heart,
   ShoppingBag,
@@ -18,6 +19,7 @@ import { useCart } from '@/context/CartContext';
 import { useToast } from '@/context/ToastContext';
 
 export default function WishlistPage() {
+  const router = useRouter();
   const { wishlist, removeFromWishlist, clearWishlist } = useWishlist();
   const { addToCart } = useCart();
   const { showToast } = useToast();
@@ -29,6 +31,7 @@ export default function WishlistPage() {
       message: `${product.name} (₹${product.price.toLocaleString('en-IN')})`,
       type: 'cart',
     });
+    router.push('/cart');
   };
 
   const handleAddAllToCart = () => {
@@ -38,6 +41,7 @@ export default function WishlistPage() {
       message: `${wishlist.length} items moved to your shopping cart.`,
       type: 'cart',
     });
+    router.push('/cart');
   };
 
   return (

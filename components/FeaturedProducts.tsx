@@ -3,6 +3,7 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { Star, ShoppingBag, Heart, Eye } from 'lucide-react';
 import { Product, CATEGORIES } from '@/data/products';
 import { useCart } from '@/context/CartContext';
@@ -22,6 +23,7 @@ export default function FeaturedProducts({
   onSelectCategory,
   onQuickView,
 }: FeaturedProductsProps) {
+  const router = useRouter();
   const { addToCart } = useCart();
   const { toggleWishlist, isInWishlist } = useWishlist();
   const { showToast } = useToast();
@@ -190,6 +192,7 @@ export default function FeaturedProducts({
                           message: `${product.name} (₹${product.price.toLocaleString('en-IN')})`,
                           type: 'cart',
                         });
+                        router.push('/cart');
                       }}
                       className="w-8 h-8 rounded-lg bg-[#4D2F1A] hover:bg-[#6E4526] active:scale-90 text-[#FAF6F0] flex items-center justify-center transition-all shadow hover:shadow-md"
                       aria-label={`Add ${product.name} to cart`}

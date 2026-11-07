@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import {
   X,
   Star,
@@ -41,6 +42,7 @@ export default function ProductQuickViewModal({
   product,
   onClose,
 }: ProductQuickViewModalProps) {
+  const router = useRouter();
   const { addToCart } = useCart();
   const { toggleWishlist, isInWishlist } = useWishlist();
   const [quantity, setQuantity] = useState(1);
@@ -53,10 +55,8 @@ export default function ProductQuickViewModal({
   const handleAddToCart = () => {
     addToCart(product, quantity);
     setAdded(true);
-    setTimeout(() => {
-      setAdded(false);
-      onClose();
-    }, 1000);
+    onClose();
+    router.push('/cart');
   };
 
   return (

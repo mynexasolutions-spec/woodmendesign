@@ -2,12 +2,14 @@
 
 import React from 'react';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import { X, Heart, ShoppingBag, Trash2 } from 'lucide-react';
 import { useWishlist } from '@/context/WishlistContext';
 import { useCart } from '@/context/CartContext';
 import { useToast } from '@/context/ToastContext';
 
 export default function WishlistDrawer() {
+  const router = useRouter();
   const { wishlist, isWishlistOpen, setIsWishlistOpen, toggleWishlist } = useWishlist();
   const { addToCart } = useCart();
   const { showToast } = useToast();
@@ -22,6 +24,8 @@ export default function WishlistDrawer() {
       message: `${product.name} (₹${product.price.toLocaleString('en-IN')})`,
       type: 'cart',
     });
+    setIsWishlistOpen(false);
+    router.push('/cart');
   };
 
   return (
@@ -151,6 +155,7 @@ export default function WishlistDrawer() {
                     type: 'cart',
                   });
                   setIsWishlistOpen(false);
+                  router.push('/cart');
                 }}
                 className="w-full py-3.5 rounded-xl bg-gradient-to-r from-[#E5A855] via-[#DE983C] to-[#C9842C] text-[#1E120A] font-bold text-sm flex items-center justify-center shadow-lg hover:scale-[1.01] active:scale-[0.99] transition-all"
               >
