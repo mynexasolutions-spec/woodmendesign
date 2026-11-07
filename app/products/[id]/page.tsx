@@ -322,82 +322,82 @@ export default function ProductDetailPage() {
                 <span>Buy Now with Instant Checkout (₹{(product.price * quantity).toLocaleString('en-IN')})</span>
               </button>
             </div>
+          </div>
+        </div>
 
-            {/* Tabs: Specifications, Care, Details */}
-            <div className="mt-8 rounded-2xl bg-white border border-[#EADBCC] p-5 sm:p-6 shadow-sm">
-              <div className="flex border-b border-[#F0E4D7] gap-4 sm:gap-6 text-xs sm:text-sm font-semibold">
-                <button
-                  onClick={() => setActiveTab('desc')}
-                  className={`pb-2.5 transition-colors relative ${
-                    activeTab === 'desc'
-                      ? 'border-b-2 border-amber-700 text-[#2A180E] font-bold'
-                      : 'text-stone-500 hover:text-stone-800'
-                  }`}
-                >
-                  Wood Story
-                </button>
-                <button
-                  onClick={() => setActiveTab('specs')}
-                  className={`pb-2.5 transition-colors relative ${
-                    activeTab === 'specs'
-                      ? 'border-b-2 border-amber-700 text-[#2A180E] font-bold'
-                      : 'text-stone-500 hover:text-stone-800'
-                  }`}
-                >
-                  Specifications
-                </button>
-                <button
-                  onClick={() => setActiveTab('care')}
-                  className={`pb-2.5 transition-colors relative ${
-                    activeTab === 'care'
-                      ? 'border-b-2 border-amber-700 text-[#2A180E] font-bold'
-                      : 'text-stone-500 hover:text-stone-800'
-                  }`}
-                >
-                  Care &amp; Maintenance
-                </button>
+        {/* Full-Width Product Details Tabs (Spans across entire container width) */}
+        <div className="mt-10 sm:mt-14 w-full rounded-2xl bg-white border border-[#EADBCC] p-6 sm:p-8 lg:p-10 shadow-sm">
+          <div className="flex border-b border-[#F0E4D7] gap-6 sm:gap-10 text-sm sm:text-base font-semibold">
+            <button
+              onClick={() => setActiveTab('desc')}
+              className={`pb-3.5 transition-colors relative ${
+                activeTab === 'desc'
+                  ? 'border-b-2 border-amber-700 text-[#2A180E] font-bold'
+                  : 'text-stone-500 hover:text-stone-800'
+              }`}
+            >
+              Wood Story
+            </button>
+            <button
+              onClick={() => setActiveTab('specs')}
+              className={`pb-3.5 transition-colors relative ${
+                activeTab === 'specs'
+                  ? 'border-b-2 border-amber-700 text-[#2A180E] font-bold'
+                  : 'text-stone-500 hover:text-stone-800'
+              }`}
+            >
+              Specifications
+            </button>
+            <button
+              onClick={() => setActiveTab('care')}
+              className={`pb-3.5 transition-colors relative ${
+                activeTab === 'care'
+                  ? 'border-b-2 border-amber-700 text-[#2A180E] font-bold'
+                  : 'text-stone-500 hover:text-stone-800'
+              }`}
+            >
+              Care &amp; Maintenance
+            </button>
+          </div>
+
+          <div className="pt-6 text-sm sm:text-base text-[#5C4535] leading-relaxed">
+            {activeTab === 'desc' && (
+              <p className="max-w-4xl">
+                Every piece of {product.woodType} is personally inspected for natural grain balance.
+                Because genuine wood has unique grain flows, each piece is truly one-of-a-kind. Handcrafted
+                by generational woodturning families in Saharanpur, India.
+              </p>
+            )}
+
+            {activeTab === 'specs' && (
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 p-5 rounded-xl bg-[#FAF6F0] border border-[#EADBCC]">
+                <div className="p-3 bg-white/70 rounded-lg border border-[#EADBCC]/60">
+                  <span className="text-xs text-stone-500 block uppercase tracking-wider font-semibold mb-1">Wood Species</span>
+                  <strong className="text-sm sm:text-base text-stone-800">{product.woodType}</strong>
+                </div>
+                <div className="p-3 bg-white/70 rounded-lg border border-[#EADBCC]/60">
+                  <span className="text-xs text-stone-500 block uppercase tracking-wider font-semibold mb-1">Dimensions</span>
+                  <strong className="text-sm sm:text-base text-stone-800">{product.dimensions}</strong>
+                </div>
+                <div className="p-3 bg-white/70 rounded-lg border border-[#EADBCC]/60">
+                  <span className="text-xs text-stone-500 block uppercase tracking-wider font-semibold mb-1">Protective Coating</span>
+                  <strong className="text-sm sm:text-base text-stone-800">{product.finish}</strong>
+                </div>
+                <div className="p-3 bg-white/70 rounded-lg border border-[#EADBCC]/60">
+                  <span className="text-xs text-stone-500 block uppercase tracking-wider font-semibold mb-1">Origin</span>
+                  <strong className="text-sm sm:text-base text-stone-800">Saharanpur, UP, India</strong>
+                </div>
               </div>
+            )}
 
-              <div className="pt-4 text-xs sm:text-sm text-[#5C4535] leading-relaxed">
-                {activeTab === 'desc' && (
-                  <p>
-                    Every piece of {product.woodType} is personally inspected for natural grain balance.
-                    Because genuine wood has unique grain flows, each piece is truly one-of-a-kind. Handcrafted
-                    by generational woodturning families in Saharanpur, India.
-                  </p>
-                )}
-
-                {activeTab === 'specs' && (
-                  <div className="space-y-2 p-3.5 rounded-xl bg-[#FAF6F0] border border-[#EADBCC]">
-                    <div className="flex justify-between py-1 border-b border-[#EADBCC]/60">
-                      <span className="text-stone-500">Wood Species:</span>
-                      <strong className="text-stone-800">{product.woodType}</strong>
-                    </div>
-                    <div className="flex justify-between py-1 border-b border-[#EADBCC]/60">
-                      <span className="text-stone-500">Dimensions:</span>
-                      <strong className="text-stone-800">{product.dimensions}</strong>
-                    </div>
-                    <div className="flex justify-between py-1 border-b border-[#EADBCC]/60">
-                      <span className="text-stone-500">Protective Coating:</span>
-                      <strong className="text-stone-800">{product.finish}</strong>
-                    </div>
-                    <div className="flex justify-between py-1">
-                      <span className="text-stone-500">Origin:</span>
-                      <strong className="text-stone-800">Saharanpur, Uttar Pradesh, India</strong>
-                    </div>
-                  </div>
-                )}
-
-                {activeTab === 'care' && (
-                  <ul className="list-disc pl-5 space-y-1.5 text-stone-700">
-                    <li>Wash with mild soapy water and a soft sponge. Never soak in water.</li>
-                    <li>Not recommended for dishwasher or microwave use.</li>
-                    <li>Towel dry immediately after washing and let air dry in an open space.</li>
-                    <li>Re-hydrate every 2–3 months with a drop of coconut oil or walnut oil.</li>
-                  </ul>
-                )}
-              </div>
-            </div>
+            {activeTab === 'care' && (
+              <ul className="list-disc pl-5 space-y-2 text-stone-700 max-w-3xl">
+                <li>Wash with mild soapy water and a soft sponge. Never soak in water.</li>
+                <li>Not recommended for dishwasher or microwave use.</li>
+                <li>Towel dry immediately after washing and let air dry in an open space.</li>
+                <li>Re-hydrate every 2–3 months with a drop of coconut oil or walnut oil.</li>
+              </ul>
+            )}
           </div>
         </div>
 
