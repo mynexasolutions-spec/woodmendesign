@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useState } from 'react';
-import confetti from 'canvas-confetti';
 import {
   X,
   CheckCircle2,
@@ -45,15 +44,21 @@ export default function CheckoutModal() {
     setOrderId(generatedId);
     setStep('success');
 
-    // Trigger celebration confetti
-    try {
-      confetti({
-        particleCount: 100,
-        spread: 70,
-        origin: { y: 0.6 },
-      });
-    } catch {
-      // ignore
+    // Trigger celebration confetti safely on client
+    if (typeof window !== 'undefined') {
+      import('canvas-confetti')
+        .then((module) => {
+          const confetti = module.default;
+          confetti({
+            particleCount: 100,
+            spread: 70,
+            origin: { y: 0.6 },
+            colors: ['#E5A855', '#2A180E', '#8C5E37', '#FAF6F0'],
+          });
+        })
+        .catch(() => {
+          // ignore if canvas-confetti fails or is not available
+        });
     }
 
     clearCart();
