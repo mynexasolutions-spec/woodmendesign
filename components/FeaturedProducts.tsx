@@ -1,10 +1,10 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { Star, ShoppingBag, Heart, Eye } from 'lucide-react';
+import { Star, ShoppingBag, Heart, Eye, Check } from 'lucide-react';
 import { Product, CATEGORIES } from '@/data/products';
 import { useCart } from '@/context/CartContext';
 import { useWishlist } from '@/context/WishlistContext';
@@ -27,6 +27,22 @@ export default function FeaturedProducts({
   const { addToCart } = useCart();
   const { toggleWishlist, isInWishlist } = useWishlist();
   const { showToast } = useToast();
+  const [addedId, setAddedId] = useState<string | null>(null);
+
+  const handleQuickAdd = (product: Product, e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    addToCart(product, 1);
+    setAddedId(product.id);
+    showToast({
+      title: 'Added to Cart',
+      message: `${product.name} (₹${product.price.toLocaleString('en-IN')})`,
+      type: 'cart',
+    });
+    setTimeout(() => {
+      setAddedId((current) => (current === product.id ? null : current));
+    }, 1200);
+  };
 
   const filteredProducts = (
     selectedCategory === 'All'
@@ -185,19 +201,20 @@ export default function FeaturedProducts({
                     </div>
 
                     <button
-                      onClick={() => {
-                        addToCart(product, 1);
-                        showToast({
-                          title: 'Added to Cart',
-                          message: `${product.name} (₹${product.price.toLocaleString('en-IN')})`,
-                          type: 'cart',
-                        });
-                      }}
-                      className="w-8 h-8 rounded-lg bg-[#4D2F1A] hover:bg-[#6E4526] active:scale-90 text-[#FAF6F0] flex items-center justify-center transition-all shadow hover:shadow-md"
+                      onClick={(e) => handleQuickAdd(product, e)}
+                      className={`w-8 h-8 rounded-lg flex items-center justify-center transition-all shadow hover:shadow-md ${
+                        addedId === product.id
+                          ? 'bg-emerald-700 text-white scale-110'
+                          : 'bg-[#4D2F1A] hover:bg-[#6E4526] active:scale-90 text-[#FAF6F0]'
+                      }`}
                       aria-label={`Add ${product.name} to cart`}
-                      title="Add to Cart"
+                      title={addedId === product.id ? 'Added!' : 'Add to Cart'}
                     >
-                      <ShoppingBag className="w-4 h-4" />
+                      {addedId === product.id ? (
+                        <Check className="w-4 h-4 stroke-[3]" />
+                      ) : (
+                        <ShoppingBag className="w-4 h-4" />
+                      )}
                     </button>
                   </div>
                 </div>

@@ -12,6 +12,7 @@ import {
   SlidersHorizontal,
   Sparkles,
   CheckCircle2,
+  Check,
   X
 } from 'lucide-react';
 import Navbar from '@/components/Navbar';
@@ -43,6 +44,22 @@ function ProductsContent() {
   const searchInputRef = useRef<HTMLInputElement>(null);
   const [sortBy, setSortBy] = useState<SortOption>('featured');
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [addedId, setAddedId] = useState<string | null>(null);
+
+  const handleQuickAdd = (product: Product, e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    addToCart(product, 1);
+    setAddedId(product.id);
+    showToast({
+      title: 'Added to Cart',
+      message: `${product.name} (₹${product.price.toLocaleString('en-IN')})`,
+      type: 'cart',
+    });
+    setTimeout(() => {
+      setAddedId((current) => (current === product.id ? null : current));
+    }, 1200);
+  };
 
   useEffect(() => {
     if (urlCategory) {
@@ -455,21 +472,20 @@ function ProductsContent() {
 
                       {/* Quick Add to Cart Button */}
                       <button
-                        onClick={(e) => {
-                          e.preventDefault();
-                          e.stopPropagation();
-                          addToCart(product, 1);
-                          showToast({
-                            title: 'Added to Cart',
-                            message: `${product.name} - ₹${product.price.toLocaleString('en-IN')}`,
-                            type: 'cart',
-                          });
-                        }}
-                        className="p-2.5 rounded-xl bg-[#3D2516] hover:bg-[#5C3B24] text-[#FAF6F0] hover:scale-105 active:scale-95 transition-all shadow"
+                        onClick={(e) => handleQuickAdd(product, e)}
+                        className={`p-2.5 rounded-xl transition-all shadow ${
+                          addedId === product.id
+                            ? 'bg-emerald-700 text-white scale-110'
+                            : 'bg-[#3D2516] hover:bg-[#5C3B24] text-[#FAF6F0] hover:scale-105 active:scale-95'
+                        }`}
                         aria-label={`Add ${product.name} to cart`}
-                        title="Add to cart"
+                        title={addedId === product.id ? 'Added!' : 'Add to cart'}
                       >
-                        <ShoppingBag className="w-4 h-4" />
+                        {addedId === product.id ? (
+                          <Check className="w-4 h-4 stroke-[3]" />
+                        ) : (
+                          <ShoppingBag className="w-4 h-4" />
+                        )}
                       </button>
                     </div>
 
