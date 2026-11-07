@@ -3,7 +3,6 @@
 import React from 'react';
 import Image from 'next/image';
 import {
-  Play,
   Leaf,
   ShieldCheck,
   Gift,
@@ -15,7 +14,7 @@ import {
 } from 'lucide-react';
 
 interface HeroProps {
-  onWatchCrafting: () => void;
+  onWatchCrafting?: () => void;
   onExploreClick: () => void;
 }
 
@@ -78,17 +77,6 @@ export default function Hero({ onWatchCrafting, onExploreClick }: HeroProps) {
                 className="inline-flex items-center justify-center px-6 sm:px-7 py-3.5 rounded-full bg-gradient-to-r from-[#E5A855] via-[#E09F48] to-[#CD8B32] text-[#180E09] font-bold text-xs sm:text-sm tracking-wide shadow-xl shadow-black/40 hover:scale-105 active:scale-95 transition-all"
               >
                 <span>Shop Collection</span>
-              </button>
-
-              {/* Secondary: Outline Play Button */}
-              <button
-                onClick={onWatchCrafting}
-                className="inline-flex items-center gap-2.5 px-5 sm:px-6 py-3.5 rounded-full border border-white/25 bg-black/30 hover:bg-black/50 text-white text-xs sm:text-sm font-semibold transition-all group backdrop-blur-md"
-              >
-                <div className="w-5 h-5 rounded-full border border-white/80 flex items-center justify-center group-hover:border-amber-400 group-hover:text-amber-400 transition-colors">
-                  <Play className="w-2.5 h-2.5 fill-white group-hover:fill-amber-400 ml-0.5 transition-colors" />
-                </div>
-                <span>Watch Crafting</span>
               </button>
             </div>
 
