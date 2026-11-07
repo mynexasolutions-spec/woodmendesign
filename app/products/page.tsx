@@ -97,9 +97,9 @@ function ProductsContent() {
         {/* Subtle Ambient Grain Overlay */}
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-amber-950/30 via-[#160D08] to-[#120B07] pointer-events-none" />
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
           {/* Breadcrumbs */}
-          <nav className="flex items-center gap-2 text-xs text-amber-200/70 mb-4" aria-label="Breadcrumb">
+          <nav className="flex items-center justify-center gap-2 text-xs text-amber-200/70 mb-4" aria-label="Breadcrumb">
             <Link href="/" className="hover:text-amber-300 transition-colors">
               Home
             </Link>
@@ -113,8 +113,8 @@ function ProductsContent() {
             )}
           </nav>
 
-          <div className="max-w-3xl">
-            <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.24em] text-[#E5A855] font-semibold mb-3">
+          <div className="max-w-3xl mx-auto">
+            <div className="inline-flex items-center justify-center gap-2 text-xs uppercase tracking-[0.24em] text-[#E5A855] font-semibold mb-3">
               <span className="w-6 h-[1px] bg-[#E5A855]/70" />
               <span>HANDCRAFTED WOODEN CATALOG</span>
               <span className="w-6 h-[1px] bg-[#E5A855]/70" />
@@ -124,7 +124,7 @@ function ProductsContent() {
               All Handcrafted Products
             </h1>
 
-            <p className="mt-3 text-sm sm:text-base text-[#D4C3B5] leading-relaxed max-w-2xl font-light">
+            <p className="mt-3 text-sm sm:text-base text-[#D4C3B5] leading-relaxed max-w-2xl mx-auto font-light">
               Meticulously turned and carved by master artisans from seasoned natural timbers.
               Every piece adds warmth, organic beauty, and lifelong durability to your kitchen and dining spaces.
             </p>
