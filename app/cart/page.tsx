@@ -38,8 +38,8 @@ export default function CartPage() {
 
       {/* Header Banner */}
       <section className="bg-[#180E09] text-white pt-24 sm:pt-28 pb-10 sm:pb-14 border-b border-[#311E13] relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <nav className="flex items-center gap-2 text-xs text-amber-200/70 mb-3" aria-label="Breadcrumb">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <nav className="flex items-center justify-center gap-2 text-xs text-amber-200/70 mb-3" aria-label="Breadcrumb">
             <Link href="/" className="hover:text-amber-300 transition-colors">
               Home
             </Link>
