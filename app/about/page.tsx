@@ -297,15 +297,12 @@ export default function AboutPage() {
                   </div>
 
                   {/* Card Content */}
-                  <div className="p-5 sm:p-6 space-y-2.5">
+                  <div className="p-5 sm:p-6 space-y-2">
                     <h3 className="font-serif-display text-base sm:text-lg font-bold text-[#2A180E] leading-snug">
                       {item.title}
                     </h3>
                     <p className="text-xs sm:text-sm font-semibold text-[#8C5E37]">
                       {item.subtitle}
-                    </p>
-                    <p className="text-xs sm:text-sm text-stone-600 leading-relaxed font-light">
-                      {item.desc}
                     </p>
                   </div>
                 </div>
