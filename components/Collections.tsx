@@ -15,7 +15,7 @@ export default function Collections({ onSelectCategory, activeCategory }: Collec
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   return (
-    <section id="collections-section" className="pt-28 sm:pt-36 pb-16 sm:pb-20 bg-[#FAF6F0] relative overflow-hidden">
+    <section id="collections-section" className="pt-10 sm:pt-14 md:pt-36 pb-16 sm:pb-20 bg-[#FAF6F0] relative overflow-hidden">
       {/* Decorative leaf motifs background watermark */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}

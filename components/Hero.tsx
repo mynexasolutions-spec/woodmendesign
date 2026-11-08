@@ -20,7 +20,7 @@ interface HeroProps {
 
 export default function Hero({ onWatchCrafting, onExploreClick }: HeroProps) {
   return (
-    <section className="relative bg-[#140B06] text-white pt-24 sm:pt-28 pb-0">
+    <section className="relative bg-[#140B06] text-white pt-24 sm:pt-28 pb-10 md:pb-0">
       {/* Whole Background Image */}
       <div
         className="absolute inset-0 z-0 overflow-hidden pointer-events-none select-none"
@@ -121,8 +121,8 @@ export default function Hero({ onWatchCrafting, onExploreClick }: HeroProps) {
           <div className="lg:col-span-5 hidden lg:block h-[420px] lg:h-[500px] pointer-events-none" />
         </div>
 
-        {/* Floating 5-Feature Bar (Positioned at bottom, overlapping hero & collections) */}
-        <div className="relative pt-6 sm:pt-10 -mb-16 sm:-mb-20 z-30 w-full mx-auto">
+        {/* Floating 5-Feature Bar (Positioned at bottom, overlapping hero & collections - hidden on mobile/phone) */}
+        <div className="hidden md:block relative pt-6 sm:pt-10 -mb-16 sm:-mb-20 z-30 w-full mx-auto">
           <div
             className="bg-[#1D1109] border border-[#3A2216] rounded-2xl sm:rounded-3xl shadow-[0_25px_60px_-15px_rgba(0,0,0,0.6),0_12px_24px_-6px_rgba(0,0,0,0.4)] backdrop-blur-md"
             style={{ backgroundColor: '#1D1109', borderColor: '#3A2216' }}
