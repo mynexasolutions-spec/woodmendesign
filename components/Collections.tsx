@@ -83,13 +83,13 @@ export default function Collections({ onSelectCategory, activeCategory }: Collec
               <Link
                 key={col.id}
                 href={`/products?category=${encodeURIComponent(col.name)}`}
-                className={`bg-white rounded-3xl p-3 sm:p-3.5 border border-[#EADBCC] shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group cursor-pointer w-[220px] shrink-0 snap-start sm:w-auto sm:shrink block ${
+                className={`bg-white rounded-2xl sm:rounded-3xl overflow-hidden border border-[#EADBCC] shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group cursor-pointer w-[220px] shrink-0 snap-start sm:w-auto sm:shrink block ${
                   isSelected ? 'ring-2 ring-[#B87D4B] shadow-lg' : ''
                 }`}
               >
-                {/* Large Full-Width Photographic Thumbnail */}
+                {/* Edge-to-Edge Flush Photographic Thumbnail (No Inset Padding) */}
                 <div
-                  className="relative w-full aspect-square rounded-2xl overflow-hidden bg-[#FAF6F0]"
+                  className="relative w-full aspect-square overflow-hidden bg-[#FAF6F0]"
                   style={{ position: 'relative', width: '100%', aspectRatio: '1 / 1' }}
                 >
                   <Image
@@ -102,7 +102,7 @@ export default function Collections({ onSelectCategory, activeCategory }: Collec
                 </div>
 
                 {/* Card Copy */}
-                <div className="flex-1 flex flex-col justify-between pt-3 pb-1 text-center">
+                <div className="p-3 sm:p-3.5 flex-1 flex flex-col justify-between text-center">
                   <div>
                     <h3 className="font-serif-display font-bold text-base sm:text-[17px] text-[#2A180E] group-hover:text-amber-800 transition-colors line-clamp-1">
                       {col.name}
