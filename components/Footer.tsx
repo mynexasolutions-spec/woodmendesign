@@ -130,11 +130,6 @@ export default function Footer({ onSelectCategory }: FooterProps) {
                 </Link>
               </li>
               <li>
-                <Link href="/blog" className="hover:text-amber-300 transition-colors">
-                  Artisan Journal &amp; Blog
-                </Link>
-              </li>
-              <li>
                 <Link href="/bundle-builder" className="hover:text-amber-300 transition-colors">
                   Gift Box Builder
                 </Link>

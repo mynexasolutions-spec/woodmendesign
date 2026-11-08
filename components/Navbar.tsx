@@ -50,7 +50,6 @@ export default function Navbar({ onOpenSearch, onSelectCategory }: NavbarProps) 
   const isProducts = pathname === '/products' || pathname?.startsWith('/products/');
   const isCollections = pathname === '/collections' || pathname?.startsWith('/collections/');
   const isAbout = pathname === '/about';
-  const isBlog = pathname === '/blog' || pathname === '/care-guide' || pathname?.startsWith('/blog/');
   const isContact = pathname === '/contact';
 
   useEffect(() => {
@@ -229,18 +228,6 @@ export default function Navbar({ onOpenSearch, onSelectCategory }: NavbarProps) 
               >
                 About
                 {isAbout && (
-                  <span className="absolute -bottom-1 left-0 right-0 h-[2px] bg-[#E5A855] rounded-full" />
-                )}
-              </Link>
-
-              <Link
-                href="/blog"
-                className={`relative py-1 transition-colors ${
-                  isBlog ? 'text-white font-bold' : 'text-[#E5D7CC] hover:text-white font-medium'
-                }`}
-              >
-                Blog
-                {isBlog && (
                   <span className="absolute -bottom-1 left-0 right-0 h-[2px] bg-[#E5A855] rounded-full" />
                 )}
               </Link>
@@ -590,15 +577,6 @@ export default function Navbar({ onOpenSearch, onSelectCategory }: NavbarProps) 
             }`}
           >
             About Us
-          </Link>
-          <Link
-            href="/blog"
-            onClick={() => setMobileMenuOpen(false)}
-            className={`block py-2 border-b border-[#2C190F] ${
-              isBlog ? 'text-amber-300 font-bold' : 'text-stone-300 hover:text-white'
-            }`}
-          >
-            Blog &amp; Care Guide
           </Link>
           <Link
             href="/contact"
