@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import {
   Phone,
   Mail,
@@ -121,91 +122,31 @@ export default function ContactPage() {
 
       {/* Main Contact Grid */}
       <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 flex-1">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          {/* Left Column: Direct Artisan Contact Details */}
-          <div className="lg:col-span-5 space-y-6">
-            {/* Signature Hotline Box (From Image 2) */}
-            <div className="p-6 rounded-3xl bg-gradient-to-br from-[#2D1B11] via-[#24160E] to-[#180E08] text-white border-2 border-amber-400/50 shadow-2xl space-y-4">
-              <span className="text-xs uppercase tracking-widest text-amber-300 font-bold block">
-                DIRECT ARTISAN DESK
-              </span>
-
-              <div className="flex items-center gap-3">
-                <div className="w-12 h-12 rounded-2xl bg-amber-500/20 text-amber-400 flex items-center justify-center shrink-0">
-                  <Phone className="w-6 h-6" />
-                </div>
-                <div>
-                  <a
-                    href="tel:9720975271"
-                    className="text-2xl sm:text-3xl font-bold text-amber-200 hover:text-white transition-colors font-mono"
-                  >
-                    9720975271
-                  </a>
-                  <p className="text-xs sm:text-sm text-stone-300">
-                    Call / WhatsApp • Quick Response
-                  </p>
-                </div>
-              </div>
-
-              <div className="pt-2 border-t border-amber-500/20 flex items-center justify-between text-xs sm:text-sm text-amber-300/90 font-medium">
-                <span>QUALITY • DESIGN • DURABILITY</span>
-                <span className="font-bold text-white">MADE WITH PRIDE</span>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+          {/* Left Column: Artisan Studio Showcase Image */}
+          <div className="lg:col-span-5 h-full flex flex-col">
+            <div className="relative w-full flex-1 min-h-[480px] sm:min-h-[560px] rounded-3xl overflow-hidden border border-[#DFD1C2] shadow-sm group">
+              <Image
+                src="/images/contact-artisan-studio.jpg"
+                alt="Woodmen Design Corporation Artisan Woodcraft Workshop & Design Studio"
+                fill
+                priority
+                sizes="(max-width: 1024px) 100vw, 42vw"
+                className="object-cover object-center group-hover:scale-105 transition-transform duration-700"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#160E08]/85 via-transparent to-transparent pointer-events-none" />
+              <div className="absolute bottom-6 left-6 right-6 text-white space-y-1.5 pointer-events-none">
+                <span className="text-xs uppercase tracking-widest text-[#E5A855] font-bold block">
+                  WOODMEN DESIGN STUDIO &bull; SAHARANPUR
+                </span>
+                <h3 className="font-serif-display text-xl sm:text-2xl font-bold text-[#FAF3EB]">
+                  Handcrafted from Solid Logs
+                </h3>
+                <p className="text-xs sm:text-sm text-stone-200 font-light leading-relaxed">
+                  Authentic Sheesham and Acacia tableware turned by master woodcraft artisans.
+                </p>
               </div>
             </div>
-
-            {/* Contact Cards */}
-            <div className="space-y-3">
-              <div className="p-4 sm:p-5 rounded-2xl bg-white border border-[#EADBCC] flex items-start gap-3.5">
-                <MapPin className="w-5 h-5 text-amber-800 shrink-0 mt-0.5" />
-                <div>
-                  <h4 className="text-sm sm:text-base font-bold text-[#2A180E]">
-                    Workshop &amp; Design Studio
-                  </h4>
-                  <p className="text-xs sm:text-sm text-stone-600 mt-1 leading-relaxed">
-                    Woodmen Design Corporation<br />
-                    Saharanpur Artisan Cluster, National Highway 344,<br />
-                    Saharanpur, Uttar Pradesh 247001, India
-                  </p>
-                </div>
-              </div>
-
-              <div className="p-4 sm:p-5 rounded-2xl bg-white border border-[#EADBCC] flex items-start gap-3.5">
-                <Mail className="w-5 h-5 text-amber-800 shrink-0 mt-0.5" />
-                <div>
-                  <h4 className="text-sm sm:text-base font-bold text-[#2A180E]">
-                    Email Inquiries
-                  </h4>
-                  <p className="text-xs sm:text-sm text-stone-600 mt-1">
-                    support@woodmendesign.in<br />
-                    orders@woodmendesign.in
-                  </p>
-                </div>
-              </div>
-
-              <div className="p-4 sm:p-5 rounded-2xl bg-white border border-[#EADBCC] flex items-start gap-3.5">
-                <Clock className="w-5 h-5 text-amber-800 shrink-0 mt-0.5" />
-                <div>
-                  <h4 className="text-sm sm:text-base font-bold text-[#2A180E]">
-                    Artisan Workshop Hours
-                  </h4>
-                  <p className="text-xs sm:text-sm text-stone-600 mt-1">
-                    Monday – Saturday: 9:00 AM – 8:30 PM IST<br />
-                    Sunday: By Prior Appointment
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* Direct WhatsApp Quick Button */}
-            <a
-              href="https://wa.me/919720975271"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-full py-3.5 px-4 rounded-2xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm sm:text-base flex items-center justify-center gap-2 shadow-lg transition-colors"
-            >
-              <Phone className="w-4 h-4" />
-              <span>Start Immediate WhatsApp Chat (9720975271)</span>
-            </a>
           </div>
 
           {/* Right Column: Wholesale & Inquiry Form */}
