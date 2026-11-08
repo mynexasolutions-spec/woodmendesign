@@ -147,17 +147,16 @@ export default function AboutPage() {
             sizes="100vw"
             className="object-cover object-center"
           />
-          {/* Deep Dark Luxury Vignette & Contrast Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-b from-[#140C07]/90 via-[#160E08]/82 to-[#140C07]/95" />
-          <div className="absolute inset-0 bg-black/25" />
+          {/* Subtle Contrast & Vignette Overlay (More Transparent to let Background Shine Through) */}
+          <div className="absolute inset-0 bg-gradient-to-b from-[#140C07]/55 via-[#140C07]/40 to-[#140C07]/70" />
         </div>
 
         {/* Ambient Warm Radial Backlight */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] bg-amber-600/15 rounded-full blur-[140px] pointer-events-none z-0" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] bg-amber-500/15 rounded-full blur-[140px] pointer-events-none z-0" />
 
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center space-y-4">
           {/* Breadcrumb */}
-          <nav className="flex items-center justify-center gap-2 text-xs text-amber-200/80 mb-2" aria-label="Breadcrumb">
+          <nav className="flex items-center justify-center gap-2 text-xs text-amber-200/90 mb-2 drop-shadow-sm" aria-label="Breadcrumb">
             <Link href="/" className="hover:text-amber-300 transition-colors">
               Home
             </Link>
@@ -165,18 +164,18 @@ export default function AboutPage() {
             <span className="text-white font-medium">About Heritage</span>
           </nav>
 
-          <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.25em] text-amber-400 font-bold">
+          <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.25em] text-amber-300 font-bold drop-shadow-sm">
             <Sparkles className="w-3.5 h-3.5" />
             <span>OUR HERITAGE &amp; ARTISAN MISSION</span>
             <Sparkles className="w-3.5 h-3.5" />
           </div>
 
-          <h1 className="font-serif-display text-3xl sm:text-5xl lg:text-6xl font-bold text-[#FBF6F0] leading-tight tracking-tight">
+          <h1 className="font-serif-display text-3xl sm:text-5xl lg:text-6xl font-bold text-[#FFFFFF] leading-tight tracking-tight drop-shadow-lg">
             Rooted in Woodcraft, <br />
             <span className="italic font-normal text-amber-300">Shaped by Generations</span>
           </h1>
 
-          <p className="text-sm sm:text-base text-[#D4C3B4] font-light leading-relaxed max-w-2xl mx-auto">
+          <p className="text-sm sm:text-base text-[#FAF3EB] font-normal leading-relaxed max-w-2xl mx-auto drop-shadow-md">
             From the historic timber lanes of Saharanpur to dinner tables across India, Woodmen Design Corporation
             transforms seasoned natural hardwood into heirloom culinary artifacts built to last generations.
           </p>
