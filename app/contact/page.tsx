@@ -121,8 +121,8 @@ export default function ContactPage() {
       </section>
 
       {/* Main Contact Grid */}
-      <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 flex-1">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14 flex-1 w-full">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-stretch">
           {/* Left Column: Artisan Studio Showcase Image */}
           <div className="lg:col-span-5 h-full flex flex-col">
             <div className="relative w-full flex-1 min-h-[480px] sm:min-h-[560px] rounded-3xl overflow-hidden border border-[#DFD1C2] shadow-sm group">
@@ -150,7 +150,7 @@ export default function ContactPage() {
           </div>
 
           {/* Right Column: Wholesale & Inquiry Form */}
-          <div className="lg:col-span-7 bg-white p-6 sm:p-8 rounded-3xl border border-[#DFD1C2] shadow-sm">
+          <div className="lg:col-span-7 bg-white p-6 sm:p-8 lg:p-10 rounded-3xl border border-[#DFD1C2] shadow-sm">
             <h3 className="font-serif-display text-xl sm:text-2xl font-bold text-[#2A180E] mb-1.5">
               Send an Inquiry or Request a Custom Quote
             </h3>
@@ -278,7 +278,7 @@ export default function ContactPage() {
 
       {/* Capabilities & B2B Solutions Section */}
       <section className="py-14 sm:py-20 bg-[#FAF4EC] border-t border-[#E8DCCE]">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
             <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.25em] text-[#8C5E37] font-bold mb-2">
               <span className="w-6 h-[1px] bg-[#8C5E37]/50" />
@@ -357,7 +357,7 @@ export default function ContactPage() {
 
       {/* Workshop Location & Commitments Grid */}
       <section className="py-14 sm:py-20 bg-white border-t border-[#E8DCCE]">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
             {/* Workshop Visit Details */}
             <div className="lg:col-span-6 bg-[#FAF6F0] rounded-3xl p-6 sm:p-10 border border-[#EADBCC] flex flex-col justify-between space-y-6">
