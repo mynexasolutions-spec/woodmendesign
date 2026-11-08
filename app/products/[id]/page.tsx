@@ -13,6 +13,7 @@ import {
   RotateCcw,
   Sparkles,
   CheckCircle2,
+  Check,
   Plus,
   Minus
 } from 'lucide-react';
@@ -54,6 +55,29 @@ export default function ProductDetailPage() {
   const [quantity, setQuantity] = useState(1);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [activeTab, setActiveTab] = useState<'desc' | 'specs' | 'care'>('desc');
+  const [relatedAddedId, setRelatedAddedId] = useState<string | null>(null);
+
+  const handleQuickAddRelated = (rel: Product, e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    addToCart(rel, 1);
+    setRelatedAddedId(rel.id);
+    showToast({
+      title: 'Added to Cart',
+      message: `${rel.name} (₹${rel.price.toLocaleString('en-IN')})`,
+      type: 'cart',
+    });
+    setTimeout(() => {
+      setRelatedAddedId((current) => (current === rel.id ? null : current));
+    }, 1200);
+  };
+
+  const handleBuyNowRelated = (rel: Product, e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    addToCart(rel, 1);
+    setIsCheckoutOpen(true);
+  };
 
   if (!product) {
     return (
@@ -426,10 +450,13 @@ export default function ProductDetailPage() {
                 return (
                   <div
                     key={rel.id}
-                    className="rounded-2xl bg-white border border-[#EADBCC] shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col justify-between group"
+                    className="bg-white rounded-2xl overflow-hidden border border-[#EADBCC] shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group relative"
                   >
-                    {/* Top Flush Image (Zero Padding) */}
-                    <div className="relative w-full aspect-square overflow-hidden bg-[#FAF6F0]">
+                    {/* Top Flush Image: Edge-to-Edge */}
+                    <div
+                      className="relative w-full aspect-square overflow-hidden bg-[#FAF6F0]"
+                      style={{ position: 'relative', width: '100%', height: '230px' }}
+                    >
                       {rel.badge && (
                         <span className="absolute top-3 left-3 z-10 px-2.5 py-0.5 rounded-md bg-[#241710] text-[#E5A855] text-xs font-bold tracking-wider uppercase shadow">
                           {rel.badge}
@@ -439,6 +466,7 @@ export default function ProductDetailPage() {
                       {/* Wishlist toggle */}
                       <button
                         onClick={(e) => {
+                          e.preventDefault();
                           e.stopPropagation();
                           toggleWishlist(rel);
                           showToast({
@@ -447,9 +475,9 @@ export default function ProductDetailPage() {
                             type: 'wishlist',
                           });
                         }}
-                        className={`absolute top-3 right-3 z-10 p-1.5 rounded-full backdrop-blur-md transition-all ${
+                        className={`absolute top-3 right-3 z-10 p-2 rounded-full backdrop-blur-md transition-all ${
                           isRelInWishlist
-                            ? 'bg-rose-50 text-rose-500 fill-current'
+                            ? 'bg-rose-50 text-rose-500 fill-current shadow-md'
                             : 'bg-white/80 hover:bg-white text-stone-700 shadow-sm'
                         }`}
                         aria-label="Save to Wishlist"
@@ -462,17 +490,18 @@ export default function ProductDetailPage() {
                       <Link
                         href={`/products/${rel.id}`}
                         className="relative w-full h-full block cursor-pointer group-hover:scale-105 transition-transform duration-500"
+                        style={{ position: 'relative', width: '100%', height: '100%' }}
                       >
                         <Image
                           src={rel.image}
                           alt={rel.name}
                           fill
-                          sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 20vw"
+                          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                           className="object-cover"
                         />
-                        <div className="absolute inset-0 bg-black/15 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                          <span className="px-3 py-1.5 rounded-full bg-white/95 text-[#2A180E] text-xs font-bold shadow-md">
-                            View Piece
+                        <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                          <span className="px-3.5 py-1.5 rounded-full bg-white/95 text-[#2A180E] text-xs font-bold shadow-lg">
+                            View Product
                           </span>
                         </div>
                       </Link>
@@ -481,17 +510,20 @@ export default function ProductDetailPage() {
                     {/* Card Content */}
                     <div className="p-3.5 sm:p-4 flex-1 flex flex-col justify-between">
                       <div>
-                        <span className="text-xs uppercase tracking-wider text-[#A67B52] font-bold block mb-1">
+                        <span className="text-xs uppercase tracking-wider text-[#A67B52] font-bold">
                           {rel.woodType.split(' ')[0]} Wood
                         </span>
                         <Link
                           href={`/products/${rel.id}`}
-                          className="font-semibold text-sm sm:text-[15px] text-[#2A180E] group-hover:text-amber-800 transition-colors line-clamp-1 block"
+                          className="font-serif-display font-semibold text-sm sm:text-[15px] text-[#2A180E] group-hover:text-[#A67B52] transition-colors line-clamp-1 mt-1 cursor-pointer block"
+                          title={rel.name}
                         >
                           {rel.name}
                         </Link>
-                        <div className="flex items-center gap-1.5 mt-2 text-amber-500">
-                          <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
+                        <div className="flex items-center gap-1.5 mt-2">
+                          <div className="flex items-center text-amber-500">
+                            <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
+                          </div>
                           <span className="text-xs sm:text-sm font-bold text-[#2A180E]">
                             {rel.rating}
                           </span>
@@ -501,55 +533,59 @@ export default function ProductDetailPage() {
                         </div>
                       </div>
 
-                      <div className="flex items-center justify-between mt-3 pt-2.5 border-t border-[#F2ECE3]">
-                        <div>
-                          <span className="text-sm sm:text-base font-bold text-[#2A180E]">
-                            ₹{rel.price.toLocaleString('en-IN')}
-                          </span>
-                          {rel.originalPrice && (
-                            <span className="text-xs text-stone-400 line-through ml-1.5">
-                              ₹{rel.originalPrice.toLocaleString('en-IN')}
-                            </span>
-                          )}
+                      <div className="mt-3 pt-2.5 border-t border-[#F2ECE3]">
+                        {/* Price Row with Quick Add */}
+                        <div className="flex items-center justify-between">
+                          <div>
+                            <div className="flex items-baseline gap-1.5">
+                              <span className="text-base sm:text-lg font-bold text-[#2A180E]">
+                                ₹{rel.price.toLocaleString('en-IN')}
+                              </span>
+                              {rel.originalPrice && (
+                                <span className="text-xs text-stone-400 line-through">
+                                  ₹{rel.originalPrice.toLocaleString('en-IN')}
+                                </span>
+                              )}
+                            </div>
+                          </div>
+
+                          {/* Quick Add Button with checkmark animated state */}
+                          <button
+                            onClick={(e) => handleQuickAddRelated(rel, e)}
+                            className={`p-2.5 rounded-xl transition-all shadow ${
+                              relatedAddedId === rel.id
+                                ? 'bg-emerald-700 text-white scale-110'
+                                : 'bg-[#3D2516] hover:bg-[#5C3B24] text-[#FAF6F0] hover:scale-105 active:scale-95'
+                            }`}
+                            aria-label={`Add ${rel.name} to cart`}
+                            title={relatedAddedId === rel.id ? 'Added!' : 'Add to cart'}
+                          >
+                            {relatedAddedId === rel.id ? (
+                              <Check className="w-4 h-4 stroke-[3]" />
+                            ) : (
+                              <ShoppingBag className="w-4 h-4" />
+                            )}
+                          </button>
                         </div>
 
-                        <button
-                          onClick={() => {
-                            addToCart(rel, 1);
-                            showToast({
-                              title: 'Added to Cart',
-                              message: `${rel.name} - ₹${rel.price.toLocaleString('en-IN')}`,
-                              type: 'cart',
-                            });
-                          }}
-                          className="w-8 h-8 rounded-lg bg-[#3D2516] hover:bg-[#52331F] text-[#FAF6F0] flex items-center justify-center transition-colors shadow-sm"
-                          title="Quick Add to Cart"
-                          aria-label={`Add ${rel.name} to cart`}
-                        >
-                          <ShoppingBag className="w-3.5 h-3.5" />
-                        </button>
-                      </div>
+                        {/* Action Buttons: View Details (Colored Brand Button) & Buy Now (WhatsApp Green) */}
+                        <div className="grid grid-cols-2 gap-2 mt-2.5">
+                          <Link
+                            href={`/products/${rel.id}`}
+                            className="py-2.5 px-2 rounded-xl bg-[#3D2516] hover:bg-[#201309] text-[#FAF6F0] text-xs sm:text-sm font-bold text-center transition-all shadow-sm hover:shadow active:scale-95 flex items-center justify-center cursor-pointer"
+                          >
+                            View Details
+                          </Link>
 
-                      {/* Action Buttons: View Details & Buy Now */}
-                      <div className="grid grid-cols-2 gap-2 mt-2.5">
-                        <Link
-                          href={`/products/${rel.id}`}
-                          className="py-2 px-2 rounded-xl bg-[#3D2516] hover:bg-[#201309] text-[#FAF6F0] text-xs font-bold text-center transition-all shadow-sm hover:shadow active:scale-95 flex items-center justify-center cursor-pointer"
-                        >
-                          View Details
-                        </Link>
-
-                        <button
-                          onClick={() => {
-                            addToCart(rel, 1);
-                            setIsCheckoutOpen(true);
-                          }}
-                          className="py-2 px-2 rounded-xl bg-[#25D366] hover:bg-[#20BD5A] text-white text-xs font-bold text-center transition-all shadow-sm hover:shadow active:scale-95 flex items-center justify-center gap-1 cursor-pointer"
-                          title="Instant Buy Now"
-                        >
-                          <WhatsAppIcon className="w-3.5 h-3.5 fill-current shrink-0" />
-                          <span>Buy Now</span>
-                        </button>
+                          <button
+                            onClick={(e) => handleBuyNowRelated(rel, e)}
+                            className="py-2.5 px-2 rounded-xl bg-[#25D366] hover:bg-[#20BD5A] text-white text-xs sm:text-sm font-bold text-center transition-all shadow-sm hover:shadow active:scale-95 flex items-center justify-center gap-1.5 cursor-pointer"
+                            title="Instant Buy Now"
+                          >
+                            <WhatsAppIcon className="w-3.5 h-3.5 fill-current shrink-0" />
+                            <span>Buy Now</span>
+                          </button>
+                        </div>
                       </div>
                     </div>
                   </div>
