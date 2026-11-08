@@ -134,22 +134,16 @@ export default function Navbar({ onOpenSearch, onSelectCategory }: NavbarProps) 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
           {/* Left: Brand Logo */}
-          <Link href="/" className="flex items-center gap-2.5 sm:gap-3 group">
-            {/* WM Circle Badge */}
-            <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full border-2 border-white/90 flex items-center justify-center transition-colors group-hover:border-[#E5A855]">
-              <span className="font-bold text-white text-xs sm:text-sm tracking-wider">
-                WM
-              </span>
-            </div>
-
-            {/* Brand Text */}
-            <div className="flex flex-col">
-              <span className="text-base sm:text-lg font-bold tracking-[0.18em] text-white uppercase leading-none group-hover:text-[#E5A855] transition-colors">
-                WOODMEN
-              </span>
-              <span className="text-[8px] sm:text-[9px] tracking-[0.28em] uppercase text-[#E5D7CC] font-semibold mt-1 leading-none">
-                DESIGN CORPORATION
-              </span>
+          <Link href="/" className="flex items-center group py-0.5">
+            <div className="relative h-11 sm:h-12 w-36 sm:w-44 transition-transform group-hover:scale-[1.02]">
+              <Image
+                src="/images/logo.webp"
+                alt="Woodmen Design Corporation"
+                fill
+                className="object-contain object-left"
+                priority
+                sizes="(max-width: 640px) 144px, 176px"
+              />
             </div>
           </Link>
 

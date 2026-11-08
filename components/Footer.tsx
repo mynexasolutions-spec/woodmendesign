@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import {
   Instagram,
   Facebook,
@@ -38,21 +39,17 @@ export default function Footer({ onSelectCategory }: FooterProps) {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-8 pb-12 border-b border-[#2C1A10]">
           {/* Column 1: Brand & Bio (4 cols on lg) */}
           <div className="lg:col-span-4 space-y-4">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full border border-amber-400/50 bg-[#2C1A10] flex items-center justify-center">
-                <span className="font-serif-display font-bold text-amber-300 text-sm">
-                  WM
-                </span>
+            <Link href="/" className="inline-block group">
+              <div className="relative h-12 sm:h-14 w-44 sm:w-52 transition-transform group-hover:scale-[1.02]">
+                <Image
+                  src="/images/logo.webp"
+                  alt="Woodmen Design Corporation"
+                  fill
+                  className="object-contain object-left"
+                  sizes="(max-width: 640px) 176px, 208px"
+                />
               </div>
-              <div className="flex flex-col">
-                <span className="font-serif-display text-lg font-bold tracking-[0.2em] text-[#FAF3EB] uppercase">
-                  WOODMEN
-                </span>
-                <span className="text-[9px] tracking-[0.3em] uppercase text-amber-300 font-semibold">
-                  Design Corporation
-                </span>
-              </div>
-            </div>
+            </Link>
 
             <p className="text-sm text-[#BFAEA0] leading-relaxed max-w-sm font-light">
               Handcrafted wooden utensils that bring nature, tradition and functionality to your home.

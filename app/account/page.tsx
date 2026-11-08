@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import {
   User,
   Package,
@@ -76,8 +77,13 @@ export default function AccountPage() {
           {/* Left Column: Profile Card */}
           <div className="lg:col-span-4 bg-white rounded-3xl p-6 sm:p-7 border border-[#EADBCC] shadow-sm space-y-6">
             <div className="flex items-center gap-4">
-              <div className="w-14 h-14 rounded-full bg-[#180E09] text-[#E5A855] border-2 border-[#E5A855] flex items-center justify-center text-xl font-bold">
-                WM
+              <div className="w-14 h-14 rounded-full bg-[#180E09] border-2 border-[#E5A855] p-2 flex items-center justify-center relative overflow-hidden shrink-0 shadow-md">
+                <Image
+                  src="/images/logo.webp"
+                  alt="Woodmen"
+                  fill
+                  className="object-contain p-1.5"
+                />
               </div>
               <div>
                 <h2 className="font-serif-display text-lg font-bold text-[#2A180E]">

@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import Image from 'next/image';
 import {
   X,
   CheckCircle2,
@@ -81,16 +82,21 @@ export default function CheckoutModal() {
       <div className="relative bg-[#FAF6F0] rounded-2xl max-w-xl w-full shadow-2xl border border-[#DFD1C2] overflow-hidden z-10 my-8">
         {/* Header */}
         <div className="p-4 sm:p-5 bg-[#1F130B] text-white flex items-center justify-between border-b border-[#362215]">
-          <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-lg bg-amber-400/20 text-amber-400 flex items-center justify-center">
-              <ShieldCheck className="w-4 h-4" />
+          <div className="flex items-center gap-3">
+            <div className="relative h-9 w-28 sm:w-32 shrink-0">
+              <Image
+                src="/images/logo.webp"
+                alt="Woodmen Design Corporation"
+                fill
+                className="object-contain object-left"
+              />
             </div>
-            <div>
-              <h3 className="font-serif-display text-base font-bold text-[#FAF3EB]">
+            <div className="border-l border-white/20 pl-3">
+              <h3 className="font-serif-display text-sm sm:text-base font-bold text-[#FAF3EB] leading-tight">
                 {step === 'form' ? 'Secure Checkout' : 'Order Confirmed!'}
               </h3>
-              <p className="text-xs sm:text-sm text-amber-300/80">
-                Woodmen Design Corporation • Artisan Direct
+              <p className="text-xs text-amber-300/80 leading-tight mt-0.5">
+                Artisan Direct Dispatch
               </p>
             </div>
           </div>
