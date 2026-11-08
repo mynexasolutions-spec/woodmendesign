@@ -119,16 +119,16 @@ export default function Navbar({ onOpenSearch, onSelectCategory }: NavbarProps) 
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 backdrop-blur-md border-b shadow-lg py-3 sm:py-3.5 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 backdrop-blur-md border-b py-3 sm:py-3.5 ${
         isScrolled
-          ? 'bg-[#160D08]/85 border-[#311E13]/80'
-          : 'bg-[#160D08]/70 border-white/10'
+          ? 'bg-[#160D08]/80 border-[#311E13]/80 shadow-md'
+          : 'bg-[#160D08]/25 border-white/10 shadow-none'
       }`}
       style={{
-        backgroundColor: isScrolled ? 'rgba(22, 13, 8, 0.82)' : 'rgba(22, 13, 8, 0.65)',
-        backdropFilter: 'blur(12px)',
-        WebkitBackdropFilter: 'blur(12px)',
-        borderColor: isScrolled ? 'rgba(49, 30, 19, 0.8)' : 'rgba(255, 255, 255, 0.1)'
+        backgroundColor: isScrolled ? 'rgba(22, 13, 8, 0.80)' : 'rgba(22, 13, 8, 0.22)',
+        backdropFilter: isScrolled ? 'blur(14px)' : 'blur(8px)',
+        WebkitBackdropFilter: isScrolled ? 'blur(14px)' : 'blur(8px)',
+        borderColor: isScrolled ? 'rgba(49, 30, 19, 0.8)' : 'rgba(255, 255, 255, 0.08)'
       }}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
