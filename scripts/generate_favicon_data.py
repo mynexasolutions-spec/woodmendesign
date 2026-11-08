@@ -20,3 +20,4 @@ with open('data/favicon-base64.ts', 'w', encoding='utf-8') as f:
     f.write(f'export const FAVICON_DATA_URI = "data:image/png;base64,{b64_32}";\n')
 
 print("Generated data/favicon-base64.ts successfully!")
+

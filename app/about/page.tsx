@@ -135,14 +135,29 @@ export default function AboutPage() {
     <div className="min-h-screen flex flex-col bg-[#FAF6F0]">
       <Navbar onOpenSearch={() => setIsSearchOpen(true)} />
 
-      {/* Hero Header */}
-      <section className="bg-[#1E130D] text-white pt-24 sm:pt-28 pb-14 sm:pb-20 relative overflow-hidden border-b border-[#362215]">
-        {/* Ambient Warm Radial Backlight */}
-        <div className="absolute top-0 right-1/4 w-[600px] h-[600px] bg-amber-600/10 rounded-full blur-[120px] pointer-events-none" />
+      {/* Hero Header with Photographic Background */}
+      <section className="relative text-white pt-24 sm:pt-32 pb-16 sm:pb-24 overflow-hidden border-b border-[#362215] bg-[#160E08]">
+        {/* Photographic Background Image */}
+        <div className="absolute inset-0 z-0 pointer-events-none select-none">
+          <Image
+            src="/images/about-hero-bg.jpg"
+            alt="Saharanpur timber yard and heritage woodcraft workshop"
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover object-center"
+          />
+          {/* Deep Dark Luxury Vignette & Contrast Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-b from-[#140C07]/90 via-[#160E08]/82 to-[#140C07]/95" />
+          <div className="absolute inset-0 bg-black/25" />
+        </div>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center space-y-4 max-w-3xl">
+        {/* Ambient Warm Radial Backlight */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] bg-amber-600/15 rounded-full blur-[140px] pointer-events-none z-0" />
+
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center space-y-4">
           {/* Breadcrumb */}
-          <nav className="flex items-center justify-center gap-2 text-xs text-amber-200/70 mb-2" aria-label="Breadcrumb">
+          <nav className="flex items-center justify-center gap-2 text-xs text-amber-200/80 mb-2" aria-label="Breadcrumb">
             <Link href="/" className="hover:text-amber-300 transition-colors">
               Home
             </Link>
@@ -168,21 +183,21 @@ export default function AboutPage() {
 
           {/* Quick Stats Strip */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3.5 pt-6 max-w-4xl mx-auto">
-            <div className="p-4 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm">
+            <div className="p-4 rounded-2xl bg-black/40 border border-white/15 backdrop-blur-md shadow-lg">
               <span className="text-2xl sm:text-3xl font-bold font-mono text-amber-300 block">400+</span>
-              <span className="text-xs sm:text-sm text-stone-300 font-medium uppercase tracking-wider block mt-1">Years Saharanpur Heritage</span>
+              <span className="text-xs sm:text-sm text-stone-200 font-medium uppercase tracking-wider block mt-1">Years Saharanpur Heritage</span>
             </div>
-            <div className="p-4 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm">
+            <div className="p-4 rounded-2xl bg-black/40 border border-white/15 backdrop-blur-md shadow-lg">
               <span className="text-2xl sm:text-3xl font-bold font-mono text-amber-300 block">40+</span>
-              <span className="text-xs sm:text-sm text-stone-300 font-medium uppercase tracking-wider block mt-1">Artisan Families Supported</span>
+              <span className="text-xs sm:text-sm text-stone-200 font-medium uppercase tracking-wider block mt-1">Artisan Families Supported</span>
             </div>
-            <div className="p-4 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm">
+            <div className="p-4 rounded-2xl bg-black/40 border border-white/15 backdrop-blur-md shadow-lg">
               <span className="text-2xl sm:text-3xl font-bold font-mono text-amber-300 block">100%</span>
-              <span className="text-xs sm:text-sm text-stone-300 font-medium uppercase tracking-wider block mt-1">Solid Seasoned Wood</span>
+              <span className="text-xs sm:text-sm text-stone-200 font-medium uppercase tracking-wider block mt-1">Solid Seasoned Wood</span>
             </div>
-            <div className="p-4 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm">
+            <div className="p-4 rounded-2xl bg-black/40 border border-white/15 backdrop-blur-md shadow-lg">
               <span className="text-2xl sm:text-3xl font-bold font-mono text-amber-300 block">0%</span>
-              <span className="text-xs sm:text-sm text-stone-300 font-medium uppercase tracking-wider block mt-1">Toxic Varnishes / Polyurethane</span>
+              <span className="text-xs sm:text-sm text-stone-200 font-medium uppercase tracking-wider block mt-1">Toxic Varnishes / Polyurethane</span>
             </div>
           </div>
         </div>
