@@ -91,7 +91,7 @@ export default function Occasions({ onSelectOccasion }: OccasionsProps) {
                 </div>
 
                 {/* Bottom Card Content with icon */}
-                <div className="p-4 bg-[#1F140D] border-t border-[#3B2518] relative z-10 space-y-1.5">
+                <div className="p-4 bg-[#1F140D] border-t border-[#3B2518] relative z-10 space-y-2">
                   <div className="flex items-center gap-2">
                     <div className="w-7 h-7 rounded-lg bg-amber-400/10 text-amber-400 flex items-center justify-center shrink-0">
                       <Icon className="w-4 h-4" />
@@ -101,11 +101,7 @@ export default function Occasions({ onSelectOccasion }: OccasionsProps) {
                     </h3>
                   </div>
 
-                  <p className="text-xs sm:text-sm text-[#C4B2A3] leading-relaxed line-clamp-2">
-                    {item.subtitle}
-                  </p>
-
-                  <div className="pt-1 flex items-center text-xs sm:text-sm font-bold text-amber-400/90 group-hover:text-amber-300 transition-colors">
+                  <div className="flex items-center text-xs sm:text-sm font-bold text-amber-400/90 group-hover:text-amber-300 transition-colors">
                     <span>Explore Products</span>
                   </div>
                 </div>
