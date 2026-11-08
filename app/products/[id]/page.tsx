@@ -529,6 +529,28 @@ export default function ProductDetailPage() {
                           <ShoppingBag className="w-3.5 h-3.5" />
                         </button>
                       </div>
+
+                      {/* Action Buttons: View Details & Buy Now */}
+                      <div className="grid grid-cols-2 gap-2 mt-2.5">
+                        <Link
+                          href={`/products/${rel.id}`}
+                          className="py-2 px-2 rounded-xl bg-[#3D2516] hover:bg-[#201309] text-[#FAF6F0] text-xs font-bold text-center transition-all shadow-sm hover:shadow active:scale-95 flex items-center justify-center cursor-pointer"
+                        >
+                          View Details
+                        </Link>
+
+                        <button
+                          onClick={() => {
+                            addToCart(rel, 1);
+                            setIsCheckoutOpen(true);
+                          }}
+                          className="py-2 px-2 rounded-xl bg-[#25D366] hover:bg-[#20BD5A] text-white text-xs font-bold text-center transition-all shadow-sm hover:shadow active:scale-95 flex items-center justify-center gap-1 cursor-pointer"
+                          title="Instant Buy Now"
+                        >
+                          <WhatsAppIcon className="w-3.5 h-3.5 fill-current shrink-0" />
+                          <span>Buy Now</span>
+                        </button>
+                      </div>
                     </div>
                   </div>
                 );
