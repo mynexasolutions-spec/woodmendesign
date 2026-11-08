@@ -5,24 +5,57 @@ import { WishlistProvider } from '@/context/WishlistContext';
 import { ToastProvider } from '@/context/ToastContext';
 
 export const metadata: Metadata = {
-  title: 'Woodmen Design Corporation | Timeless Wooden Essentials for Your Home',
+  metadataBase: new URL('https://woodmendesign.vercel.app'),
+  title: 'Woodmen Design Corporation | Handcrafted Solid Wood Kitchenware & Tableware',
   description:
-    'Handcrafted wooden utensils that bring nature, tradition and warmth to your everyday life. Solid Sheesham & Acacia wooden serving bowls, roti casseroles, masala boxes, trays, and cake stands.',
+    'Authentic Indian Sheesham & Acacia wooden utensils, roti casseroles, masala boxes, serving bowls & trays. Handcrafted in Saharanpur with direct artisan pricing.',
   keywords: [
-    'wooden utensils',
+    'woodmen design',
     'woodmen design corporation',
+    'wooden utensils',
     'sheesham wood bowls',
     'wooden roti casserole',
     'wooden masala box',
     'wooden serving tray',
     'wooden cake stand',
     'handcrafted kitchenware India',
+    'solid wood tableware',
+    'saharanpur woodcraft',
   ],
-  authors: [{ name: 'Woodmen Design Corporation' }],
+  authors: [{ name: 'Woodmen Design Corporation', url: 'https://woodmendesign.vercel.app' }],
+  creator: 'Woodmen Design Corporation',
+  publisher: 'Woodmen Design Corporation',
+  icons: {
+    icon: '/logo.webp',
+    shortcut: '/logo.webp',
+    apple: '/logo.webp',
+  },
   openGraph: {
-    title: 'Woodmen Design Corporation | Timeless Wooden Essentials for Your Home',
-    description: 'Crafted by Nature, Designed for You. Handcrafted in India.',
+    title: 'Woodmen Design Corporation | Handcrafted Solid Wood Tableware',
+    description:
+      'Authentic Indian Sheesham & Acacia wooden utensils, roti casseroles, masala boxes, serving bowls & trays. Handcrafted in Saharanpur with direct artisan pricing.',
+    url: 'https://woodmendesign.vercel.app',
+    siteName: 'Woodmen Design Corporation',
+    images: [
+      {
+        url: '/og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Woodmen Design Corporation - Handcrafted Wooden Tableware',
+      },
+    ],
+    locale: 'en_IN',
     type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Woodmen Design Corporation | Handcrafted Solid Wood Tableware',
+    description:
+      'Authentic Indian Sheesham & Acacia wooden utensils, roti casseroles, masala boxes, serving bowls & trays. Handcrafted in Saharanpur with direct artisan pricing.',
+    images: ['/og-image.jpg'],
+  },
+  alternates: {
+    canonical: 'https://woodmendesign.vercel.app',
   },
 };
 
