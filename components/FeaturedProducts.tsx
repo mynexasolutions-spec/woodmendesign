@@ -233,21 +233,21 @@ export default function FeaturedProducts({
                     </button>
                   </div>
 
-                  {/* Action Buttons: View Details (Colored Brand Button) & Buy Now (WhatsApp Green) */}
-                  <div className="grid grid-cols-2 gap-2 mt-2.5">
+                  {/* Action Buttons: View Details (Colored Brand Button) & Buy Now (WhatsApp Green) in 2 Rows */}
+                  <div className="flex flex-col gap-2 mt-2.5">
                     <Link
                       href={`/products/${product.id}`}
-                      className="py-2 sm:py-2.5 px-2 rounded-xl bg-[#3D2516] hover:bg-[#201309] text-[#FAF6F0] text-xs sm:text-sm font-bold text-center transition-all shadow-sm hover:shadow active:scale-95 flex items-center justify-center cursor-pointer"
+                      className="w-full py-2 sm:py-2.5 px-3 rounded-xl bg-[#3D2516] hover:bg-[#201309] text-[#FAF6F0] text-xs sm:text-sm font-bold text-center transition-all shadow-sm hover:shadow active:scale-95 flex items-center justify-center cursor-pointer"
                     >
                       View Details
                     </Link>
 
                     <button
                       onClick={(e) => handleBuyNow(product, e)}
-                      className="py-2 sm:py-2.5 px-2 rounded-xl bg-[#25D366] hover:bg-[#20BD5A] text-white text-xs sm:text-sm font-bold text-center transition-all shadow-sm hover:shadow active:scale-95 flex items-center justify-center gap-1.5 cursor-pointer"
+                      className="w-full py-2 sm:py-2.5 px-3 rounded-xl bg-[#25D366] hover:bg-[#20BD5A] text-white text-xs sm:text-sm font-bold text-center transition-all shadow-sm hover:shadow active:scale-95 flex items-center justify-center gap-2 cursor-pointer"
                       title="Instant Buy Now"
                     >
-                      <WhatsAppIcon className="w-3.5 h-3.5 fill-current shrink-0" />
+                      <WhatsAppIcon className="w-4 h-4 fill-current shrink-0" />
                       <span>Buy Now</span>
                     </button>
                   </div>
