@@ -144,3 +144,4 @@ bg.save('public/images/og-image.jpg', 'JPEG', quality=90, optimize=True)
 bg.save('app/opengraph-image.jpg', 'JPEG', quality=90, optimize=True)
 
 print("Saved public/og-image.jpg successfully! Size:", os.path.getsize('public/og-image.jpg'), "bytes")
+

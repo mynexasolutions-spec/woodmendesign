@@ -26,9 +26,14 @@ export const metadata: Metadata = {
   creator: 'Woodmen Design Corporation',
   publisher: 'Woodmen Design Corporation',
   icons: {
-    icon: '/logo.webp',
-    shortcut: '/logo.webp',
-    apple: '/logo.webp',
+    icon: [
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/icon.png', sizes: '192x192', type: 'image/png' },
+    ],
+    shortcut: '/favicon.ico',
+    apple: [
+      { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
+    ],
   },
   openGraph: {
     title: 'Woodmen Design Corporation | Handcrafted Solid Wood Tableware',
@@ -67,6 +72,9 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <head>
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="icon" type="image/png" sizes="192x192" href="/icon.png" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
