@@ -114,14 +114,14 @@ export default function TrackOrderPage() {
 
             <button
               type="submit"
-              className="py-3 px-6 rounded-2xl bg-gradient-to-r from-[#E5A855] via-[#DE983C] to-[#C9842C] text-[#1E120A] font-bold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-md hover:scale-[1.01] active:scale-[0.99] transition-all shrink-0"
+              className="py-3 px-6 rounded-2xl bg-gradient-to-r from-[#E5A855] via-[#DE983C] to-[#C9842C] text-[#1E120A] font-bold text-sm sm:text-base flex items-center justify-center gap-2 shadow-md hover:scale-[1.01] active:scale-[0.99] transition-all shrink-0"
             >
               <Search className="w-4 h-4" />
               <span>Track Consignment</span>
             </button>
           </form>
 
-          <p className="text-[11px] text-stone-500 mt-3 text-center sm:text-left">
+          <p className="text-xs sm:text-sm text-stone-600 mt-3 text-center sm:text-left">
             Need demo tracking? Try entering <strong>WM-542190</strong> or your phone number.
           </p>
         </div>
@@ -132,22 +132,22 @@ export default function TrackOrderPage() {
             {/* Top summary */}
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-[#F2ECE3]">
               <div>
-                <span className="text-[10px] uppercase tracking-widest text-[#8C5E37] font-bold">
+                <span className="text-xs uppercase tracking-widest text-[#8C5E37] font-bold">
                   CONSIGNMENT #{trackedOrder.id}
                 </span>
-                <h3 className="font-serif-display text-xl font-bold text-[#2A180E] mt-0.5">
+                <h3 className="font-serif-display text-xl sm:text-2xl font-bold text-[#2A180E] mt-0.5">
                   {trackedOrder.status}
                 </h3>
-                <p className="text-xs text-stone-500 mt-1">
+                <p className="text-xs sm:text-sm text-stone-500 mt-1">
                   Placed on {trackedOrder.orderDate} • Origin: {trackedOrder.origin}
                 </p>
               </div>
 
-              <div className="p-3 rounded-xl bg-amber-50 border border-amber-200/80 text-right sm:text-left">
-                <span className="text-[10px] uppercase font-bold text-amber-900 block">
+              <div className="p-3.5 rounded-xl bg-amber-50 border border-amber-200/80 text-right sm:text-left">
+                <span className="text-xs uppercase font-bold text-amber-900 block">
                   Estimated Delivery
                 </span>
-                <strong className="text-sm font-serif text-amber-950">
+                <strong className="text-sm sm:text-base font-serif text-amber-950">
                   {trackedOrder.estimatedDelivery}
                 </strong>
               </div>
@@ -181,17 +181,17 @@ export default function TrackOrderPage() {
                   <div className="pt-1">
                     <div className="flex items-center gap-2">
                       <h4
-                        className={`text-xs sm:text-sm font-bold ${
+                        className={`text-sm sm:text-base font-bold ${
                           st.completed ? 'text-[#2A180E]' : 'text-stone-400'
                         }`}
                       >
                         {st.title}
                       </h4>
-                      <span className="text-[10px] text-stone-400 font-mono">
+                      <span className="text-xs text-stone-400 font-mono">
                         {st.date}
                       </span>
                     </div>
-                    <p className="text-xs text-stone-500 mt-0.5 leading-relaxed">
+                    <p className="text-xs sm:text-sm text-stone-600 mt-1 leading-relaxed">
                       {st.desc}
                     </p>
                   </div>

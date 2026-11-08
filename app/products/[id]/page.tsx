@@ -158,39 +158,39 @@ export default function ProductDetailPage() {
               />
 
               {/* Timber Seal Pill */}
-              <div className="absolute bottom-4 right-4 z-10 bg-white/95 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-[#E8DCCE] text-[11px] text-[#5C4535] font-medium shadow-sm">
+              <div className="absolute bottom-4 right-4 z-10 bg-white/95 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-[#E8DCCE] text-xs sm:text-sm text-[#5C4535] font-semibold shadow-sm">
                 100% Solid {product.woodType}
               </div>
             </div>
 
             {/* Unified Trust Strip */}
-            <div className="grid grid-cols-3 divide-x divide-[#E8DCCE] rounded-2xl bg-white border border-[#E8DCCE] p-3.5 shadow-sm text-center">
+            <div className="grid grid-cols-3 divide-x divide-[#E8DCCE] rounded-2xl bg-white border border-[#E8DCCE] p-4 shadow-sm text-center">
               <div className="px-2 space-y-1">
                 <ShieldCheck className="w-5 h-5 text-amber-700 mx-auto" />
-                <span className="text-[11px] sm:text-xs font-bold text-[#2A180E] block">
+                <span className="text-xs sm:text-sm font-bold text-[#2A180E] block">
                   Food-Safe Oil
                 </span>
-                <span className="text-[10px] text-stone-500 block">
+                <span className="text-xs text-stone-500 block">
                   Non-toxic finish
                 </span>
               </div>
 
               <div className="px-2 space-y-1">
                 <Truck className="w-5 h-5 text-amber-700 mx-auto" />
-                <span className="text-[11px] sm:text-xs font-bold text-[#2A180E] block">
+                <span className="text-xs sm:text-sm font-bold text-[#2A180E] block">
                   Free Shipping
                 </span>
-                <span className="text-[10px] text-stone-500 block">
+                <span className="text-xs text-stone-500 block">
                   On orders &gt; ₹999
                 </span>
               </div>
 
               <div className="px-2 space-y-1">
                 <RotateCcw className="w-5 h-5 text-amber-700 mx-auto" />
-                <span className="text-[11px] sm:text-xs font-bold text-[#2A180E] block">
+                <span className="text-xs sm:text-sm font-bold text-[#2A180E] block">
                   7-Day Returns
                 </span>
-                <span className="text-[10px] text-stone-500 block">
+                <span className="text-xs text-stone-500 block">
                   Hassle-free replacement
                 </span>
               </div>
@@ -431,7 +431,7 @@ export default function ProductDetailPage() {
                     {/* Top Flush Image (Zero Padding) */}
                     <div className="relative w-full aspect-square overflow-hidden bg-[#FAF6F0]">
                       {rel.badge && (
-                        <span className="absolute top-3 left-3 z-10 px-2 py-0.5 rounded-md bg-[#241710] text-[#E5A855] text-[10px] font-bold tracking-wider uppercase shadow">
+                        <span className="absolute top-3 left-3 z-10 px-2.5 py-0.5 rounded-md bg-[#241710] text-[#E5A855] text-xs font-bold tracking-wider uppercase shadow">
                           {rel.badge}
                         </span>
                       )}
@@ -481,21 +481,21 @@ export default function ProductDetailPage() {
                     {/* Card Content */}
                     <div className="p-3.5 sm:p-4 flex-1 flex flex-col justify-between">
                       <div>
-                        <span className="text-[10px] uppercase tracking-wider text-[#A67B52] font-bold block mb-1">
+                        <span className="text-xs uppercase tracking-wider text-[#A67B52] font-bold block mb-1">
                           {rel.woodType.split(' ')[0]} Wood
                         </span>
                         <Link
                           href={`/products/${rel.id}`}
-                          className="font-semibold text-xs sm:text-sm text-[#2A180E] group-hover:text-amber-800 transition-colors line-clamp-1 block"
+                          className="font-semibold text-sm sm:text-[15px] text-[#2A180E] group-hover:text-amber-800 transition-colors line-clamp-1 block"
                         >
                           {rel.name}
                         </Link>
-                        <div className="flex items-center gap-1 mt-1.5 text-amber-500">
+                        <div className="flex items-center gap-1.5 mt-2 text-amber-500">
                           <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
-                          <span className="text-xs font-bold text-[#2A180E]">
+                          <span className="text-xs sm:text-sm font-bold text-[#2A180E]">
                             {rel.rating}
                           </span>
-                          <span className="text-[11px] text-stone-400">
+                          <span className="text-xs text-stone-500">
                             ({rel.reviewsCount})
                           </span>
                         </div>
@@ -503,11 +503,11 @@ export default function ProductDetailPage() {
 
                       <div className="flex items-center justify-between mt-3 pt-2.5 border-t border-[#F2ECE3]">
                         <div>
-                          <span className="text-xs sm:text-sm font-bold text-[#2A180E]">
+                          <span className="text-sm sm:text-base font-bold text-[#2A180E]">
                             ₹{rel.price.toLocaleString('en-IN')}
                           </span>
                           {rel.originalPrice && (
-                            <span className="text-[10px] text-stone-400 line-through ml-1.5">
+                            <span className="text-xs text-stone-400 line-through ml-1.5">
                               ₹{rel.originalPrice.toLocaleString('en-IN')}
                             </span>
                           )}

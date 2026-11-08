@@ -99,7 +99,7 @@ export default function ProductQuickViewModal({
 
             {/* Subtle bottom tag */}
             <div className="absolute bottom-4 left-4 right-4 z-10 text-center">
-              <span className="inline-block px-3 py-1 rounded-full bg-white/90 backdrop-blur-md border border-[#E8DCCE] text-[11px] text-[#8C5E37] font-medium tracking-wide shadow-sm">
+              <span className="inline-block px-3.5 py-1.5 rounded-full bg-white/90 backdrop-blur-md border border-[#E8DCCE] text-xs sm:text-sm text-[#8C5E37] font-semibold tracking-wide shadow-sm">
                 🌿 Handcrafted in Saharanpur • 100% Solid {product.woodType}
               </span>
             </div>
@@ -129,7 +129,7 @@ export default function ProductQuickViewModal({
                 <span className="text-xs font-bold text-[#2A180E]">
                   {product.rating}
                 </span>
-                <span className="text-xs text-stone-500">
+                <span className="text-xs sm:text-sm text-stone-500">
                   ({product.reviewsCount} customer reviews)
                 </span>
               </div>
@@ -150,12 +150,12 @@ export default function ProductQuickViewModal({
               </div>
 
               {/* Description */}
-              <p className="text-xs text-[#5C4535] leading-relaxed mt-3 font-light">
+              <p className="text-sm text-[#5C4535] leading-relaxed mt-3 font-light">
                 {product.description}
               </p>
 
               {/* Wood Specs Box */}
-              <div className="mt-4 p-3 rounded-xl bg-[#F0E6DB] border border-[#DFCFC0] space-y-1.5 text-xs">
+              <div className="mt-4 p-3.5 rounded-xl bg-[#F0E6DB] border border-[#DFCFC0] space-y-2 text-xs sm:text-sm">
                 <div className="flex justify-between">
                   <span className="text-stone-600 font-medium">Wood Species:</span>
                   <span className="font-bold text-[#2A180E]">{product.woodType}</span>
@@ -171,10 +171,10 @@ export default function ProductQuickViewModal({
               </div>
 
               {/* Key features bullets */}
-              <div className="mt-3 space-y-1">
+              <div className="mt-3 space-y-1.5">
                 {product.features.map((feat, idx) => (
-                  <div key={idx} className="flex items-center gap-1.5 text-[11px] text-stone-700">
-                    <Sparkles className="w-3 h-3 text-amber-600 shrink-0" />
+                  <div key={idx} className="flex items-center gap-1.5 text-xs sm:text-sm text-stone-700">
+                    <Sparkles className="w-3.5 h-3.5 text-amber-600 shrink-0" />
                     <span>{feat}</span>
                   </div>
                 ))}

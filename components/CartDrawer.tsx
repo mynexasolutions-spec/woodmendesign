@@ -71,7 +71,7 @@ export default function CartDrawer() {
                 <h3 className="font-serif-display text-base font-bold text-[#FAF3EB]">
                   Your Wooden Cart
                 </h3>
-                <span className="text-[11px] text-amber-300/80">
+                <span className="text-xs text-amber-300/90">
                   {cart.length} {cart.length === 1 ? 'item' : 'items'}
                 </span>
               </div>
@@ -88,7 +88,7 @@ export default function CartDrawer() {
 
           {/* Free Shipping Progress Meter */}
           <div className="px-5 py-3 bg-[#F0E5D8] border-b border-[#DFD1C2]">
-            <div className="flex items-center justify-between text-xs font-semibold text-[#3D2516] mb-1.5">
+            <div className="flex items-center justify-between text-xs sm:text-sm font-semibold text-[#3D2516] mb-1.5">
               <span className="flex items-center gap-1.5">
                 <Truck className="w-4 h-4 text-amber-700" />
                 {amountNeededForFreeShipping > 0 ? (
@@ -102,7 +102,7 @@ export default function CartDrawer() {
                   </span>
                 )}
               </span>
-              <span className="text-[10px] text-stone-500 font-mono">
+              <span className="text-xs text-stone-600 font-mono">
                 {freeShippingProgress}%
               </span>
             </div>
@@ -170,13 +170,13 @@ export default function CartDrawer() {
                           <Trash2 className="w-3.5 h-3.5" />
                         </button>
                       </div>
-                      <span className="text-[10px] text-[#A67B52] font-medium block">
+                      <span className="text-xs text-[#A67B52] font-semibold block">
                         {item.product.woodType}
                       </span>
                     </div>
 
                     <div className="flex items-center justify-between mt-2">
-                      <span className="text-xs font-bold text-[#2A180E]">
+                      <span className="text-sm font-bold text-[#2A180E]">
                         ₹{(item.product.price * item.quantity).toLocaleString('en-IN')}
                       </span>
 
@@ -187,7 +187,7 @@ export default function CartDrawer() {
                           className="p-1 hover:bg-[#EAE0D4] text-stone-700 transition-colors"
                           aria-label="Decrease quantity"
                         >
-                          <Minus className="w-3 h-3" />
+                          <Minus className="w-3.5 h-3.5" />
                         </button>
                         <span className="px-2 text-xs font-bold text-[#2A180E] min-w-[20px] text-center">
                           {item.quantity}
@@ -197,7 +197,7 @@ export default function CartDrawer() {
                           className="p-1 hover:bg-[#EAE0D4] text-stone-700 transition-colors"
                           aria-label="Increase quantity"
                         >
-                          <Plus className="w-3 h-3" />
+                          <Plus className="w-3.5 h-3.5" />
                         </button>
                       </div>
                     </div>
@@ -218,13 +218,13 @@ export default function CartDrawer() {
                     placeholder="Coupon (try WOODMEN10)"
                     value={inputCoupon}
                     onChange={(e) => setInputCoupon(e.target.value)}
-                    className="w-full pl-8 pr-3 py-1.5 rounded-lg bg-[#FAF6F0] border border-[#DFD1C2] text-xs uppercase placeholder-stone-400 focus:outline-none focus:border-[#A67B52]"
+                    className="w-full pl-8 pr-3 py-2 rounded-lg bg-[#FAF6F0] border border-[#DFD1C2] text-xs sm:text-sm uppercase placeholder-stone-400 focus:outline-none focus:border-[#A67B52]"
                   />
                   <Tag className="w-3.5 h-3.5 text-stone-400 absolute left-2.5 top-1/2 -translate-y-1/2" />
                 </div>
                 <button
                   type="submit"
-                  className="px-3 py-1.5 rounded-lg bg-[#4D2F1A] text-white font-bold text-xs hover:bg-[#6E4526] transition-colors"
+                  className="px-3.5 py-2 rounded-lg bg-[#4D2F1A] text-white font-bold text-xs sm:text-sm hover:bg-[#6E4526] transition-colors"
                 >
                   Apply
                 </button>
@@ -232,7 +232,7 @@ export default function CartDrawer() {
 
               {couponStatus && (
                 <p
-                  className={`text-[11px] ${
+                  className={`text-xs ${
                     couponStatus.success ? 'text-emerald-700' : 'text-rose-600'
                   }`}
                 >
@@ -241,7 +241,7 @@ export default function CartDrawer() {
               )}
 
               {/* Subtotal, discount, shipping, total */}
-              <div className="space-y-1.5 text-xs text-[#5C4535] pt-1">
+              <div className="space-y-1.5 text-xs sm:text-sm text-[#5C4535] pt-1">
                 <div className="flex justify-between">
                   <span>Subtotal</span>
                   <span className="font-semibold text-[#2A180E]">
@@ -260,7 +260,7 @@ export default function CartDrawer() {
                   <span>Shipping</span>
                   <span>
                     {shippingFee === 0 ? (
-                      <span className="text-emerald-700 font-semibold uppercase text-[11px]">
+                      <span className="text-emerald-700 font-semibold uppercase text-xs">
                         FREE
                       </span>
                     ) : (
@@ -281,12 +281,12 @@ export default function CartDrawer() {
                   setIsCartOpen(false);
                   setIsCheckoutOpen(true);
                 }}
-                className="w-full py-3.5 rounded-xl bg-gradient-to-r from-[#E5A855] via-[#DE983C] to-[#C9842C] text-[#1E120A] font-bold text-sm flex items-center justify-center shadow-lg shadow-amber-900/20 hover:scale-[1.01] active:scale-[0.99] transition-all"
+                className="w-full py-3.5 rounded-xl bg-gradient-to-r from-[#E5A855] via-[#DE983C] to-[#C9842C] text-[#1E120A] font-bold text-sm sm:text-base flex items-center justify-center shadow-lg shadow-amber-900/20 hover:scale-[1.01] active:scale-[0.99] transition-all"
               >
                 <span>Proceed to Checkout</span>
               </button>
 
-              <p className="text-[10px] text-center text-stone-500">
+              <p className="text-xs text-center text-stone-500">
                 🔒 Safe & encrypted checkout • Cash on Delivery & UPI available
               </p>
             </div>

@@ -54,24 +54,24 @@ export default function Footer({ onSelectCategory }: FooterProps) {
               </div>
             </div>
 
-            <p className="text-xs sm:text-sm text-[#BFAEA0] leading-relaxed max-w-sm font-light">
+            <p className="text-sm text-[#BFAEA0] leading-relaxed max-w-sm font-light">
               Handcrafted wooden utensils that bring nature, tradition and functionality to your home.
               Crafted from sustainably sourced solid seasoned timber.
             </p>
 
-            <div className="pt-1 space-y-2 text-xs text-[#C4B2A3]">
+            <div className="pt-1 space-y-2.5 text-sm text-[#C4B2A3]">
               <div className="flex items-center gap-2">
-                <Phone className="w-3.5 h-3.5 text-amber-400" />
+                <Phone className="w-4 h-4 text-amber-400 shrink-0" />
                 <a href="tel:9720975271" className="hover:text-amber-300 transition-colors font-medium">
                   +91 9720975271
                 </a>
               </div>
               <div className="flex items-center gap-2">
-                <Mail className="w-3.5 h-3.5 text-amber-400" />
+                <Mail className="w-4 h-4 text-amber-400 shrink-0" />
                 <span>support@woodmendesign.in</span>
               </div>
               <div className="flex items-center gap-2">
-                <MapPin className="w-3.5 h-3.5 text-amber-400" />
+                <MapPin className="w-4 h-4 text-amber-400 shrink-0" />
                 <span>Saharanpur Woodcraft Cluster, Uttar Pradesh, India</span>
               </div>
             </div>
@@ -82,7 +82,7 @@ export default function Footer({ onSelectCategory }: FooterProps) {
                 href="https://instagram.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-8 h-8 rounded-full bg-[#281810] hover:bg-[#3D2518] text-[#D8C7B8] hover:text-amber-300 flex items-center justify-center transition-colors border border-[#3C2518]"
+                className="w-9 h-9 rounded-full bg-[#281810] hover:bg-[#3D2518] text-[#D8C7B8] hover:text-amber-300 flex items-center justify-center transition-colors border border-[#3C2518]"
                 aria-label="Instagram"
               >
                 <Instagram className="w-4 h-4" />
@@ -91,7 +91,7 @@ export default function Footer({ onSelectCategory }: FooterProps) {
                 href="https://facebook.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-8 h-8 rounded-full bg-[#281810] hover:bg-[#3D2518] text-[#D8C7B8] hover:text-amber-300 flex items-center justify-center transition-colors border border-[#3C2518]"
+                className="w-9 h-9 rounded-full bg-[#281810] hover:bg-[#3D2518] text-[#D8C7B8] hover:text-amber-300 flex items-center justify-center transition-colors border border-[#3C2518]"
                 aria-label="Facebook"
               >
                 <Facebook className="w-4 h-4" />
@@ -100,7 +100,7 @@ export default function Footer({ onSelectCategory }: FooterProps) {
                 href="https://wa.me/919720975271"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-8 h-8 rounded-full bg-[#281810] hover:bg-[#3D2518] text-[#D8C7B8] hover:text-amber-300 flex items-center justify-center transition-colors border border-[#3C2518]"
+                className="w-9 h-9 rounded-full bg-[#281810] hover:bg-[#3D2518] text-[#D8C7B8] hover:text-amber-300 flex items-center justify-center transition-colors border border-[#3C2518]"
                 aria-label="WhatsApp"
               >
                 <Phone className="w-4 h-4" />
@@ -110,10 +110,10 @@ export default function Footer({ onSelectCategory }: FooterProps) {
 
           {/* Column 2: Quick Links */}
           <div className="lg:col-span-2 space-y-3">
-            <h4 className="text-xs font-bold uppercase tracking-widest text-[#FAF3EB]">
+            <h4 className="text-sm font-bold uppercase tracking-widest text-[#FAF3EB]">
               Quick Links
             </h4>
-            <ul className="space-y-2 text-xs">
+            <ul className="space-y-2.5 text-sm">
               <li>
                 <Link href="/" className="hover:text-amber-300 transition-colors">
                   Home
@@ -149,10 +149,10 @@ export default function Footer({ onSelectCategory }: FooterProps) {
 
           {/* Column 3: Categories */}
           <div className="lg:col-span-2 space-y-3">
-            <h4 className="text-xs font-bold uppercase tracking-widest text-[#FAF3EB]">
+            <h4 className="text-sm font-bold uppercase tracking-widest text-[#FAF3EB]">
               Categories
             </h4>
-            <ul className="space-y-2 text-xs">
+            <ul className="space-y-2.5 text-sm">
               {COLLECTIONS.map((c) => (
                 <li key={c.id}>
                   <Link
@@ -169,17 +169,17 @@ export default function Footer({ onSelectCategory }: FooterProps) {
 
           {/* Column 4: Support */}
           <div className="lg:col-span-2 space-y-3">
-            <h4 className="text-xs font-bold uppercase tracking-widest text-[#FAF3EB]">
+            <h4 className="text-sm font-bold uppercase tracking-widest text-[#FAF3EB]">
               Support &amp; Care
             </h4>
-            <ul className="space-y-2 text-xs">
+            <ul className="space-y-2.5 text-sm">
               <li>
-                <Link href="/care-guide" className="hover:text-amber-300 transition-colors">
+                <Link href="/about" className="hover:text-amber-300 transition-colors">
                   FAQs &amp; Care Guide
                 </Link>
               </li>
               <li>
-                <Link href="/care-guide" className="hover:text-amber-300 transition-colors">
+                <Link href="/about" className="hover:text-amber-300 transition-colors">
                   Seasoning Instructions
                 </Link>
               </li>
@@ -194,7 +194,7 @@ export default function Footer({ onSelectCategory }: FooterProps) {
                 </Link>
               </li>
               <li>
-                <a href="https://wa.me/919720975271" target="_blank" rel="noopener noreferrer" className="hover:text-amber-300 transition-colors text-amber-400">
+                <a href="https://wa.me/919720975271" target="_blank" rel="noopener noreferrer" className="hover:text-amber-300 transition-colors text-amber-400 font-medium">
                   Artisan Help: 9720975271
                 </a>
               </li>
@@ -203,10 +203,10 @@ export default function Footer({ onSelectCategory }: FooterProps) {
 
           {/* Column 5: Stay in the Loop */}
           <div className="lg:col-span-2 space-y-3">
-            <h4 className="text-xs font-bold uppercase tracking-widest text-[#FAF3EB]">
+            <h4 className="text-sm font-bold uppercase tracking-widest text-[#FAF3EB]">
               Stay in the Loop
             </h4>
-            <p className="text-xs text-[#BFAEA0] leading-relaxed">
+            <p className="text-sm text-[#BFAEA0] leading-relaxed">
               Get updates on new collections, exclusive seasonal offers and wood care tips.
             </p>
 
@@ -218,11 +218,11 @@ export default function Footer({ onSelectCategory }: FooterProps) {
                   placeholder="Enter your email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full pl-3 pr-10 py-2.5 rounded-xl bg-[#251710] border border-[#3E2719] text-xs text-white placeholder-stone-400 focus:outline-none focus:border-amber-400"
+                  className="w-full pl-3.5 pr-12 py-3 rounded-xl bg-[#251710] border border-[#3E2719] text-sm text-white placeholder-stone-400 focus:outline-none focus:border-amber-400"
                 />
                 <button
                   type="submit"
-                  className="absolute right-1.5 top-1.5 bottom-1.5 px-3 rounded-lg bg-amber-500 hover:bg-amber-400 text-stone-950 text-xs font-bold flex items-center justify-center transition-colors"
+                  className="absolute right-1.5 top-1.5 bottom-1.5 px-3.5 rounded-lg bg-amber-500 hover:bg-amber-400 text-stone-950 text-xs sm:text-sm font-bold flex items-center justify-center transition-colors"
                   aria-label="Submit newsletter"
                 >
                   Join
@@ -230,7 +230,7 @@ export default function Footer({ onSelectCategory }: FooterProps) {
               </div>
 
               {subscribed && (
-                <p className="text-[11px] text-emerald-400 flex items-center gap-1 font-medium">
+                <p className="text-xs text-emerald-400 flex items-center gap-1 font-medium">
                   <Check className="w-3.5 h-3.5" />
                   Subscribed! Welcome to Woodmen family.
                 </p>

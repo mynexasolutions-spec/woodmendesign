@@ -50,7 +50,7 @@ export default function Craftsmanship({ onDiscoverStory }: CraftsmanshipProps) {
             <div className="max-w-md space-y-4 sm:space-y-5">
               {/* Kicker tag with right line */}
               <div className="inline-flex items-center gap-3">
-                <span className="text-[11px] sm:text-xs uppercase tracking-[0.24em] text-[#E5A855] font-semibold">
+                <span className="text-xs sm:text-sm uppercase tracking-[0.24em] text-[#E5A855] font-semibold">
                   OUR CRAFTSMANSHIP
                 </span>
                 <span className="w-8 sm:w-12 h-[1px] bg-[#E5A855]/70" />

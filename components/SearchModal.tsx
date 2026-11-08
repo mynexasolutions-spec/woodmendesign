@@ -77,7 +77,7 @@ export default function SearchModal({
               <button
                 key={tag}
                 onClick={() => setSearchTerm(tag)}
-                className="px-2.5 py-1 rounded-full bg-white border border-[#DFD1C2] text-[#3D2516] hover:bg-stone-50 shrink-0 text-[11px] font-medium"
+                className="px-3 py-1 rounded-full bg-white border border-[#DFD1C2] text-[#3D2516] hover:bg-stone-50 shrink-0 text-xs sm:text-sm font-medium"
               >
                 {tag}
               </button>
@@ -112,23 +112,23 @@ export default function SearchModal({
                   </div>
 
                   <div className="flex-1">
-                    <span className="text-[10px] uppercase font-bold text-[#A67B52]">
+                    <span className="text-xs uppercase font-bold text-[#A67B52]">
                       {product.category}
                     </span>
-                    <h4 className="font-serif-display text-xs sm:text-sm font-bold text-[#2A180E] group-hover:text-amber-800 transition-colors">
+                    <h4 className="font-serif-display text-sm sm:text-base font-bold text-[#2A180E] group-hover:text-amber-800 transition-colors">
                       {product.name}
                     </h4>
-                    <span className="text-[11px] text-stone-500 block">
+                    <span className="text-xs text-stone-500 block">
                       {product.woodType}
                     </span>
                   </div>
 
                   <div className="text-right">
-                    <span className="text-sm font-bold text-[#2A180E] block">
+                    <span className="text-sm sm:text-base font-bold text-[#2A180E] block">
                       ₹{product.price.toLocaleString('en-IN')}
                     </span>
-                    <div className="flex items-center justify-end gap-1 text-[11px] text-amber-500 font-semibold">
-                      <Star className="w-3 h-3 fill-amber-400" />
+                    <div className="flex items-center justify-end gap-1 text-xs text-amber-500 font-semibold">
+                      <Star className="w-3.5 h-3.5 fill-amber-400" />
                       <span>{product.rating}</span>
                     </div>
                   </div>

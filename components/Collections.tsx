@@ -78,12 +78,12 @@ export default function Collections({ onSelectCategory, activeCategory }: Collec
                   </h3>
 
                   {/* Subtitle / Item count */}
-                  <p className="text-[11px] text-[#7C6656] mt-1 font-medium">
+                  <p className="text-xs sm:text-sm text-[#7C6656] mt-1 font-medium">
                     {col.itemCount} Designs Available
                   </p>
 
                   {/* Bottom selection indicator */}
-                  <div className="mt-3 flex items-center justify-center text-[11px] font-semibold text-[#A67B52] opacity-0 group-hover:opacity-100 transition-opacity">
+                  <div className="mt-3 flex items-center justify-center text-xs font-semibold text-[#A67B52] opacity-0 group-hover:opacity-100 transition-opacity">
                     <span>Explore Collection</span>
                   </div>
                 </Link>

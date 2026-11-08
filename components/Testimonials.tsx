@@ -179,14 +179,14 @@ export default function Testimonials() {
                         </div>
                         <div>
                           <div className="flex items-center gap-1.5">
-                            <h4 className="text-xs sm:text-sm font-bold text-[#2A180E]">
+                            <h4 className="text-sm font-bold text-[#2A180E]">
                               {item.name}
                             </h4>
                             <span title="Verified Buyer">
                               <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
                             </span>
                           </div>
-                          <span className="text-[10px] text-stone-400 block">
+                          <span className="text-xs text-stone-500 block">
                             {item.location}
                           </span>
                         </div>

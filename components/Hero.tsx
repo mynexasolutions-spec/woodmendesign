@@ -50,7 +50,7 @@ export default function Hero({ onWatchCrafting, onExploreClick }: HeroProps) {
           <div className="lg:col-span-7 z-10 py-6 lg:py-10 max-w-2xl">
             {/* Kicker tag with right line */}
             <div className="inline-flex items-center gap-3 mb-5">
-              <span className="text-[11px] sm:text-xs uppercase tracking-[0.24em] text-[#E5A855] font-semibold">
+              <span className="text-xs sm:text-sm uppercase tracking-[0.24em] text-[#E5A855] font-semibold">
                 HANDCRAFTED WOODEN UTENSILS
               </span>
               <span className="w-10 sm:w-14 h-[1px] bg-[#E5A855]" />
@@ -85,10 +85,10 @@ export default function Hero({ onWatchCrafting, onExploreClick }: HeroProps) {
               {/* Badge 1: 100% Natural Wood */}
               <div className="flex flex-col items-center sm:items-start text-center sm:text-left space-y-1">
                 <Leaf className="w-5 h-5 text-[#E5A855] stroke-[1.5]" />
-                <span className="text-[11px] sm:text-xs font-bold text-[#FAF3EB] leading-tight">
+                <span className="text-xs sm:text-sm font-bold text-[#FAF3EB] leading-tight">
                   100%
                 </span>
-                <span className="text-[10px] text-stone-300 leading-tight">
+                <span className="text-xs text-stone-300 leading-tight">
                   Natural Wood
                 </span>
               </div>
@@ -96,10 +96,10 @@ export default function Hero({ onWatchCrafting, onExploreClick }: HeroProps) {
               {/* Badge 2: Durable & Long Lasting */}
               <div className="flex flex-col items-center sm:items-start text-center sm:text-left space-y-1">
                 <ShieldCheck className="w-5 h-5 text-[#E5A855] stroke-[1.5]" />
-                <span className="text-[11px] sm:text-xs font-bold text-[#FAF3EB] leading-tight">
+                <span className="text-xs sm:text-sm font-bold text-[#FAF3EB] leading-tight">
                   Durable &amp;
                 </span>
-                <span className="text-[10px] text-stone-300 leading-tight">
+                <span className="text-xs text-stone-300 leading-tight">
                   Long Lasting
                 </span>
               </div>
@@ -107,10 +107,10 @@ export default function Hero({ onWatchCrafting, onExploreClick }: HeroProps) {
               {/* Badge 3: Perfect for Gifting */}
               <div className="flex flex-col items-center sm:items-start text-center sm:text-left space-y-1">
                 <Gift className="w-5 h-5 text-[#E5A855] stroke-[1.5]" />
-                <span className="text-[11px] sm:text-xs font-bold text-[#FAF3EB] leading-tight">
+                <span className="text-xs sm:text-sm font-bold text-[#FAF3EB] leading-tight">
                   Perfect
                 </span>
-                <span className="text-[10px] text-stone-300 leading-tight">
+                <span className="text-xs text-stone-300 leading-tight">
                   for Gifting
                 </span>
               </div>

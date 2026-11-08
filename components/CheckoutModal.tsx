@@ -89,7 +89,7 @@ export default function CheckoutModal() {
               <h3 className="font-serif-display text-base font-bold text-[#FAF3EB]">
                 {step === 'form' ? 'Secure Checkout' : 'Order Confirmed!'}
               </h3>
-              <p className="text-[11px] text-amber-300/80">
+              <p className="text-xs sm:text-sm text-amber-300/80">
                 Woodmen Design Corporation • Artisan Direct
               </p>
             </div>
@@ -106,27 +106,27 @@ export default function CheckoutModal() {
         {step === 'form' ? (
           <form onSubmit={handleSubmit} className="p-5 sm:p-6 space-y-4 max-h-[80vh] overflow-y-auto">
             {/* Quick Order Review Bar */}
-            <div className="p-3 rounded-xl bg-white border border-[#EADBCC] flex items-center justify-between text-xs">
+            <div className="p-3 sm:p-4 rounded-xl bg-white border border-[#EADBCC] flex items-center justify-between text-xs sm:text-sm">
               <div>
                 <span className="text-stone-500">Order Total ({cart.length} items):</span>
-                <strong className="block text-sm font-bold text-[#2A180E]">
+                <strong className="block text-sm sm:text-base font-bold text-[#2A180E]">
                   ₹{total.toLocaleString('en-IN')}
                 </strong>
               </div>
-              <span className="text-[11px] text-emerald-700 bg-emerald-50 px-2 py-1 rounded font-semibold border border-emerald-200">
+              <span className="text-xs text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded font-semibold border border-emerald-200">
                 {shippingFee === 0 ? 'FREE Delivery' : 'Standard Shipping'}
               </span>
             </div>
 
             {/* Shipping Details */}
             <div className="space-y-3">
-              <h4 className="text-xs font-bold uppercase tracking-wider text-[#3D2516]">
+              <h4 className="text-xs sm:text-sm font-bold uppercase tracking-wider text-[#3D2516]">
                 1. Delivery Address
               </h4>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
-                  <label className="text-[11px] font-semibold text-stone-600 block mb-1">
+                  <label className="text-xs sm:text-sm font-semibold text-stone-700 block mb-1">
                     Full Name *
                   </label>
                   <input
@@ -135,12 +135,12 @@ export default function CheckoutModal() {
                     placeholder="e.g. Rahul Sharma"
                     value={formData.fullName}
                     onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
-                    className="w-full px-3 py-2 rounded-lg bg-white border border-[#DFD1C2] text-xs focus:outline-none focus:border-[#A67B52]"
+                    className="w-full px-3.5 py-2.5 rounded-lg bg-white border border-[#DFD1C2] text-sm focus:outline-none focus:border-[#A67B52]"
                   />
                 </div>
 
                 <div>
-                  <label className="text-[11px] font-semibold text-stone-600 block mb-1">
+                  <label className="text-xs sm:text-sm font-semibold text-stone-700 block mb-1">
                     Phone / WhatsApp *
                   </label>
                   <input
@@ -149,13 +149,13 @@ export default function CheckoutModal() {
                     placeholder="e.g. 9720975271"
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    className="w-full px-3 py-2 rounded-lg bg-white border border-[#DFD1C2] text-xs focus:outline-none focus:border-[#A67B52]"
+                    className="w-full px-3.5 py-2.5 rounded-lg bg-white border border-[#DFD1C2] text-sm focus:outline-none focus:border-[#A67B52]"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="text-[11px] font-semibold text-stone-600 block mb-1">
+                <label className="text-xs sm:text-sm font-semibold text-stone-700 block mb-1">
                   Street Address & Flat / House No. *
                 </label>
                 <input
@@ -164,13 +164,13 @@ export default function CheckoutModal() {
                   placeholder="Apartment, Street name, Landmark"
                   value={formData.address}
                   onChange={(e) => setFormData({ ...formData, address: e.target.value })}
-                  className="w-full px-3 py-2 rounded-lg bg-white border border-[#DFD1C2] text-xs focus:outline-none focus:border-[#A67B52]"
+                  className="w-full px-3.5 py-2.5 rounded-lg bg-white border border-[#DFD1C2] text-sm focus:outline-none focus:border-[#A67B52]"
                 />
               </div>
 
               <div className="grid grid-cols-3 gap-2">
                 <div>
-                  <label className="text-[11px] font-semibold text-stone-600 block mb-1">
+                  <label className="text-xs sm:text-sm font-semibold text-stone-700 block mb-1">
                     City *
                   </label>
                   <input
@@ -179,12 +179,12 @@ export default function CheckoutModal() {
                     placeholder="City"
                     value={formData.city}
                     onChange={(e) => setFormData({ ...formData, city: e.target.value })}
-                    className="w-full px-3 py-2 rounded-lg bg-white border border-[#DFD1C2] text-xs focus:outline-none focus:border-[#A67B52]"
+                    className="w-full px-3 py-2.5 rounded-lg bg-white border border-[#DFD1C2] text-sm focus:outline-none focus:border-[#A67B52]"
                   />
                 </div>
 
                 <div>
-                  <label className="text-[11px] font-semibold text-stone-600 block mb-1">
+                  <label className="text-xs sm:text-sm font-semibold text-stone-700 block mb-1">
                     State *
                   </label>
                   <input
@@ -193,12 +193,12 @@ export default function CheckoutModal() {
                     placeholder="State"
                     value={formData.state}
                     onChange={(e) => setFormData({ ...formData, state: e.target.value })}
-                    className="w-full px-3 py-2 rounded-lg bg-white border border-[#DFD1C2] text-xs focus:outline-none focus:border-[#A67B52]"
+                    className="w-full px-3 py-2.5 rounded-lg bg-white border border-[#DFD1C2] text-sm focus:outline-none focus:border-[#A67B52]"
                   />
                 </div>
 
                 <div>
-                  <label className="text-[11px] font-semibold text-stone-600 block mb-1">
+                  <label className="text-xs sm:text-sm font-semibold text-stone-700 block mb-1">
                     PIN Code *
                   </label>
                   <input
@@ -208,7 +208,7 @@ export default function CheckoutModal() {
                     placeholder="6 digits"
                     value={formData.pincode}
                     onChange={(e) => setFormData({ ...formData, pincode: e.target.value })}
-                    className="w-full px-3 py-2 rounded-lg bg-white border border-[#DFD1C2] text-xs focus:outline-none focus:border-[#A67B52]"
+                    className="w-full px-3 py-2.5 rounded-lg bg-white border border-[#DFD1C2] text-sm focus:outline-none focus:border-[#A67B52]"
                   />
                 </div>
               </div>
@@ -216,7 +216,7 @@ export default function CheckoutModal() {
 
             {/* Payment Method */}
             <div className="space-y-3 pt-2">
-              <h4 className="text-xs font-bold uppercase tracking-wider text-[#3D2516]">
+              <h4 className="text-xs sm:text-sm font-bold uppercase tracking-wider text-[#3D2516]">
                 2. Select Payment Mode
               </h4>
 
@@ -237,8 +237,8 @@ export default function CheckoutModal() {
                     className="sr-only"
                   />
                   <Banknote className="w-5 h-5 text-amber-700" />
-                  <span className="text-xs font-bold">Cash on Delivery</span>
-                  <span className="text-[10px] text-stone-400">Pay at doorstep</span>
+                  <span className="text-xs sm:text-sm font-bold">Cash on Delivery</span>
+                  <span className="text-xs text-stone-500">Pay at doorstep</span>
                 </label>
 
                 <label
@@ -257,8 +257,8 @@ export default function CheckoutModal() {
                     className="sr-only"
                   />
                   <QrCode className="w-5 h-5 text-amber-700" />
-                  <span className="text-xs font-bold">UPI / GPay / PhonePe</span>
-                  <span className="text-[10px] text-emerald-700 font-semibold">Instant verification</span>
+                  <span className="text-xs sm:text-sm font-bold">UPI / GPay / PhonePe</span>
+                  <span className="text-xs text-emerald-700 font-semibold">Instant verification</span>
                 </label>
 
                 <label
@@ -277,8 +277,8 @@ export default function CheckoutModal() {
                     className="sr-only"
                   />
                   <CreditCard className="w-5 h-5 text-amber-700" />
-                  <span className="text-xs font-bold">Debit / Credit Card</span>
-                  <span className="text-[10px] text-stone-400">100% Encrypted</span>
+                  <span className="text-xs sm:text-sm font-bold">Debit / Credit Card</span>
+                  <span className="text-xs text-stone-500">100% Encrypted</span>
                 </label>
               </div>
             </div>
@@ -287,7 +287,7 @@ export default function CheckoutModal() {
             <div className="pt-3">
               <button
                 type="submit"
-                className="w-full py-3.5 rounded-xl bg-gradient-to-r from-[#E5A855] via-[#DE983C] to-[#C9842C] text-[#1E120A] font-bold text-sm flex items-center justify-center shadow-lg shadow-amber-900/20 hover:scale-[1.01] active:scale-[0.99] transition-all"
+                className="w-full py-3.5 rounded-xl bg-gradient-to-r from-[#E5A855] via-[#DE983C] to-[#C9842C] text-[#1E120A] font-bold text-sm sm:text-base flex items-center justify-center shadow-lg shadow-amber-900/20 hover:scale-[1.01] active:scale-[0.99] transition-all"
               >
                 <span>Place Order (₹{total.toLocaleString('en-IN')})</span>
               </button>
@@ -301,18 +301,18 @@ export default function CheckoutModal() {
             </div>
 
             <div>
-              <span className="text-xs font-bold tracking-wider uppercase text-amber-700">
+              <span className="text-xs sm:text-sm font-bold tracking-wider uppercase text-amber-700">
                 Order Placed Successfully!
               </span>
               <h4 className="font-serif-display text-2xl font-bold text-[#2A180E] mt-1">
                 Thank You, {formData.fullName || 'Valued Customer'}!
               </h4>
-              <p className="text-xs text-stone-500 mt-1">
+              <p className="text-xs sm:text-sm text-stone-500 mt-1">
                 Order Tracking ID: <strong className="font-mono text-stone-800">{orderId}</strong>
               </p>
             </div>
 
-            <div className="p-4 rounded-xl bg-white border border-[#DFD1C2] text-left text-xs space-y-2">
+            <div className="p-4 rounded-xl bg-white border border-[#DFD1C2] text-left text-xs sm:text-sm space-y-2">
               <div className="flex items-center gap-2 text-emerald-800 font-semibold">
                 <Truck className="w-4 h-4 text-emerald-600" />
                 <span>Dispatched directly from our Saharanpur wood workshop</span>
@@ -325,14 +325,14 @@ export default function CheckoutModal() {
               </p>
             </div>
 
-            <div className="p-3 rounded-lg bg-amber-50 border border-amber-200 text-xs text-amber-900 flex items-center justify-center gap-2">
+            <div className="p-3.5 rounded-lg bg-amber-50 border border-amber-200 text-xs sm:text-sm text-amber-900 flex items-center justify-center gap-2">
               <Phone className="w-4 h-4 text-amber-700" />
               <span>Questions? Call or WhatsApp artisan hotline: <strong>9720975271</strong></span>
             </div>
 
             <button
               onClick={handleClose}
-              className="px-6 py-2.5 rounded-full bg-[#3D2516] text-[#FAF6F0] text-xs font-bold hover:bg-[#5A3821] transition-colors"
+              className="px-6 py-2.5 rounded-full bg-[#3D2516] text-[#FAF6F0] text-sm font-bold hover:bg-[#5A3821] transition-colors"
             >
               Continue Shopping
             </button>

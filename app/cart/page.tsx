@@ -125,7 +125,7 @@ export default function CartPage() {
                     </Link>
 
                     <div>
-                      <span className="text-[10px] uppercase tracking-wider text-[#A67B52] font-bold block">
+                      <span className="text-xs uppercase tracking-wider text-[#A67B52] font-bold block">
                         {item.product.woodType.split(' ')[0]} Wood
                       </span>
                       <Link
@@ -208,7 +208,7 @@ export default function CartPage() {
                 </div>
 
                 {subtotal < 999 && (
-                  <p className="text-[11px] text-amber-800 bg-amber-50 p-2 rounded-lg border border-amber-200">
+                  <p className="text-xs sm:text-sm text-amber-800 bg-amber-50 p-2.5 rounded-xl border border-amber-200">
                     Add ₹{(999 - subtotal).toLocaleString('en-IN')} more to unlock <strong>FREE Shipping</strong>!
                   </p>
                 )}
@@ -222,12 +222,12 @@ export default function CartPage() {
               {/* Checkout Button */}
               <button
                 onClick={() => setIsCheckoutOpen(true)}
-                className="w-full py-3.5 rounded-full bg-gradient-to-r from-[#E5A855] via-[#DF9D44] to-[#CC882E] text-[#180E09] font-bold text-xs sm:text-sm tracking-wide shadow-xl hover:scale-[1.02] active:scale-[0.98] transition-all"
+                className="w-full py-3.5 rounded-full bg-gradient-to-r from-[#E5A855] via-[#DF9D44] to-[#CC882E] text-[#180E09] font-bold text-sm sm:text-base tracking-wide shadow-xl hover:scale-[1.02] active:scale-[0.98] transition-all"
               >
                 <span>Proceed to Checkout</span>
               </button>
 
-              <div className="pt-2 space-y-2 text-[11px] text-stone-500 border-t border-[#F2ECE3]">
+              <div className="pt-3 space-y-2 text-xs sm:text-sm text-stone-600 border-t border-[#F2ECE3]">
                 <div className="flex items-center gap-2">
                   <ShieldCheck className="w-3.5 h-3.5 text-amber-700 shrink-0" />
                   <span>100% Secure Checkout with Razorpay / UPI</span>

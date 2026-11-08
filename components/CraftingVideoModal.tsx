@@ -66,37 +66,37 @@ export default function CraftingVideoModal({
         <div className="p-6 sm:p-8 space-y-6">
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 border-b border-[#342216] pb-6">
             <div className="space-y-1">
-              <span className="text-[10px] uppercase tracking-wider text-amber-400 font-bold">
+              <span className="text-xs uppercase tracking-wider text-amber-400 font-bold">
                 Step 01
               </span>
-              <h4 className="font-serif-display text-sm font-bold text-[#F4ECE3]">
+              <h4 className="font-serif-display text-sm sm:text-base font-bold text-[#F4ECE3]">
                 Wood Selection
               </h4>
-              <p className="text-xs text-[#B8A697] leading-relaxed">
+              <p className="text-xs sm:text-sm text-[#B8A697] leading-relaxed">
                 60-day naturally kiln-seasoned Indian Rosewood (Sheesham) and Acacia to ensure zero warps.
               </p>
             </div>
 
             <div className="space-y-1">
-              <span className="text-[10px] uppercase tracking-wider text-amber-400 font-bold">
+              <span className="text-xs uppercase tracking-wider text-amber-400 font-bold">
                 Step 02
               </span>
-              <h4 className="font-serif-display text-sm font-bold text-[#F4ECE3]">
+              <h4 className="font-serif-display text-sm sm:text-base font-bold text-[#F4ECE3]">
                 Lathe Woodturning
               </h4>
-              <p className="text-xs text-[#B8A697] leading-relaxed">
+              <p className="text-xs sm:text-sm text-[#B8A697] leading-relaxed">
                 Turned by hand on traditional lathes by master artisans with over 30 years of family lineage.
               </p>
             </div>
 
             <div className="space-y-1">
-              <span className="text-[10px] uppercase tracking-wider text-amber-400 font-bold">
+              <span className="text-xs uppercase tracking-wider text-amber-400 font-bold">
                 Step 03
               </span>
-              <h4 className="font-serif-display text-sm font-bold text-[#F4ECE3]">
+              <h4 className="font-serif-display text-sm sm:text-base font-bold text-[#F4ECE3]">
                 Herbal Oil & Beeswax
               </h4>
-              <p className="text-xs text-[#B8A697] leading-relaxed">
+              <p className="text-xs sm:text-sm text-[#B8A697] leading-relaxed">
                 Hand-buffed with 100% food-grade organic walnut oil and pure local beeswax for natural protection.
               </p>
             </div>

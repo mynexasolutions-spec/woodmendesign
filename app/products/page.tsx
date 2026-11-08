@@ -374,7 +374,7 @@ function ProductsContent() {
                   >
                     {/* Top Badge */}
                     {product.badge && (
-                      <span className="absolute top-3 left-3 z-10 px-2 py-0.5 rounded-md bg-[#241710] text-[#E5A855] text-[10px] font-bold tracking-wider uppercase shadow">
+                      <span className="absolute top-3 left-3 z-10 px-2.5 py-0.5 rounded-md bg-[#241710] text-[#E5A855] text-xs font-bold tracking-wider uppercase shadow">
                         {product.badge}
                       </span>
                     )}
@@ -429,28 +429,28 @@ function ProductsContent() {
 
                   {/* Product Info */}
                   <div className="p-3.5 sm:p-4 flex-1 flex flex-col justify-between">
-                    <span className="text-[10px] uppercase tracking-wider text-[#A67B52] font-bold">
+                    <span className="text-xs uppercase tracking-wider text-[#A67B52] font-bold">
                       {product.woodType.split(' ')[0]} Wood
                     </span>
 
                     {/* Product Title: Direct Link to Product Page */}
                     <Link
                       href={`/products/${product.id}`}
-                      className="font-serif-display font-semibold text-xs sm:text-sm text-[#2A180E] group-hover:text-[#A67B52] transition-colors line-clamp-1 mt-0.5 cursor-pointer"
+                      className="font-serif-display font-semibold text-sm sm:text-[15px] text-[#2A180E] group-hover:text-[#A67B52] transition-colors line-clamp-1 mt-1 cursor-pointer"
                       title={product.name}
                     >
                       {product.name}
                     </Link>
 
                     {/* Star Rating & Review Count */}
-                    <div className="flex items-center gap-1.5 mt-1.5">
+                    <div className="flex items-center gap-1.5 mt-2">
                       <div className="flex items-center text-amber-500">
                         <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
                       </div>
-                      <span className="text-xs font-bold text-[#2A180E]">
+                      <span className="text-xs sm:text-sm font-bold text-[#2A180E]">
                         {product.rating}
                       </span>
-                      <span className="text-[11px] text-stone-400">
+                      <span className="text-xs text-stone-500">
                         ({product.reviewsCount})
                       </span>
                     </div>
@@ -459,11 +459,11 @@ function ProductsContent() {
                     <div className="mt-3 pt-2.5 border-t border-[#F2ECE3] flex items-center justify-between">
                       <div>
                         <div className="flex items-baseline gap-1.5">
-                          <span className="text-sm sm:text-base font-bold text-[#2A180E]">
+                          <span className="text-base sm:text-lg font-bold text-[#2A180E]">
                             ₹{product.price.toLocaleString('en-IN')}
                           </span>
                           {product.originalPrice && (
-                            <span className="text-[11px] text-stone-400 line-through">
+                            <span className="text-xs text-stone-400 line-through">
                               ₹{product.originalPrice.toLocaleString('en-IN')}
                             </span>
                           )}
@@ -492,7 +492,7 @@ function ProductsContent() {
                     {/* Direct Product Link Pill */}
                     <Link
                       href={`/products/${product.id}`}
-                      className="mt-2 text-center py-1.5 text-[11px] font-bold text-[#8C5E37] hover:text-[#2A180E] bg-[#FAF6F0] hover:bg-[#F0E6DB] rounded-lg transition-colors block"
+                      className="mt-2 text-center py-2 text-xs font-bold text-[#8C5E37] hover:text-[#2A180E] bg-[#FAF6F0] hover:bg-[#F0E6DB] rounded-lg transition-colors block"
                     >
                       View Details
                     </Link>

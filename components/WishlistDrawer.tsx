@@ -49,7 +49,7 @@ export default function WishlistDrawer() {
                 <h3 className="font-serif-display text-base font-bold text-[#FAF3EB]">
                   Your Wishlist
                 </h3>
-                <span className="text-[11px] text-amber-300/80">
+                <span className="text-xs text-amber-300/90">
                   {wishlist.length} {wishlist.length === 1 ? 'saved piece' : 'saved pieces'}
                 </span>
               </div>
@@ -71,15 +71,15 @@ export default function WishlistDrawer() {
                 <div className="w-16 h-16 rounded-full bg-[#EFE6DC] flex items-center justify-center text-[#8C5E37]">
                   <Heart className="w-8 h-8 opacity-60" />
                 </div>
-                <h4 className="font-serif-display text-lg font-bold text-[#2A180E]">
+                <h4 className="font-serif-display text-xl font-bold text-[#2A180E]">
                   Your wishlist is empty
                 </h4>
-                <p className="text-xs text-[#7A6353] max-w-xs font-light">
+                <p className="text-sm text-[#7A6353] max-w-xs font-light">
                   Tap the heart icon on any handcrafted wooden utensil to save your favorites here.
                 </p>
                 <button
                   onClick={() => setIsWishlistOpen(false)}
-                  className="mt-2 px-5 py-2.5 rounded-full bg-[#3D2516] text-[#FAF6F0] text-xs font-bold hover:bg-[#5A3821] transition-colors"
+                  className="mt-2 px-6 py-2.5 rounded-full bg-[#3D2516] text-[#FAF6F0] text-sm font-bold hover:bg-[#5A3821] transition-colors"
                 >
                   Explore Collections
                 </button>
@@ -108,7 +108,7 @@ export default function WishlistDrawer() {
                   <div className="flex-1 flex flex-col justify-between">
                     <div>
                       <div className="flex items-start justify-between gap-1">
-                        <h4 className="font-serif-display text-xs sm:text-sm font-bold text-[#2A180E] leading-snug line-clamp-1">
+                        <h4 className="font-serif-display text-sm sm:text-base font-bold text-[#2A180E] leading-snug line-clamp-1">
                           {product.name}
                         </h4>
                         <button
@@ -119,21 +119,21 @@ export default function WishlistDrawer() {
                           <Trash2 className="w-3.5 h-3.5" />
                         </button>
                       </div>
-                      <span className="text-[10px] text-[#A67B52] font-medium block">
+                      <span className="text-xs text-[#A67B52] font-semibold block">
                         {product.woodType}
                       </span>
                     </div>
 
                     <div className="flex items-center justify-between mt-2 pt-1 border-t border-[#F2ECE3]">
-                      <span className="text-xs font-bold text-[#2A180E]">
+                      <span className="text-sm font-bold text-[#2A180E]">
                         ₹{product.price.toLocaleString('en-IN')}
                       </span>
 
                       <button
                         onClick={() => handleMoveToCart(product)}
-                        className="px-3 py-1 rounded-lg bg-[#3D2516] hover:bg-[#5C3B24] text-[#FAF6F0] text-[11px] font-bold flex items-center gap-1.5 transition-colors"
+                        className="px-3 py-1.5 rounded-lg bg-[#3D2516] hover:bg-[#5C3B24] text-[#FAF6F0] text-xs sm:text-sm font-bold flex items-center gap-1.5 transition-colors"
                       >
-                        <ShoppingBag className="w-3 h-3" />
+                        <ShoppingBag className="w-3.5 h-3.5" />
                         <span>Move to Cart</span>
                       </button>
                     </div>

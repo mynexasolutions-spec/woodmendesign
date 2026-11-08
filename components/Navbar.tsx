@@ -207,10 +207,10 @@ export default function Navbar({ onOpenSearch, onSelectCategory }: NavbarProps) 
                           key={col.id}
                           href={`/products?category=${encodeURIComponent(col.name)}`}
                           onClick={(e) => handleCategorySelect(e, col.name)}
-                          className="w-full text-left px-3 py-2 rounded-lg text-xs text-[#E3D3C4] hover:bg-[#341F14] hover:text-amber-300 transition-colors flex items-center justify-between group"
+                          className="w-full text-left px-3 py-2 rounded-lg text-sm text-[#E3D3C4] hover:bg-[#341F14] hover:text-amber-300 transition-colors flex items-center justify-between group"
                         >
                           <span>{col.name}</span>
-                          <span className="text-[10px] text-amber-400/60 font-mono group-hover:text-amber-400">
+                          <span className="text-xs text-amber-400/70 font-mono group-hover:text-amber-400">
                             {col.itemCount}
                           </span>
                         </Link>
@@ -353,22 +353,22 @@ export default function Navbar({ onOpenSearch, onSelectCategory }: NavbarProps) 
                                 />
                               </div>
                               <div className="flex-1 min-w-0">
-                                <p className="text-xs font-semibold text-white truncate group-hover:text-[#E5A855] transition-colors">
+                                <p className="text-sm font-semibold text-white truncate group-hover:text-[#E5A855] transition-colors">
                                   {p.name}
                                 </p>
                                 <div className="flex items-center gap-2 mt-0.5">
-                                  <span className="text-[10px] text-[#A67B52] font-medium">{p.category}</span>
-                                  <span className="text-[10px] text-stone-400">• {p.woodType}</span>
+                                  <span className="text-xs text-[#A67B52] font-semibold">{p.category}</span>
+                                  <span className="text-xs text-stone-400">• {p.woodType}</span>
                                 </div>
                               </div>
-                              <span className="text-xs font-bold text-[#E5A855] shrink-0">
+                              <span className="text-sm font-bold text-[#E5A855] shrink-0">
                                 ₹{p.price.toLocaleString('en-IN')}
                               </span>
                             </Link>
                           ))}
                           <button
                             type="submit"
-                            className="w-full pt-2 pb-1 text-center text-[11px] text-amber-300/80 hover:text-amber-200 border-t border-white/10 transition-colors block font-medium cursor-pointer"
+                            className="w-full pt-2 pb-1 text-center text-xs text-amber-300/80 hover:text-amber-200 border-t border-white/10 transition-colors block font-medium cursor-pointer"
                           >
                             Press Enter to see all results in catalog
                           </button>
@@ -508,10 +508,10 @@ export default function Navbar({ onOpenSearch, onSelectCategory }: NavbarProps) 
                           <Image src={p.image} alt={p.name} fill className="object-cover" />
                         </div>
                         <div className="flex-1 min-w-0">
-                          <p className="text-xs font-medium text-white truncate">{p.name}</p>
-                          <span className="text-[10px] text-[#A67B52] block">{p.category}</span>
+                          <p className="text-sm font-medium text-white truncate">{p.name}</p>
+                          <span className="text-xs text-[#A67B52] block">{p.category}</span>
                         </div>
-                        <span className="text-xs font-bold text-[#E5A855]">
+                        <span className="text-sm font-bold text-[#E5A855]">
                           ₹{p.price.toLocaleString('en-IN')}
                         </span>
                       </Link>
@@ -561,10 +561,10 @@ export default function Navbar({ onOpenSearch, onSelectCategory }: NavbarProps) 
                   key={col.id}
                   href={`/products?category=${encodeURIComponent(col.name)}`}
                   onClick={(e) => handleCategorySelect(e, col.name)}
-                  className="text-xs text-stone-400 hover:text-amber-300 py-1 transition-colors flex items-center justify-between pr-2"
+                  className="text-xs sm:text-sm text-stone-300 hover:text-amber-300 py-1 transition-colors flex items-center justify-between pr-2"
                 >
                   <span className="truncate">{col.name}</span>
-                  <span className="text-[10px] text-amber-400/60 font-mono ml-1">{col.itemCount}</span>
+                  <span className="text-xs text-amber-400/70 font-mono ml-1">{col.itemCount}</span>
                 </Link>
               ))}
             </div>

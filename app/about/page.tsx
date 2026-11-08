@@ -167,22 +167,22 @@ export default function AboutPage() {
           </p>
 
           {/* Quick Stats Strip */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 pt-6 max-w-3xl mx-auto">
-            <div className="p-3.5 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3.5 pt-6 max-w-4xl mx-auto">
+            <div className="p-4 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm">
               <span className="text-2xl sm:text-3xl font-bold font-mono text-amber-300 block">400+</span>
-              <span className="text-[11px] text-stone-300 font-medium uppercase tracking-wider block mt-0.5">Years Saharanpur Heritage</span>
+              <span className="text-xs sm:text-sm text-stone-300 font-medium uppercase tracking-wider block mt-1">Years Saharanpur Heritage</span>
             </div>
-            <div className="p-3.5 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm">
+            <div className="p-4 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm">
               <span className="text-2xl sm:text-3xl font-bold font-mono text-amber-300 block">40+</span>
-              <span className="text-[11px] text-stone-300 font-medium uppercase tracking-wider block mt-0.5">Artisan Families Supported</span>
+              <span className="text-xs sm:text-sm text-stone-300 font-medium uppercase tracking-wider block mt-1">Artisan Families Supported</span>
             </div>
-            <div className="p-3.5 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm">
+            <div className="p-4 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm">
               <span className="text-2xl sm:text-3xl font-bold font-mono text-amber-300 block">100%</span>
-              <span className="text-[11px] text-stone-300 font-medium uppercase tracking-wider block mt-0.5">Solid Seasoned Wood</span>
+              <span className="text-xs sm:text-sm text-stone-300 font-medium uppercase tracking-wider block mt-1">Solid Seasoned Wood</span>
             </div>
-            <div className="p-3.5 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm">
+            <div className="p-4 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm">
               <span className="text-2xl sm:text-3xl font-bold font-mono text-amber-300 block">0%</span>
-              <span className="text-[11px] text-stone-300 font-medium uppercase tracking-wider block mt-0.5">Toxic Varnishes / Polyurethane</span>
+              <span className="text-xs sm:text-sm text-stone-300 font-medium uppercase tracking-wider block mt-1">Toxic Varnishes / Polyurethane</span>
             </div>
           </div>
         </div>
@@ -204,10 +204,10 @@ export default function AboutPage() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
                 <div className="absolute bottom-4 left-4 right-4 text-white">
-                  <span className="text-[10px] uppercase tracking-widest text-amber-300 font-bold block">
+                  <span className="text-xs uppercase tracking-widest text-amber-300 font-bold block">
                     SAHARANPUR ARTISAN GUILD
                   </span>
-                  <p className="text-xs text-stone-200 font-light mt-0.5">
+                  <p className="text-xs sm:text-sm text-stone-200 font-light mt-1">
                     Generational master woodturner shaping a solid sheesham roti casserole with hand-guided chisel.
                   </p>
                 </div>
@@ -239,15 +239,15 @@ export default function AboutPage() {
               </p>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 pt-2">
-                <div className="p-4 rounded-2xl bg-white border border-[#EADBCC] space-y-1">
+                <div className="p-4 rounded-2xl bg-white border border-[#EADBCC] space-y-1.5">
                   <TreeDeciduous className="w-5 h-5 text-amber-800" />
-                  <h4 className="text-xs font-bold text-[#2A180E]">Single-Block Turning</h4>
-                  <p className="text-[11px] text-stone-500 font-light">Carved seamlessly from solid logs—zero glue joints to peel or crack over time.</p>
+                  <h4 className="text-sm sm:text-base font-bold text-[#2A180E]">Single-Block Turning</h4>
+                  <p className="text-xs sm:text-sm text-stone-600 font-light">Carved seamlessly from solid logs—zero glue joints to peel or crack over time.</p>
                 </div>
-                <div className="p-4 rounded-2xl bg-white border border-[#EADBCC] space-y-1">
+                <div className="p-4 rounded-2xl bg-white border border-[#EADBCC] space-y-1.5">
                   <ShieldCheck className="w-5 h-5 text-amber-800" />
-                  <h4 className="text-xs font-bold text-[#2A180E]">Edible Oil Polished</h4>
-                  <p className="text-[11px] text-stone-500 font-light">Natural beeswax and cold-pressed walnut oil ensure safe direct food contact.</p>
+                  <h4 className="text-sm sm:text-base font-bold text-[#2A180E]">Edible Oil Polished</h4>
+                  <p className="text-xs sm:text-sm text-stone-600 font-light">Natural beeswax and cold-pressed walnut oil ensure safe direct food contact.</p>
                 </div>
               </div>
             </div>
@@ -288,10 +288,10 @@ export default function AboutPage() {
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
                       className="object-cover group-hover:scale-105 transition-transform duration-500"
                     />
-                    <span className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-[#180E08]/85 text-[#E5A855] text-[10px] font-bold font-mono tracking-wider backdrop-blur-md border border-white/10">
+                    <span className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-[#180E08]/85 text-[#E5A855] text-xs font-bold font-mono tracking-wider backdrop-blur-md border border-white/10">
                       STAGE {item.step}
                     </span>
-                    <span className="absolute bottom-3 right-3 px-2.5 py-0.5 rounded-full bg-white/95 text-[#2A180E] text-[10px] font-bold shadow-sm">
+                    <span className="absolute bottom-3 right-3 px-2.5 py-0.5 rounded-full bg-white/95 text-[#2A180E] text-xs font-bold shadow-sm">
                       {item.tag}
                     </span>
                   </div>
@@ -301,16 +301,16 @@ export default function AboutPage() {
                     <h3 className="font-serif-display text-base sm:text-lg font-bold text-[#2A180E] leading-snug">
                       {item.title}
                     </h3>
-                    <p className="text-[11px] font-semibold text-[#8C5E37]">
+                    <p className="text-xs sm:text-sm font-semibold text-[#8C5E37]">
                       {item.subtitle}
                     </p>
-                    <p className="text-xs text-stone-600 leading-relaxed font-light">
+                    <p className="text-xs sm:text-sm text-stone-600 leading-relaxed font-light">
                       {item.desc}
                     </p>
                   </div>
                 </div>
 
-                <div className="px-5 sm:px-6 pb-5 pt-2 border-t border-[#F5ECE3] flex items-center justify-between text-[11px] text-stone-400 font-medium">
+                <div className="px-5 sm:px-6 pb-5 pt-2 border-t border-[#F5ECE3] flex items-center justify-between text-xs text-stone-500 font-medium">
                   <span>Saharanpur, UP</span>
                   <span className="text-[#8C5E37] font-bold">100% Handcrafted</span>
                 </div>
@@ -332,7 +332,7 @@ export default function AboutPage() {
             <h2 className="font-serif-display text-2xl sm:text-4xl font-bold text-[#2A180E] tracking-tight">
               Our Certified Hardwoods
             </h2>
-            <p className="mt-3 text-xs sm:text-sm text-[#6B5547] font-light leading-relaxed">
+            <p className="mt-3 text-sm sm:text-base text-[#6B5547] font-light leading-relaxed">
               We never use composite plywood, compressed MDF, or faux laminate wraps. Every product is turned from solid logs of certified Indian timbers.
             </p>
           </div>
@@ -345,7 +345,7 @@ export default function AboutPage() {
               >
                 <div className="space-y-4">
                   <div className="flex items-center justify-between">
-                    <span className="px-3 py-1 rounded-full bg-[#EFE4D6] text-[#8C5E37] text-[10px] font-bold uppercase tracking-wider">
+                    <span className="px-3 py-1 rounded-full bg-[#EFE4D6] text-[#8C5E37] text-xs font-bold uppercase tracking-wider">
                       {wood.badge}
                     </span>
                     <TreeDeciduous className="w-5 h-5 text-amber-800" />
@@ -355,20 +355,20 @@ export default function AboutPage() {
                     <h3 className="font-serif-display text-xl sm:text-2xl font-bold text-[#2A180E]">
                       {wood.name}
                     </h3>
-                    <span className="text-xs text-stone-500 italic block mt-0.5">
+                    <span className="text-xs sm:text-sm text-stone-500 italic block mt-0.5">
                       {wood.scientific}
                     </span>
                   </div>
 
-                  <div className="p-3 rounded-xl bg-white border border-[#EADBCC] text-xs text-[#5C4535]">
-                    <strong className="block text-[#2A180E] font-semibold text-[11px] uppercase tracking-wider mb-0.5">Natural Grain Profile</strong>
+                  <div className="p-3.5 rounded-xl bg-white border border-[#EADBCC] text-sm text-[#5C4535]">
+                    <strong className="block text-[#2A180E] font-semibold text-xs uppercase tracking-wider mb-0.5">Natural Grain Profile</strong>
                     <span className="font-light">{wood.color}</span>
                   </div>
 
-                  <div className="space-y-2 pt-2">
+                  <div className="space-y-2.5 pt-2">
                     {wood.characteristics.map((char, cIdx) => (
-                      <div key={cIdx} className="flex items-start gap-2 text-xs text-stone-700 font-light">
-                        <CheckCircle2 className="w-3.5 h-3.5 text-amber-700 shrink-0 mt-0.5" />
+                      <div key={cIdx} className="flex items-start gap-2.5 text-xs sm:text-sm text-stone-700 font-light">
+                        <CheckCircle2 className="w-4 h-4 text-amber-700 shrink-0 mt-0.5" />
                         <span>{char}</span>
                       </div>
                     ))}
@@ -429,7 +429,7 @@ export default function AboutPage() {
       <section className="py-14 sm:py-18 bg-[#FAF6F0]">
         <div className="max-w-4xl mx-auto px-4 sm:px-6">
           <div className="p-8 sm:p-12 rounded-3xl bg-gradient-to-br from-[#2D1B11] via-[#24160E] to-[#180E08] text-white border-2 border-amber-400/40 shadow-2xl text-center space-y-5">
-            <span className="text-[10px] uppercase tracking-[0.3em] text-amber-300 font-bold block">
+            <span className="text-xs uppercase tracking-[0.25em] text-amber-300 font-bold block">
               DIRECT ARTISAN DESK • SAHARANPUR, INDIA
             </span>
 
@@ -437,7 +437,7 @@ export default function AboutPage() {
               Speak Directly with Our Master Woodcrafter
             </h3>
 
-            <p className="text-xs sm:text-sm text-stone-300 max-w-xl mx-auto font-light leading-relaxed">
+            <p className="text-sm sm:text-base text-stone-300 max-w-xl mx-auto font-light leading-relaxed">
               Have a custom dining set requirement, desire custom logo laser engraving, or seeking advice on natural wood maintenance? Our lead artisan is available via direct phone and WhatsApp.
             </p>
 
@@ -461,7 +461,7 @@ export default function AboutPage() {
               </a>
             </div>
 
-            <div className="pt-4 border-t border-white/10 flex flex-wrap items-center justify-center gap-6 text-[11px] text-amber-200/80">
+            <div className="pt-4 border-t border-white/10 flex flex-wrap items-center justify-center gap-6 text-xs sm:text-sm text-amber-200/90 font-medium">
               <span>✓ Direct Artisan Pricing</span>
               <span>✓ 100% Solid Certified Timber</span>
               <span>✓ Pan-India Safe Delivery</span>

@@ -39,11 +39,11 @@ export default function FloatingWhatsApp() {
             </button>
           </div>
 
-          <div className="py-3 space-y-1.5 text-xs text-[#D8C7B8]">
+          <div className="py-3 space-y-1.5 text-xs sm:text-sm text-[#D8C7B8]">
             <p className="font-medium text-amber-200">
               &quot;Namaste! Chat directly with our master woodcraft artisans for orders and custom sizes.&quot;
             </p>
-            <p className="text-[11px] text-stone-400">
+            <p className="text-xs text-stone-300">
               Online • Saharanpur Guild • Mon–Sat 9am–9pm
             </p>
           </div>
@@ -53,7 +53,7 @@ export default function FloatingWhatsApp() {
               href="https://wa.me/919720975271?text=Hi%20Woodmen%20Design%20Corporation,%20I%20would%20like%20to%20inquire%20about%20your%20handcrafted%20wooden%20products."
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full py-2.5 px-3 rounded-xl bg-[#25D366] hover:bg-[#20ba59] text-white font-bold text-xs flex items-center justify-center gap-2 shadow-md transition-colors"
+              className="w-full py-2.5 px-3 rounded-xl bg-[#25D366] hover:bg-[#20ba59] text-white font-bold text-sm flex items-center justify-center gap-2 shadow-md transition-colors"
             >
               <WhatsAppIcon className="w-4 h-4" />
               <span>Chat on WhatsApp</span>

@@ -139,24 +139,24 @@ export default function AccountPage() {
                 >
                   <div className="space-y-1">
                     <div className="flex items-center gap-3">
-                      <span className="font-mono text-xs font-bold text-[#2A180E]">
+                      <span className="font-mono text-xs sm:text-sm font-bold text-[#2A180E]">
                         {order.id}
                       </span>
-                      <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full border ${order.statusColor}`}>
+                      <span className={`text-xs font-bold px-2.5 py-0.5 rounded-full border ${order.statusColor}`}>
                         {order.status}
                       </span>
                     </div>
-                    <p className="text-xs font-semibold text-[#2A180E]">
+                    <p className="text-sm font-semibold text-[#2A180E]">
                       {order.items}
                     </p>
-                    <p className="text-[11px] text-stone-400">
+                    <p className="text-xs text-stone-500">
                       Ordered on {order.date} • {order.amount}
                     </p>
                   </div>
 
                   <Link
                     href={`/track-order`}
-                    className="px-4 py-2 rounded-full bg-white hover:bg-[#3D2516] text-[#2A180E] hover:text-white font-bold text-xs border border-[#DFD1C2] shadow-sm transition-colors shrink-0"
+                    className="px-4 py-2 rounded-full bg-white hover:bg-[#3D2516] text-[#2A180E] hover:text-white font-bold text-xs sm:text-sm border border-[#DFD1C2] shadow-sm transition-colors shrink-0"
                   >
                     View Status
                   </Link>
@@ -164,11 +164,11 @@ export default function AccountPage() {
               ))}
             </div>
 
-            <div className="p-4 rounded-2xl bg-amber-50/70 border border-amber-200/80 text-xs text-amber-950 flex items-start gap-3">
+            <div className="p-4 rounded-2xl bg-amber-50/70 border border-amber-200/80 text-sm text-amber-950 flex items-start gap-3">
               <ShieldCheck className="w-5 h-5 text-amber-800 shrink-0 mt-0.5" />
               <div>
-                <strong>Direct Artisan Guarantee</strong>
-                <p className="text-[11px] text-stone-600 mt-0.5">
+                <strong className="text-sm">Direct Artisan Guarantee</strong>
+                <p className="text-xs sm:text-sm text-stone-600 mt-1">
                   Every order ships directly from our family workshop in Saharanpur with transit insurance and tamper-proof eco-kraft packaging.
                 </p>
               </div>

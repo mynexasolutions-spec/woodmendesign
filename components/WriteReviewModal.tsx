@@ -85,20 +85,20 @@ export default function WriteReviewModal({
         ) : (
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="text-center space-y-1">
-              <span className="text-[10px] uppercase tracking-widest text-[#8C5E37] font-bold">
+              <span className="text-xs uppercase tracking-widest text-[#8C5E37] font-bold">
                 COMMUNITY VOICE
               </span>
               <h3 className="font-serif-display text-2xl font-bold text-[#2A180E]">
                 Share Your Experience
               </h3>
-              <p className="text-xs text-stone-500 font-light">
+              <p className="text-sm text-stone-600 font-light">
                 How has your Woodmen piece brought warmth to your home?
               </p>
             </div>
 
             {/* Star Rating Picker */}
             <div className="flex flex-col items-center justify-center py-2">
-              <span className="text-xs font-semibold text-stone-600 mb-1.5">
+              <span className="text-xs sm:text-sm font-semibold text-stone-700 mb-1.5">
                 Your Rating
               </span>
               <div className="flex items-center gap-1">
@@ -123,7 +123,7 @@ export default function WriteReviewModal({
 
             <div className="grid grid-cols-2 gap-3">
               <div>
-                <label className="text-[11px] font-semibold text-stone-700 block mb-1">
+                <label className="text-xs sm:text-sm font-semibold text-stone-700 block mb-1">
                   Your Name *
                 </label>
                 <input
@@ -132,12 +132,12 @@ export default function WriteReviewModal({
                   placeholder="e.g. Shalini Roy"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="w-full px-3 py-2 rounded-xl bg-white border border-[#DFD1C2] text-xs focus:outline-none focus:border-amber-700"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-[#DFD1C2] text-sm focus:outline-none focus:border-amber-700"
                 />
               </div>
 
               <div>
-                <label className="text-[11px] font-semibold text-stone-700 block mb-1">
+                <label className="text-xs sm:text-sm font-semibold text-stone-700 block mb-1">
                   City / State
                 </label>
                 <input
@@ -145,19 +145,19 @@ export default function WriteReviewModal({
                   placeholder="e.g. Pune, MH"
                   value={location}
                   onChange={(e) => setLocation(e.target.value)}
-                  className="w-full px-3 py-2 rounded-xl bg-white border border-[#DFD1C2] text-xs focus:outline-none focus:border-amber-700"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-[#DFD1C2] text-sm focus:outline-none focus:border-amber-700"
                 />
               </div>
             </div>
 
             <div>
-              <label className="text-[11px] font-semibold text-stone-700 block mb-1">
+              <label className="text-xs sm:text-sm font-semibold text-stone-700 block mb-1">
                 Product Purchased
               </label>
               <select
                 value={product}
                 onChange={(e) => setProduct(e.target.value)}
-                className="w-full px-3 py-2 rounded-xl bg-white border border-[#DFD1C2] text-xs focus:outline-none focus:border-amber-700"
+                className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-[#DFD1C2] text-sm focus:outline-none focus:border-amber-700"
               >
                 {PRODUCTS.map((p) => (
                   <option key={p.id} value={p.name}>
@@ -168,7 +168,7 @@ export default function WriteReviewModal({
             </div>
 
             <div>
-              <label className="text-[11px] font-semibold text-stone-700 block mb-1">
+              <label className="text-xs sm:text-sm font-semibold text-stone-700 block mb-1">
                 Your Review *
               </label>
               <textarea
@@ -177,13 +177,13 @@ export default function WriteReviewModal({
                 placeholder="Describe the craftsmanship, finish, utility, and feel of the wood..."
                 value={quote}
                 onChange={(e) => setQuote(e.target.value)}
-                className="w-full px-3 py-2 rounded-xl bg-white border border-[#DFD1C2] text-xs focus:outline-none focus:border-amber-700"
+                className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-[#DFD1C2] text-sm focus:outline-none focus:border-amber-700"
               />
             </div>
 
             <button
               type="submit"
-              className="w-full py-3 rounded-xl bg-gradient-to-r from-[#E5A855] via-[#DE983C] to-[#C9842C] text-[#1E120A] font-bold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-lg transition-all"
+              className="w-full py-3.5 rounded-xl bg-gradient-to-r from-[#E5A855] via-[#DE983C] to-[#C9842C] text-[#1E120A] font-bold text-sm sm:text-base flex items-center justify-center gap-2 shadow-lg transition-all"
             >
               <span>Submit Verified Review</span>
             </button>

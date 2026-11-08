@@ -101,11 +101,11 @@ export default function Occasions({ onSelectOccasion }: OccasionsProps) {
                     </h3>
                   </div>
 
-                  <p className="text-[11px] text-[#C4B2A3] leading-relaxed line-clamp-2">
+                  <p className="text-xs sm:text-sm text-[#C4B2A3] leading-relaxed line-clamp-2">
                     {item.subtitle}
                   </p>
 
-                  <div className="pt-1 flex items-center text-[11px] font-bold text-amber-400/90 group-hover:text-amber-300 transition-colors">
+                  <div className="pt-1 flex items-center text-xs sm:text-sm font-bold text-amber-400/90 group-hover:text-amber-300 transition-colors">
                     <span>Explore Products</span>
                   </div>
                 </div>

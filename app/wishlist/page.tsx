@@ -156,22 +156,22 @@ export default function WishlistPage() {
                   {/* Product Info */}
                   <div className="p-3.5 sm:p-4 flex-1 flex flex-col justify-between">
                     <div>
-                      <span className="text-[10px] uppercase tracking-wider text-[#A67B52] font-bold">
+                      <span className="text-xs uppercase tracking-wider text-[#A67B52] font-bold">
                         {product.woodType.split(' ')[0]} Wood
                       </span>
                       <Link
                         href={`/products/${product.id}`}
-                        className="font-serif-display font-semibold text-xs sm:text-sm text-[#2A180E] hover:text-[#A67B52] transition-colors line-clamp-1 mt-0.5 block"
+                        className="font-serif-display font-semibold text-sm sm:text-[15px] text-[#2A180E] hover:text-[#A67B52] transition-colors line-clamp-1 mt-1 block"
                       >
                         {product.name}
                       </Link>
 
-                      <div className="flex items-center gap-1.5 mt-1.5">
+                      <div className="flex items-center gap-1.5 mt-2">
                         <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
-                        <span className="text-xs font-bold text-[#2A180E]">
+                        <span className="text-xs sm:text-sm font-bold text-[#2A180E]">
                           {product.rating}
                         </span>
-                        <span className="text-[11px] text-stone-400">
+                        <span className="text-xs text-stone-500">
                           ({product.reviewsCount})
                         </span>
                       </div>

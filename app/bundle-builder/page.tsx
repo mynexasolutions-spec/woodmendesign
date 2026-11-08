@@ -225,14 +225,14 @@ export default function BundleBuilderPage() {
                   }`}
                 >
                   <div>
-                    <h4 className="text-xs font-bold text-[#2A180E]">
+                    <h4 className="text-sm font-bold text-[#2A180E]">
                       Artisan Pure Beeswax Polish (50g)
                     </h4>
-                    <p className="text-[11px] text-stone-500 mt-0.5">
+                    <p className="text-xs sm:text-sm text-stone-500 mt-0.5">
                       Natural water-repellent protective salve
                     </p>
                   </div>
-                  <span className="text-xs font-bold text-amber-900">₹249</span>
+                  <span className="text-sm font-bold text-amber-900">₹249</span>
                 </div>
 
                 <div
@@ -244,14 +244,14 @@ export default function BundleBuilderPage() {
                   }`}
                 >
                   <div>
-                    <h4 className="text-xs font-bold text-[#2A180E]">
+                    <h4 className="text-sm font-bold text-[#2A180E]">
                       Cold-Pressed Walnut Oil (100ml)
                     </h4>
-                    <p className="text-[11px] text-stone-500 mt-0.5">
+                    <p className="text-xs sm:text-sm text-stone-500 mt-0.5">
                       Deep penetrating food-safe moisturizing oil
                     </p>
                   </div>
-                  <span className="text-xs font-bold text-amber-900">₹299</span>
+                  <span className="text-sm font-bold text-amber-900">₹299</span>
                 </div>
               </div>
             </div>
@@ -263,7 +263,7 @@ export default function BundleBuilderPage() {
               </h3>
 
               <div>
-                <label className="text-[11px] font-semibold text-stone-700 block mb-1">
+                <label className="text-xs sm:text-sm font-semibold text-stone-700 block mb-1">
                   Gift Message (Will be handwritten on handmade paper card)
                 </label>
                 <textarea
@@ -271,12 +271,12 @@ export default function BundleBuilderPage() {
                   placeholder="e.g. Wishing you endless warmth and delicious meals in your new home! With love, Aditi & Rohan"
                   value={giftNote}
                   onChange={(e) => setGiftNote(e.target.value)}
-                  className="w-full px-3 py-2 rounded-xl bg-[#FAF6F0] border border-[#DFD1C2] text-xs focus:outline-none focus:border-amber-700"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-[#FAF6F0] border border-[#DFD1C2] text-sm focus:outline-none focus:border-amber-700"
                 />
               </div>
 
               <div>
-                <label className="text-[11px] font-semibold text-stone-700 block mb-1">
+                <label className="text-xs sm:text-sm font-semibold text-stone-700 block mb-1">
                   Ribbon Color
                 </label>
                 <div className="flex gap-2">
@@ -313,8 +313,8 @@ export default function BundleBuilderPage() {
                     Your Custom Gift Box
                   </h3>
                 </div>
-                <span className="px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-900 text-[10px] font-bold flex items-center gap-1">
-                  <Percent className="w-3 h-3" />
+                <span className="px-2.5 py-1 rounded-full bg-amber-100 text-amber-900 text-xs font-bold flex items-center gap-1">
+                  <Percent className="w-3.5 h-3.5" />
                   15% Bundle Discount
                 </span>
               </div>
@@ -334,7 +334,7 @@ export default function BundleBuilderPage() {
               </div>
 
               {/* Items included */}
-              <div className="space-y-2 text-xs text-stone-700">
+              <div className="space-y-2 text-xs sm:text-sm text-stone-700">
                 <div className="flex justify-between">
                   <span>1. {selectedBase.name}</span>
                   <span className="font-semibold text-[#2A180E]">₹{basePrice}</span>
@@ -349,12 +349,12 @@ export default function BundleBuilderPage() {
                 </div>
                 <div className="flex justify-between text-emerald-800">
                   <span>Luxury Box Packaging &amp; Gift Card</span>
-                  <span className="font-bold uppercase text-[10px]">FREE</span>
+                  <span className="font-bold uppercase text-xs">FREE</span>
                 </div>
               </div>
 
               {/* Price calculation */}
-              <div className="pt-3 border-t border-[#F2ECE3] space-y-1.5 text-xs">
+              <div className="pt-3 border-t border-[#F2ECE3] space-y-1.5 text-xs sm:text-sm">
                 <div className="flex justify-between text-stone-500">
                   <span>Original Value:</span>
                   <span className="line-through">₹{rawTotal}</span>
@@ -372,13 +372,13 @@ export default function BundleBuilderPage() {
               {/* Add to Cart button */}
               <button
                 onClick={handleAddBundleToCart}
-                className="w-full py-3.5 rounded-2xl bg-gradient-to-r from-[#E5A855] via-[#DE983C] to-[#C9842C] text-[#1E120A] font-bold text-sm flex items-center justify-center gap-2 shadow-lg hover:scale-[1.01] active:scale-[0.99] transition-all"
+                className="w-full py-3.5 rounded-2xl bg-gradient-to-r from-[#E5A855] via-[#DE983C] to-[#C9842C] text-[#1E120A] font-bold text-sm sm:text-base flex items-center justify-center gap-2 shadow-lg hover:scale-[1.01] active:scale-[0.99] transition-all"
               >
                 <ShoppingBag className="w-4 h-4" />
                 <span>Add Curated Box to Cart (₹{finalBundlePrice})</span>
               </button>
 
-              <div className="flex items-center justify-center gap-2 text-[11px] text-stone-500">
+              <div className="flex items-center justify-center gap-2 text-xs sm:text-sm text-stone-500">
                 <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
                 <span>Shipped in sturdy shock-resistant courier packaging</span>
               </div>
