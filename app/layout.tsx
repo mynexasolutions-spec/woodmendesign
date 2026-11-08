@@ -3,6 +3,7 @@ import './globals.css';
 import { CartProvider } from '@/context/CartContext';
 import { WishlistProvider } from '@/context/WishlistContext';
 import { ToastProvider } from '@/context/ToastContext';
+import { FAVICON_DATA_URI } from '@/data/favicon-base64';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://woodmendesign.vercel.app'),
@@ -27,12 +28,13 @@ export const metadata: Metadata = {
   publisher: 'Woodmen Design Corporation',
   icons: {
     icon: [
-      { url: '/favicon.ico', sizes: 'any' },
-      { url: '/icon.png', sizes: '192x192', type: 'image/png' },
+      { url: FAVICON_DATA_URI, type: 'image/png' },
+      { url: '/icon.png?v=5', sizes: '192x192', type: 'image/png' },
+      { url: '/favicon.ico?v=5', sizes: 'any' },
     ],
-    shortcut: '/favicon.ico',
+    shortcut: FAVICON_DATA_URI,
     apple: [
-      { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
+      { url: '/apple-touch-icon.png?v=5', sizes: '180x180', type: 'image/png' },
     ],
   },
   openGraph: {
@@ -72,9 +74,11 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <head>
-        <link rel="icon" href="/favicon.ico" sizes="any" />
-        <link rel="icon" type="image/png" sizes="192x192" href="/icon.png" />
-        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href={FAVICON_DATA_URI} />
+        <link rel="shortcut icon" href={FAVICON_DATA_URI} />
+        <link rel="icon" href="/favicon.ico?v=5" sizes="any" />
+        <link rel="icon" type="image/png" sizes="192x192" href="/icon.png?v=5" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=5" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
