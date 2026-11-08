@@ -122,14 +122,14 @@ export default function Hero({ onWatchCrafting, onExploreClick }: HeroProps) {
         </div>
 
         {/* Floating 5-Feature Bar (Positioned at bottom, overlapping hero & collections) */}
-        <div className="relative pt-6 sm:pt-10 -mb-16 sm:-mb-20 z-30 max-w-5xl mx-auto px-3 sm:px-6">
+        <div className="relative pt-6 sm:pt-10 -mb-16 sm:-mb-20 z-30 w-full mx-auto">
           <div
             className="bg-[#1D1109] border border-[#3A2216] rounded-2xl sm:rounded-3xl shadow-[0_25px_60px_-15px_rgba(0,0,0,0.6),0_12px_24px_-6px_rgba(0,0,0,0.4)] backdrop-blur-md"
             style={{ backgroundColor: '#1D1109', borderColor: '#3A2216' }}
           >
             <div className="grid grid-cols-2 md:grid-cols-5 divide-y md:divide-y-0 md:divide-x divide-[#331E12]">
               {/* Feature 1: Premium Quality Wood (Concentric tree ring cross-section) */}
-              <div className="flex flex-col items-center justify-center text-center py-4 px-3 sm:py-5 sm:px-4 group">
+              <div className="flex flex-col items-center justify-center text-center py-5 px-3 sm:py-6 sm:px-4 group">
                 <div className="mb-2 text-[#E5A855] group-hover:scale-110 transition-transform">
                   <svg
                     viewBox="0 0 32 32"
@@ -155,7 +155,7 @@ export default function Hero({ onWatchCrafting, onExploreClick }: HeroProps) {
               </div>
 
               {/* Feature 2: Handcrafted by Artisans (Crossed spoons / carving tools) */}
-              <div className="flex flex-col items-center justify-center text-center py-4 px-3 sm:py-5 sm:px-4 group">
+              <div className="flex flex-col items-center justify-center text-center py-5 px-3 sm:py-6 sm:px-4 group">
                 <div className="mb-2 text-[#E5A855] group-hover:scale-110 transition-transform">
                   <svg
                     viewBox="0 0 32 32"
@@ -183,7 +183,7 @@ export default function Hero({ onWatchCrafting, onExploreClick }: HeroProps) {
               </div>
 
               {/* Feature 3: Timeless Design (Infinity symbol) */}
-              <div className="flex flex-col items-center justify-center text-center py-4 px-3 sm:py-5 sm:px-4 group">
+              <div className="flex flex-col items-center justify-center text-center py-5 px-3 sm:py-6 sm:px-4 group">
                 <div className="mb-2 text-[#E5A855] group-hover:scale-110 transition-transform">
                   <svg
                     viewBox="0 0 32 32"
@@ -207,7 +207,7 @@ export default function Hero({ onWatchCrafting, onExploreClick }: HeroProps) {
               </div>
 
               {/* Feature 4: Everyday Utility (Fork & Spoon) */}
-              <div className="flex flex-col items-center justify-center text-center py-4 px-3 sm:py-5 sm:px-4 group">
+              <div className="flex flex-col items-center justify-center text-center py-5 px-3 sm:py-6 sm:px-4 group">
                 <div className="mb-2 text-[#E5A855] group-hover:scale-110 transition-transform">
                   <svg
                     viewBox="0 0 32 32"
@@ -236,7 +236,7 @@ export default function Hero({ onWatchCrafting, onExploreClick }: HeroProps) {
               </div>
 
               {/* Feature 5: Adds Natural Elegance (House) */}
-              <div className="flex flex-col items-center justify-center text-center py-4 px-3 sm:py-5 sm:px-4 col-span-2 md:col-span-1 group">
+              <div className="flex flex-col items-center justify-center text-center py-5 px-3 sm:py-6 sm:px-4 col-span-2 md:col-span-1 group">
                 <div className="mb-2 text-[#E5A855] group-hover:scale-110 transition-transform">
                   <svg
                     viewBox="0 0 32 32"
