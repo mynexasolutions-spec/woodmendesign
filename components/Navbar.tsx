@@ -121,7 +121,7 @@ export default function Navbar({ onOpenSearch, onSelectCategory }: NavbarProps) 
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 backdrop-blur-md border-b py-3 sm:py-3.5 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 backdrop-blur-md border-b py-2.5 sm:py-3 ${
         isScrolled
           ? 'border-[#311E13] shadow-md'
           : 'border-[#311E13]/70 shadow-none'
@@ -137,17 +137,17 @@ export default function Navbar({ onOpenSearch, onSelectCategory }: NavbarProps) 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
           {/* Left: Brand Logo */}
-          <Link href="/" className="flex items-center group py-0.5 min-w-0 shrink">
+          <Link href="/" className="flex items-center group min-w-0 shrink">
             {/* Light pill behind the copper logo on the dark navbar */}
             <div className="flex items-center rounded-xl px-2 sm:px-3 py-1 sm:py-1.5 transition-transform group-hover:scale-[1.02] bg-[#FFFDF9] ring-1 ring-[#E8DCCE] shadow-md">
-              <div className="relative h-10 sm:h-14 lg:h-16 w-[min(9.5rem,40vw)] sm:w-52 lg:w-60">
+              <div className="relative h-11 sm:h-12 lg:h-14 w-[min(9.5rem,40vw)] sm:w-44 lg:w-52">
                 <Image
                   src="/images/logo.webp"
                   alt="Woodmen Design Corporation"
                   fill
                   className="object-contain object-left"
                   priority
-                  sizes="(max-width: 640px) 160px, 240px"
+                  sizes="(max-width: 640px) 160px, 208px"
                 />
               </div>
             </div>
