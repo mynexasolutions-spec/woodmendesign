@@ -14,6 +14,8 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import FloatingWhatsApp from '@/components/FloatingWhatsApp';
 import CheckoutModal from '@/components/CheckoutModal';
+import { woodLabel } from '@/data/products';
+import ProductImageFill from '@/components/ProductImageFill';
 import { useWishlist } from '@/context/WishlistContext';
 import { useCart } from '@/context/CartContext';
 import { useToast } from '@/context/ToastContext';
@@ -139,7 +141,6 @@ export default function WishlistPage() {
                   {/* Top Image: Edge-to-Edge */}
                   <div
                     className="relative w-full aspect-square overflow-hidden bg-[#FAF6F0]"
-                    style={{ position: 'relative', width: '100%', height: '230px' }}
                   >
                     {/* Remove from Wishlist Button */}
                     <button
@@ -156,21 +157,15 @@ export default function WishlistPage() {
                       className="relative w-full h-full block cursor-pointer group-hover:scale-105 transition-transform duration-500"
                       style={{ position: 'relative', width: '100%', height: '100%' }}
                     >
-                      <Image
-                        src={product.image}
-                        alt={product.name}
-                        fill
-                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 20vw"
-                        className="object-cover"
-                      />
+                      <ProductImageFill src={product.image} alt={product.name} sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 20vw" />
                     </Link>
                   </div>
 
                   {/* Product Info */}
-                  <div className="p-3.5 sm:p-4 flex-1 flex flex-col justify-between">
+                  <div className="p-2.5 sm:p-4 flex-1 flex flex-col justify-between">
                     <div>
                       <span className="text-xs uppercase tracking-wider text-[#A67B52] font-bold">
-                        {product.woodType.split(' ')[0]} Wood
+                        {woodLabel(product.woodType)}
                       </span>
                       <Link
                         href={`/products/${product.id}`}
@@ -179,7 +174,7 @@ export default function WishlistPage() {
                         {product.name}
                       </Link>
 
-                      <div className="flex items-center gap-1.5 mt-2">
+                      <div className="flex items-center gap-1.5 mt-1 sm:mt-2">
                         <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
                         <span className="text-xs sm:text-sm font-bold text-[#2A180E]">
                           {product.rating}
@@ -190,7 +185,7 @@ export default function WishlistPage() {
                       </div>
                     </div>
 
-                    <div className="mt-3 pt-2.5 border-t border-[#F2ECE3] flex items-center justify-between">
+                    <div className="mt-2 pt-2 sm:mt-3 sm:pt-2.5 border-t border-[#F2ECE3] flex items-center justify-between">
                       <span className="text-sm sm:text-base font-bold text-[#2A180E]">
                         ₹{product.price.toLocaleString('en-IN')}
                       </span>
@@ -206,7 +201,7 @@ export default function WishlistPage() {
                     </div>
 
                     {/* Action Buttons: View Details & Buy Now in 2 Rows */}
-                    <div className="flex flex-col gap-2 mt-2.5">
+                    <div className="flex flex-col gap-1.5 sm:gap-2 mt-2 sm:mt-2.5">
                       <Link
                         href={`/products/${product.id}`}
                         className="w-full py-2 px-3 rounded-xl bg-[#3D2516] hover:bg-[#201309] text-[#FAF6F0] text-xs font-bold text-center transition-all shadow-sm hover:shadow active:scale-95 flex items-center justify-center cursor-pointer"

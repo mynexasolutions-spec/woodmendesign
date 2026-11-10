@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound, useParams, useRouter } from 'next/navigation';
@@ -15,7 +15,10 @@ import {
   CheckCircle2,
   Check,
   Plus,
-  Minus
+  Minus,
+  Droplets,
+  Ban,
+  Wind
 } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -25,6 +28,8 @@ import CheckoutModal from '@/components/CheckoutModal';
 import SearchModal from '@/components/SearchModal';
 import FloatingWhatsApp from '@/components/FloatingWhatsApp';
 import { PRODUCTS, Product } from '@/data/products';
+import { PRODUCT_DETAILS } from '@/data/product-details';
+import ProductImageFill from '@/components/ProductImageFill';
 import { useCart } from '@/context/CartContext';
 import { useWishlist } from '@/context/WishlistContext';
 import { useToast } from '@/context/ToastContext';
@@ -42,6 +47,13 @@ function WhatsAppIcon({ className = 'w-5 h-5' }: { className?: string }) {
   );
 }
 
+/** Splits "LEAD IN CAPS: rest of the sentence" (Amazon bullet style) into a bold lead and the text. */
+function splitLead(line: string): { lead: string | null; text: string } {
+  const m = line.match(/^([A-Z0-9][A-Z0-9 &/,'’()+-]{2,60}?)\s*[:–—]\s*(.+)$/);
+  if (!m) return { lead: null, text: line };
+  return { lead: m[1].trim().toLowerCase(), text: m[2].trim() };
+}
+
 export default function ProductDetailPage() {
   const router = useRouter();
   const params = useParams();
@@ -56,6 +68,12 @@ export default function ProductDetailPage() {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [activeTab, setActiveTab] = useState<'desc' | 'specs' | 'care'>('desc');
   const [relatedAddedId, setRelatedAddedId] = useState<string | null>(null);
+  const [activeImage, setActiveImage] = useState(0);
+
+  // Reset gallery when navigating between products
+  useEffect(() => {
+    setActiveImage(0);
+  }, [productId]);
 
   const handleQuickAddRelated = (rel: Product, e: React.MouseEvent) => {
     e.preventDefault();
@@ -102,6 +120,9 @@ export default function ProductDetailPage() {
     );
   }
 
+  const gallery = product.images && product.images.length > 0 ? product.images : [product.image];
+  const mainImage = gallery[activeImage] ?? product.image;
+  const details = PRODUCT_DETAILS[product.id];
   const inWishlist = isInWishlist(product.id);
   // Related products: priority to same category, supplemented with complementary kitchen/dining pieces
   const categoryMatches = PRODUCTS.filter(
@@ -172,20 +193,43 @@ export default function ProductDetailPage() {
                 </span>
               )}
 
-              <Image
-                src={product.image}
-                alt={product.name}
-                fill
-                sizes="(max-width: 1024px) 100vw, 50vw"
-                className="object-cover transition-transform duration-500 group-hover:scale-105"
-                priority
-              />
+              <ProductImageFill key={mainImage} src={mainImage} alt={product.name} sizes="(max-width: 1024px) 100vw, 50vw" priority className="transition-transform duration-500 group-hover:scale-105" />
 
               {/* Timber Seal Pill */}
               <div className="absolute bottom-4 right-4 z-10 bg-white/95 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-[#E8DCCE] text-xs sm:text-sm text-[#5C4535] font-semibold shadow-sm">
-                100% Solid {product.woodType}
+                {/mdf|metal|enamel|print/i.test(product.woodType)
+                  ? product.woodType
+                  : `100% Solid ${product.woodType}`}
               </div>
             </div>
+
+            {/* Thumbnail Gallery (only when product has multiple photos) */}
+            {gallery.length > 1 && (
+              <div className="flex flex-nowrap gap-2.5 overflow-x-auto no-scrollbar py-1 px-0.5 sm:grid sm:grid-cols-6 sm:overflow-visible">
+                {gallery.map((src, idx) => (
+                  <button
+                    key={src}
+                    type="button"
+                    onClick={() => setActiveImage(idx)}
+                    aria-label={`View photo ${idx + 1} of ${product.name}`}
+                    aria-current={idx === activeImage}
+                    className={`relative aspect-square w-16 shrink-0 sm:w-auto rounded-xl overflow-hidden bg-white border-2 transition-all ${
+                      idx === activeImage
+                        ? 'border-amber-700 shadow-sm'
+                        : 'border-[#E8DCCE] opacity-80 hover:opacity-100 hover:border-[#C9A27A]'
+                    }`}
+                  >
+                    <Image
+                      src={src}
+                      alt=""
+                      fill
+                      sizes="100px"
+                      className="object-contain bg-white"
+                    />
+                  </button>
+                ))}
+              </div>
+            )}
 
             {/* Unified Trust Strip */}
             <div className="grid grid-cols-3 divide-x divide-[#E8DCCE] rounded-2xl bg-white border border-[#E8DCCE] p-4 shadow-sm text-center">
@@ -234,20 +278,26 @@ export default function ProductDetailPage() {
 
               {/* Rating & Stock Status */}
               <div className="flex flex-wrap items-center gap-3 mt-3">
-                <div className="flex items-center gap-0.5 text-amber-500">
-                  {[...Array(5)].map((_, i) => (
-                    <Star
-                      key={i}
-                      className="w-4 h-4 fill-amber-400 text-amber-400"
-                    />
-                  ))}
-                </div>
-                <span className="text-xs sm:text-sm font-bold text-[#2A180E]">
-                  {product.rating}
-                </span>
-                <span className="text-xs text-stone-500">
-                  ({product.reviewsCount} verified reviews)
-                </span>
+                {product.reviewsCount > 0 ? (
+                  <>
+                    <div className="flex items-center gap-0.5 text-amber-500">
+                      {[...Array(5)].map((_, i) => (
+                        <Star
+                          key={i}
+                          className="w-4 h-4 fill-amber-400 text-amber-400"
+                        />
+                      ))}
+                    </div>
+                    <span className="text-xs sm:text-sm font-bold text-[#2A180E]">
+                      {product.rating}
+                    </span>
+                    <span className="text-xs text-stone-500">
+                      ({product.reviewsCount} verified reviews)
+                    </span>
+                  </>
+                ) : (
+                  <span className="text-xs text-stone-500">No reviews yet</span>
+                )}
                 <span className="text-stone-300 hidden sm:inline">•</span>
                 <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-800 text-xs font-bold border border-emerald-200">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
@@ -351,42 +401,80 @@ export default function ProductDetailPage() {
         </div>
 
         {/* Full-Width Product Details Tabs (Spans across entire container width) */}
-        <div className="mt-10 sm:mt-14 w-full rounded-2xl bg-white border border-[#EADBCC] p-6 sm:p-8 lg:p-10 shadow-sm">
-          <div className="flex border-b border-[#F0E4D7] gap-6 sm:gap-10 text-sm sm:text-base font-semibold">
+        <div className="mt-8 sm:mt-14 w-full rounded-2xl bg-white border border-[#EADBCC] p-3.5 sm:p-8 lg:p-10 shadow-sm">
+          <div className="flex overflow-x-auto no-scrollbar border-b border-[#F0E4D7] gap-5 sm:gap-10 text-sm sm:text-base font-semibold">
             <button
               onClick={() => setActiveTab('desc')}
-              className={`pb-3.5 transition-colors relative ${
+              className={`pb-3 sm:pb-3.5 whitespace-nowrap shrink-0 transition-colors relative ${
                 activeTab === 'desc'
                   ? 'border-b-2 border-amber-700 text-[#2A180E] font-bold'
                   : 'text-stone-500 hover:text-stone-800'
               }`}
             >
-              Wood Story
+              {details ? 'Description' : 'Wood Story'}
             </button>
             <button
               onClick={() => setActiveTab('specs')}
-              className={`pb-3.5 transition-colors relative ${
+              className={`pb-3 sm:pb-3.5 whitespace-nowrap shrink-0 transition-colors relative ${
                 activeTab === 'specs'
                   ? 'border-b-2 border-amber-700 text-[#2A180E] font-bold'
                   : 'text-stone-500 hover:text-stone-800'
               }`}
             >
-              Specifications
+              <span className="sm:hidden">{details ? 'Product Info' : 'Specs'}</span>
+              <span className="hidden sm:inline">{details ? 'Product Information' : 'Specifications'}</span>
             </button>
             <button
               onClick={() => setActiveTab('care')}
-              className={`pb-3.5 transition-colors relative ${
+              className={`pb-3 sm:pb-3.5 whitespace-nowrap shrink-0 transition-colors relative ${
                 activeTab === 'care'
                   ? 'border-b-2 border-amber-700 text-[#2A180E] font-bold'
                   : 'text-stone-500 hover:text-stone-800'
               }`}
             >
-              Care &amp; Maintenance
+              <span className="sm:hidden">Care</span>
+              <span className="hidden sm:inline">Care &amp; Maintenance</span>
             </button>
           </div>
 
-          <div className="pt-6 text-sm sm:text-base text-[#5C4535] leading-relaxed">
-            {activeTab === 'desc' && (
+          <div className="pt-4 sm:pt-6 text-sm sm:text-base text-[#5C4535] leading-relaxed">
+            {activeTab === 'desc' && details && (
+              <div className="max-w-4xl space-y-5">
+                {details.about.length > 0 && (
+                  <div className="rounded-2xl border border-[#EADBCC] overflow-hidden bg-white shadow-sm">
+                    <div className="px-4 sm:px-6 py-4 bg-[#FAF6F0] border-b border-[#EADBCC]">
+                      <h4 className="text-base sm:text-lg font-bold text-[#2A180E]">About this item</h4>
+                    </div>
+                    <ul className="divide-y divide-[#F0E4D7]">
+                      {details.about.map((line, i) => {
+                        const { lead, text } = splitLead(line);
+                        return (
+                          <li key={i} className="flex items-start gap-3 px-4 sm:px-6 py-3.5 text-sm text-[#3E2B1F]">
+                            <CheckCircle2 className="w-4 h-4 text-amber-700 shrink-0 mt-0.5" />
+                            <span className="leading-relaxed">
+                              {lead && (
+                                <strong className="font-semibold text-[#2A180E] capitalize">{lead}: </strong>
+                              )}
+                              {text}
+                            </span>
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  </div>
+                )}
+                {details.description && (
+                  <div className="rounded-2xl border border-[#EADBCC] overflow-hidden bg-white shadow-sm">
+                    <div className="px-4 sm:px-6 py-4 bg-[#FAF6F0] border-b border-[#EADBCC]">
+                      <h4 className="text-base sm:text-lg font-bold text-[#2A180E]">Product description</h4>
+                    </div>
+                    <p className="px-4 sm:px-6 py-4 text-sm leading-7 text-[#3E2B1F]">{details.description}</p>
+                  </div>
+                )}
+              </div>
+            )}
+
+            {activeTab === 'desc' && !details && (
               <p className="max-w-4xl">
                 Every piece of {product.woodType} is personally inspected for natural grain balance.
                 Because genuine wood has unique grain flows, each piece is truly one-of-a-kind. Handcrafted
@@ -394,7 +482,34 @@ export default function ProductDetailPage() {
               </p>
             )}
 
-            {activeTab === 'specs' && (
+            {activeTab === 'specs' && details && (
+              <div className="max-w-4xl rounded-2xl border border-[#EADBCC] overflow-hidden bg-white shadow-sm">
+                <div className="px-4 sm:px-6 py-4 bg-[#FAF6F0] border-b border-[#EADBCC]">
+                  <h4 className="text-base sm:text-lg font-bold text-[#2A180E]">Product information</h4>
+                  <p className="text-xs text-stone-500 mt-0.5">{product.name}</p>
+                </div>
+                <table className="w-full text-sm border-collapse">
+                  <tbody>
+                    {details.specs.map(([label, value], i) => (
+                      <tr
+                        key={label}
+                        className={`border-b border-[#F0E4D7] last:border-b-0 ${i % 2 === 1 ? 'bg-[#FDFAF6]' : 'bg-white'}`}
+                      >
+                        <th
+                          scope="row"
+                          className="w-2/5 sm:w-1/3 align-top text-left font-semibold text-[#5C4535] bg-[#FAF6F0]/80 border-r border-[#F0E4D7] px-4 sm:px-6 py-3"
+                        >
+                          {label}
+                        </th>
+                        <td className="align-top text-[#2A180E] px-4 sm:px-6 py-3 break-words">{value}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
+
+            {activeTab === 'specs' && !details && (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 p-5 rounded-xl bg-[#FAF6F0] border border-[#EADBCC]">
                 <div className="p-3 bg-white/70 rounded-lg border border-[#EADBCC]/60">
                   <span className="text-xs text-stone-500 block uppercase tracking-wider font-semibold mb-1">Wood Species</span>
@@ -416,12 +531,30 @@ export default function ProductDetailPage() {
             )}
 
             {activeTab === 'care' && (
-              <ul className="list-disc pl-5 space-y-2 text-stone-700 max-w-3xl">
-                <li>Wash with mild soapy water and a soft sponge. Never soak in water.</li>
-                <li>Not recommended for dishwasher or microwave use.</li>
-                <li>Towel dry immediately after washing and let air dry in an open space.</li>
-                <li>Re-hydrate every 2–3 months with a drop of coconut oil or walnut oil.</li>
-              </ul>
+              <div className="max-w-4xl rounded-2xl border border-[#EADBCC] overflow-hidden bg-white shadow-sm">
+                <div className="px-4 sm:px-6 py-4 bg-[#FAF6F0] border-b border-[#EADBCC]">
+                  <h4 className="text-base sm:text-lg font-bold text-[#2A180E]">Care &amp; maintenance</h4>
+                  <p className="text-xs text-stone-500 mt-0.5">Keep your wooden piece beautiful for years</p>
+                </div>
+                <ul className="divide-y divide-[#F0E4D7]">
+                  {[
+                    { Icon: Droplets, title: 'Gentle wash', text: 'Wash with mild soapy water and a soft sponge. Never soak in water.' },
+                    { Icon: Ban, title: 'No dishwasher or microwave', text: 'Not recommended for dishwasher or microwave use.' },
+                    { Icon: Wind, title: 'Dry well', text: 'Towel dry immediately after washing and let air dry in an open space.' },
+                    { Icon: Sparkles, title: 'Re-oil regularly', text: 'Re-hydrate every 2–3 months with a drop of coconut oil or walnut oil.' },
+                  ].map(({ Icon, title, text }) => (
+                    <li key={title} className="flex items-start gap-4 px-4 sm:px-6 py-4">
+                      <span className="w-9 h-9 shrink-0 rounded-full bg-[#F6EFE6] border border-[#EADBCC] flex items-center justify-center">
+                        <Icon className="w-4 h-4 text-amber-700" />
+                      </span>
+                      <div>
+                        <p className="text-sm font-semibold text-[#2A180E]">{title}</p>
+                        <p className="text-sm text-[#5C4535] leading-relaxed mt-0.5">{text}</p>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             )}
           </div>
         </div>
@@ -455,7 +588,6 @@ export default function ProductDetailPage() {
                     {/* Top Flush Image: Edge-to-Edge */}
                     <div
                       className="relative w-full aspect-square overflow-hidden bg-[#FAF6F0]"
-                      style={{ position: 'relative', width: '100%', height: '230px' }}
                     >
                       {rel.badge && (
                         <span className="absolute top-3 left-3 z-10 px-2.5 py-0.5 rounded-md bg-[#241710] text-[#E5A855] text-xs font-bold tracking-wider uppercase shadow">
@@ -492,13 +624,7 @@ export default function ProductDetailPage() {
                         className="relative w-full h-full block cursor-pointer group-hover:scale-105 transition-transform duration-500"
                         style={{ position: 'relative', width: '100%', height: '100%' }}
                       >
-                        <Image
-                          src={rel.image}
-                          alt={rel.name}
-                          fill
-                          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                          className="object-cover"
-                        />
+                        <ProductImageFill src={rel.image} alt={rel.name} sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw" />
                         <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                           <span className="px-3.5 py-1.5 rounded-full bg-white/95 text-[#2A180E] text-xs font-bold shadow-lg">
                             View Product

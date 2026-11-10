@@ -16,6 +16,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import FloatingWhatsApp from '@/components/FloatingWhatsApp';
 import CheckoutModal from '@/components/CheckoutModal';
+import { woodLabel } from '@/data/products';
 import { useCart } from '@/context/CartContext';
 import { useToast } from '@/context/ToastContext';
 
@@ -120,13 +121,13 @@ export default function CartPage() {
                         alt={item.product.name}
                         fill
                         sizes="96px"
-                        className="object-cover"
+                        className="object-contain bg-white"
                       />
                     </Link>
 
                     <div>
                       <span className="text-xs uppercase tracking-wider text-[#A67B52] font-bold block">
-                        {item.product.woodType.split(' ')[0]} Wood
+                        {woodLabel(item.product.woodType)}
                       </span>
                       <Link
                         href={`/products/${item.product.id}`}

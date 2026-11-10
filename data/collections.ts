@@ -56,5 +56,21 @@ export const COLLECTIONS: Collection[] = [
     itemCount: 14,
     tagline: 'End-grain teak cutting & paddle cheese boards',
   },
+  {
+    id: 'col-7',
+    name: 'Pooja & Decor',
+    slug: 'Pooja & Decor',
+    image: '/images/products/ganesha-laxmi-tea-light-1.jpg',
+    itemCount: 4,
+    tagline: 'Ganesha, Laxmi & Ram Darbar tea-light holders',
+  },
+  {
+    id: 'col-8',
+    name: 'Kitchen Utensils',
+    slug: 'Kitchen Utensils',
+    image: '/images/products/wooden-utensil-set-1.jpg',
+    itemCount: 1,
+    tagline: 'Natural wood spoons, spatulas & holders',
+  },
 ];
 

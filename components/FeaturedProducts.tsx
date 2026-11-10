@@ -5,7 +5,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { Star, ShoppingBag, Heart, Eye, Check } from 'lucide-react';
-import { Product, CATEGORIES } from '@/data/products';
+import { Product, CATEGORIES, woodLabel } from '@/data/products';
+import ProductImageFill from '@/components/ProductImageFill';
 import { useCart } from '@/context/CartContext';
 import { useWishlist } from '@/context/WishlistContext';
 import { useToast } from '@/context/ToastContext';
@@ -115,7 +116,6 @@ export default function FeaturedProducts({
                 {/* Top Image: Edge-to-Edge Flush Image (No Inset Padding) */}
                 <div
                   className="relative w-full aspect-square overflow-hidden bg-[#FAF6F0]"
-                  style={{ position: 'relative', width: '100%', height: '230px' }}
                 >
                   {/* Badge (Bestseller, Popular, etc.) */}
                   {product.badge && (
@@ -151,16 +151,10 @@ export default function FeaturedProducts({
                   {/* Product Image: Direct Link to Dedicated Product Page */}
                   <Link
                     href={`/products/${product.id}`}
-                    className="relative w-full h-full block cursor-pointer group-hover:scale-105 transition-transform duration-500"
+                    className="relative w-full h-full block overflow-hidden cursor-pointer group-hover:scale-105 transition-transform duration-500"
                     style={{ position: 'relative', width: '100%', height: '100%' }}
                   >
-                    <Image
-                      src={product.image}
-                      alt={product.name}
-                      fill
-                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 20vw"
-                      className="object-cover"
-                    />
+                    <ProductImageFill src={product.image} alt={product.name} sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 20vw" />
 
                     {/* Quick View Button on Hover */}
                     <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
@@ -172,10 +166,10 @@ export default function FeaturedProducts({
                 </div>
 
                 {/* Product Info */}
-                <div className="p-3.5 sm:p-4 flex-1 flex flex-col justify-between">
+                <div className="p-2.5 sm:p-4 flex-1 flex flex-col justify-between">
                   {/* Category name */}
                   <span className="text-xs uppercase tracking-wider text-[#A67B52] font-bold">
-                    {product.woodType.split(' ')[0]} Wood
+                    {woodLabel(product.woodType)}
                   </span>
 
                   {/* Product Title: Direct Link to Dedicated Product Page */}
@@ -188,20 +182,26 @@ export default function FeaturedProducts({
                   </Link>
 
                   {/* Rating & Reviews */}
-                  <div className="flex items-center gap-1.5 mt-2">
-                    <div className="flex items-center text-amber-500">
-                      <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
-                    </div>
-                    <span className="text-xs sm:text-sm font-bold text-[#2A180E]">
-                      {product.rating}
-                    </span>
-                    <span className="text-xs text-stone-500">
-                      ({product.reviewsCount})
-                    </span>
+                  <div className="flex items-center gap-1.5 mt-1 sm:mt-2">
+                    {product.reviewsCount > 0 ? (
+                      <>
+                        <div className="flex items-center text-amber-500">
+                          <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
+                        </div>
+                        <span className="text-xs sm:text-sm font-bold text-[#2A180E]">
+                          {product.rating}
+                        </span>
+                        <span className="text-xs text-stone-500">
+                          ({product.reviewsCount})
+                        </span>
+                      </>
+                    ) : (
+                      <span className="text-xs text-stone-500">No reviews yet</span>
+                    )}
                   </div>
 
                   {/* Price & Add to Cart button */}
-                  <div className="mt-3 pt-2.5 border-t border-[#F2ECE3] flex items-center justify-between">
+                  <div className="mt-2 pt-2 sm:mt-3 sm:pt-2.5 border-t border-[#F2ECE3] flex items-center justify-between">
                     <div>
                       <div className="flex items-baseline gap-1.5">
                         <span className="text-base sm:text-lg font-bold text-[#2A180E]">
@@ -234,7 +234,7 @@ export default function FeaturedProducts({
                   </div>
 
                   {/* Action Buttons: View Details (Colored Brand Button) & Buy Now (WhatsApp Green) in 2 Rows */}
-                  <div className="flex flex-col gap-2 mt-2.5">
+                  <div className="flex flex-col gap-1.5 sm:gap-2 mt-2 sm:mt-2.5">
                     <Link
                       href={`/products/${product.id}`}
                       className="w-full py-2 sm:py-2.5 px-3 rounded-xl bg-[#3D2516] hover:bg-[#201309] text-[#FAF6F0] text-xs sm:text-sm font-bold text-center transition-all shadow-sm hover:shadow active:scale-95 flex items-center justify-center cursor-pointer"

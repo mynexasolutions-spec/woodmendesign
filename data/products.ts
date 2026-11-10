@@ -1,12 +1,24 @@
+import { SQUARE_IMAGES } from './square-images';
+
 export interface Product {
   id: string;
   name: string;
-  category: 'Bowls & Serving' | 'Roti Casseroles' | 'Masala Boxes' | 'Serving Trays' | 'Cake Stands' | 'Chopping Boards';
+  category:
+    | 'Bowls & Serving'
+    | 'Roti Casseroles'
+    | 'Masala Boxes'
+    | 'Serving Trays'
+    | 'Cake Stands'
+    | 'Chopping Boards'
+    | 'Pooja & Decor'
+    | 'Kitchen Utensils';
   price: number;
   originalPrice?: number;
   rating: number;
   reviewsCount: number;
   image: string;
+  /** Optional extra gallery photos (shown as thumbnails on the product page). First entry should be the main image. */
+  images?: string[];
   badge?: string;
   woodType: string;
   dimensions: string;
@@ -17,7 +29,17 @@ export interface Product {
   inStock: boolean;
 }
 
-export const PRODUCTS: Product[] = [
+/** Short wood label for cards, e.g. 'Mango Wood' (avoids 'Wood Wood' for values like 'Wood & Metal'). */
+export const woodLabel = (woodType: string): string => {
+  const first = woodType.split(' ')[0];
+  return /^wood$/i.test(first) ? 'Wood' : `${first} Wood`;
+};
+
+/** Builds /images/products/<slug>-1.jpg ... -<count>.jpg */
+const gallery = (slug: string, count: number): string[] =>
+  Array.from({ length: count }, (_, i) => `/images/products/${slug}-${i + 1}.jpg`);
+
+const RAW_PRODUCTS: Product[] = [
   // --- ROW 1 (Core Bestsellers 1-5) ---
   {
     id: 'prod-1',
@@ -485,7 +507,450 @@ export const PRODUCTS: Product[] = [
     ],
     inStock: true,
   },
+
+  // --- NEW: Woodmen Design range (details taken from our Amazon listings) ---
+  // rating/reviewsCount of 0 means "no reviews yet" (UI hides the stars).
+  {
+    id: 'prod-21',
+    name: 'Mango Wood Serving Tray 20 x 16 Inch',
+    category: 'Serving Trays',
+    price: 549,
+    originalPrice: 1999,
+    rating: 5.0,
+    reviewsCount: 1,
+    image: '/images/products/mango-serving-tray-1.jpg',
+    images: [1, 2, 3, 4, 5, 6].map((n) => `/images/products/mango-serving-tray-${n}.jpg`),
+    badge: 'New',
+    woodType: 'Mango Wood',
+    dimensions: '20" x 16" x 0.5" (50.8 x 38.1 x 1.3 cm)',
+    finish: 'Natural Wooden Grain Polish',
+    shortDescription: 'Large rectangular mango wood platter for serving tea, snacks, breakfast, fruits and desserts.',
+    description: 'Bring elegance and functionality to your dining experience with this mango wood serving tray, made from solid mango wood with a unique natural grain pattern. The sturdy construction ensures everyday durability while keeping a sophisticated, rustic charm. At 20 x 16 inches it gives ample space for tea, snacks, breakfast, fruits, desserts or beverages, and works equally well as a decorative platter for dining tables and coffee tables.',
+    features: [
+      'Crafted from solid mango wood with durable hardwood construction',
+      'Natural polish that highlights the wood’s organic grain, knots and unique character',
+      'Generous 20 x 16 inch size for tea, snacks, breakfast, fruits and desserts',
+      'Versatile: breakfast in bed, entertaining guests, or a rustic decor accent',
+      'Lightweight at just 450 g, easy to carry and handle'
+    ],
+    inStock: true,
+  },
+  {
+    id: 'prod-22',
+    name: 'Natural Mango Wood Bowl (Small)',
+    category: 'Bowls & Serving',
+    price: 264,
+    originalPrice: 449,
+    rating: 0,
+    reviewsCount: 0,
+    image: '/images/products/mango-wood-bowl-1.jpg',
+    images: [1, 2, 3, 4, 5, 6, 7].map((n) => `/images/products/mango-wood-bowl-${n}.jpg`),
+    badge: 'New',
+    woodType: 'Mango Wood',
+    dimensions: '4" x 4" x 1.5" (10.2 x 10.2 cm), 250 ml',
+    finish: 'Smooth Natural Food-Safe Finish',
+    shortDescription: 'Compact handcrafted mango wood bowl for dry fruits, nuts, berries, dips and small salads.',
+    description: 'Expertly handcrafted from premium mango wood, this bowl shows a rich natural grain and a smooth polished finish. The compact 4 x 4 x 1.5 inch design is perfect for dry fruits, nuts, berries, snacks or small salads. Made from natural, eco-friendly mango wood with a food-safe finish, it is a healthier and more sustainable alternative to plastic. Because each bowl is handcrafted from real wood, slight variations in colour, grain or texture make every piece unique.',
+    features: [
+      'Premium natural mango wood with a smooth handcrafted finish',
+      'Strong, sturdy and resistant to cracking for everyday use',
+      'Food-safe, eco-friendly finish with no harmful chemicals',
+      '250 ml capacity, ideal for dry fruits, snacks, dips and desserts',
+      'Lightweight at 170 g'
+    ],
+    inStock: true,
+  },
+  {
+    id: 'prod-23',
+    name: 'Premium Wooden Roti Box with Lid',
+    category: 'Roti Casseroles',
+    price: 689,
+    originalPrice: 1999,
+    rating: 3.7,
+    reviewsCount: 8,
+    image: '/images/products/wooden-roti-box-1.jpg',
+    images: [1, 2, 3, 4, 5, 6, 7].map((n) => `/images/products/wooden-roti-box-${n}.jpg`),
+    badge: 'New',
+    woodType: 'Walnut Wood',
+    dimensions: '15 x 8 x 10 cm (L x W x H), 500 ml',
+    finish: 'Hand-carved, Polished Smooth Finish (Dark Brown)',
+    shortDescription: 'Handmade round wooden roti dabba with a fitted lift-off lid and knob handle.',
+    description: 'A handmade wooden roti box with a well-fitted lid that keeps rotis warm and fresh and helps them stay soft for longer. The smooth polished finish, perfectly fitted lid and elegant knob handle make it easy to use, and the natural wood grain with a traditional round design adds rustic charm to any room. It also works as a decorative storage piece for small items, trinkets or jewellery, and comes in a gift box.',
+    features: [
+      'Durable hand-carved wood construction with natural wood grain',
+      'Fitted lift-off lid with wooden knob handle for easy access',
+      'Smooth polished interior and exterior, protects contents from moisture and dust',
+      'Gift box included, ideal for gifting on special occasions',
+      'Versatile storage for rotis, small items, trinkets or jewellery'
+    ],
+    inStock: true,
+  },
+
+  // --- NEW: more Woodmen Design products (details from Amazon listings, 2026-11-10) ---
+  {
+    id: 'prod-24',
+    name: 'Floral Print Wooden Chapati Box (Red)',
+    category: 'Roti Casseroles',
+    price: 999,
+    originalPrice: 1999,
+    rating: 0,
+    reviewsCount: 0,
+    image: '/images/products/chapati-box-red-1.jpg',
+    images: gallery('chapati-box-red', 9),
+    badge: 'New',
+    woodType: 'Walnut Wood',
+    dimensions: '15 x 8 x 10 cm (L x W x H), 500 ml',
+    finish: 'Smooth Polished Finish with Multi-colour Floral Print',
+    shortDescription: 'Designer wooden chapati box with a red floral print lid, fitted lid and knob handle.',
+    description: 'Add charm and functionality to your kitchen with this handcrafted wooden chapati box. The multi-colour floral print and smooth wooden finish make it a stylish serving piece, while the fitted lid helps keep chapatis, rotis, parathas and naans warm and fresh through the meal. It also works as a decorative kitchen accessory and makes a thoughtful gift.',
+    features: [
+      'Elegant multi-colour floral print that brightens the dining table',
+      'Fitted lid helps retain warmth and freshness of rotis and parathas',
+      'Sturdy wooden construction, lightweight and easy to handle',
+      'Also suits breads, snacks, cookies and dry items',
+      'A stylish gift for housewarmings, festivals and weddings'
+    ],
+    inStock: true,
+  },
+  {
+    id: 'prod-25',
+    name: 'Floral Print Wooden Chapati Box (Blue)',
+    category: 'Roti Casseroles',
+    price: 999,
+    originalPrice: 1999,
+    rating: 0,
+    reviewsCount: 0,
+    image: '/images/products/chapati-box-blue-1.jpg',
+    images: gallery('chapati-box-blue', 5),
+    badge: 'New',
+    woodType: 'Walnut Wood',
+    dimensions: '15 x 8 x 10 cm (L x W x H), 500 ml',
+    finish: 'Smooth Polished Finish with Multi-colour Floral Print',
+    shortDescription: 'Designer wooden chapati box with a blue floral print lid, fitted lid and knob handle.',
+    description: 'Add charm and functionality to your kitchen with this handcrafted wooden chapati box. The multi-colour floral print and smooth wooden finish make it a stylish serving piece, while the fitted lid helps keep chapatis, rotis, parathas and naans warm and fresh through the meal. It also works as a decorative kitchen accessory and makes a thoughtful gift.',
+    features: [
+      'Elegant multi-colour floral print that brightens the dining table',
+      'Fitted lid helps retain warmth and freshness of rotis and parathas',
+      'Sturdy wooden construction, lightweight and easy to handle',
+      'Also suits breads, snacks, cookies and dry items',
+      'A stylish gift for housewarmings, festivals and weddings'
+    ],
+    inStock: true,
+  },
+  {
+    id: 'prod-26',
+    name: 'Floral Print Wooden Chapati Box (Brown)',
+    category: 'Roti Casseroles',
+    price: 699,
+    originalPrice: 1999,
+    rating: 0,
+    reviewsCount: 0,
+    image: '/images/products/chapati-box-brown-1.jpg',
+    images: gallery('chapati-box-brown', 5),
+    badge: 'New',
+    woodType: 'Walnut Wood',
+    dimensions: '15 x 8 x 10 cm (L x W x H), 500 ml',
+    finish: 'Smooth Polished Finish with Floral Print',
+    shortDescription: 'Designer wooden chapati box with a brown floral print lid, fitted lid and knob handle.',
+    description: 'Add charm and functionality to your kitchen with this handcrafted wooden chapati box. The floral print and smooth wooden finish make it a stylish serving piece, while the fitted lid helps keep chapatis, rotis, parathas and naans warm and fresh through the meal. It also works as a decorative kitchen accessory and makes a thoughtful gift.',
+    features: [
+      'Elegant floral print in warm brown tones',
+      'Fitted lid helps retain warmth and freshness of rotis and parathas',
+      'Sturdy wooden construction, lightweight and easy to handle',
+      'Also suits breads, snacks, cookies and dry items',
+      'A stylish gift for housewarmings, festivals and weddings'
+    ],
+    inStock: true,
+  },
+  {
+    id: 'prod-27',
+    name: 'Round Wooden Spice Box with Steel Containers',
+    category: 'Masala Boxes',
+    price: 1500,
+    originalPrice: 2599,
+    rating: 0,
+    reviewsCount: 0,
+    image: '/images/products/round-spice-box-1.jpg',
+    images: gallery('round-spice-box', 6),
+    badge: 'New',
+    woodType: 'Mango Wood',
+    dimensions: '21 x 12 x 11 cm (L x W x H)',
+    finish: 'Natural Wood Grain Finish',
+    shortDescription: 'Round wooden masala dabba with a knob lid and multiple steel containers for everyday spices.',
+    description: 'Bring elegance and convenience to your kitchen with this wooden masala box, designed to store and organise everyday spices. The natural wood finish adds a traditional, classic touch to the countertop, and the multiple stainless steel containers keep different spices, herbs and seasonings neatly separated and easy to reach.',
+    features: [
+      'Natural wood grain finish with a traditional round design',
+      'Multiple stainless steel containers keep spices separate',
+      'Wooden lid with an easy-grip knob handle',
+      'Holds turmeric, chilli powder, cumin, coriander, garam masala and more',
+      'Keeps frequently used spices organised and within reach'
+    ],
+    inStock: true,
+  },
+  {
+    id: 'prod-28',
+    name: 'Mango Wood Square Tray 9 x 12 Inch',
+    category: 'Serving Trays',
+    price: 449,
+    originalPrice: 899,
+    rating: 0,
+    reviewsCount: 0,
+    image: '/images/products/mango-square-tray-1.jpg',
+    images: gallery('mango-square-tray', 7),
+    badge: 'New',
+    woodType: 'Mango Wood',
+    dimensions: '9" x 12" (approx. 23 x 30 cm)',
+    finish: 'Natural Polish Finish',
+    shortDescription: 'Lightweight multipurpose mango wood tray for serving food, organising office supplies or displaying decor.',
+    description: 'This tray is made from high-quality mango wood, known for its durability and rich texture. The smooth polished surface brings out the natural grain, making it both functional and good-looking. At 9 x 12 inches it is easy to carry and store, and works for serving meals and snacks, organising office supplies, or displaying jewellery, candles and plants.',
+    features: [
+      'Crafted from durable mango wood with a rich natural grain',
+      'Natural polish finish that protects and highlights the wood',
+      'Multipurpose: serving, desk organising, or jewellery and decor display',
+      'Compact and lightweight, easy to carry and store',
+      'Easy to clean with mild soap and water'
+    ],
+    inStock: true,
+  },
+  {
+    id: 'prod-29',
+    name: 'Meena Work Floral Serving Tray 35 x 14 cm',
+    category: 'Serving Trays',
+    price: 499,
+    originalPrice: 1999,
+    rating: 0,
+    reviewsCount: 0,
+    image: '/images/products/meena-serving-tray-1.jpg',
+    images: gallery('meena-serving-tray', 4),
+    badge: 'New',
+    woodType: 'Mango Wood & MDF',
+    dimensions: '35 x 14 x 3.5 cm (L x W x H)',
+    finish: 'Hand-painted Meena Work',
+    shortDescription: 'Decorative rectangular tray with turquoise and orange Meena floral artwork.',
+    description: 'Elevate your serving with this decorative tray featuring intricate Meena work. The turquoise and orange floral blooms and golden leaves on a white background give it a vibrant, traditional look. Made from mango wood and MDF, the 35 x 14 cm tray suits serving beverages and snacks or displaying as a decor accent. Each tray is handcrafted, so small variations are part of its charm.',
+    features: [
+      'Hand-painted Meena work with turquoise and orange floral pattern',
+      'Mango wood and MDF construction',
+      'Compact 35 x 14 cm size for beverages, snacks or decor display',
+      'Traditional artistry with a contemporary look',
+      'Lightweight at about 450 g'
+    ],
+    inStock: true,
+  },
+  {
+    id: 'prod-30',
+    name: 'Peacock Print Rectangular Serving Tray with Handles',
+    category: 'Serving Trays',
+    price: 1200,
+    originalPrice: 1500,
+    rating: 0,
+    reviewsCount: 0,
+    image: '/images/products/peacock-serving-tray-1.jpg',
+    images: gallery('peacock-serving-tray', 6),
+    badge: 'New',
+    woodType: 'Wood (Printed Enamel Finish)',
+    dimensions: '14 x 8 x 2.5 cm (L x W x H)',
+    finish: 'Hand-painted Meena Work, White Grey & Gold',
+    shortDescription: 'Rectangular serving tray with a peacock print in black and gold and wooden side handles.',
+    description: 'A stylish way to serve food and drinks. This tray has a wooden base with a colourful, artistic peacock print and gold-toned wooden handles on both sides. Use it for breakfast in bed, cocktail parties, picnics or as a decorative piece for home, kitchen and restaurant.',
+    features: [
+      'Peacock and floral print in black and gold on a white-grey base',
+      'Wooden base with side handles for easy carrying',
+      'Great for breakfast in bed, parties and picnics',
+      'Works equally well at home, in kitchens and restaurants',
+      'Lightweight at about 400 g'
+    ],
+    inStock: true,
+  },
+  {
+    id: 'prod-31',
+    name: 'Round Wooden Serving Tray with Raised Rim',
+    category: 'Serving Trays',
+    price: 499,
+    rating: 0,
+    reviewsCount: 0,
+    image: '/images/products/round-serving-tray-1.jpg',
+    images: gallery('round-serving-tray', 2),
+    badge: 'New',
+    woodType: 'Mango Wood',
+    dimensions: '25 cm Diameter x 1.5 cm',
+    finish: 'Natural Wood Grain Finish',
+    shortDescription: 'Round mango wood tray with a warm natural finish and a raised rim to keep items secure.',
+    description: 'A round wooden serving tray with a warm natural finish and a striking wood grain pattern. The raised rim keeps items secure while serving, and the classic shape suits snacks, dry fruits, biscuits, nuts and beverages. It also works for arranging decor items, flower plates and table accessories.',
+    features: [
+      'Natural wood grain pattern with a warm finish',
+      'Raised rim keeps items in place while serving',
+      'Ideal for snacks, dry fruits, biscuits, nuts and beverages',
+      'Also useful for decor and table accessories',
+      'Lightweight at about 200 g, a good gift choice'
+    ],
+    inStock: true,
+  },
+  {
+    id: 'prod-32',
+    name: 'Handcrafted Natural Wood Bowl, Rustic Grain',
+    category: 'Bowls & Serving',
+    price: 299,
+    rating: 0,
+    reviewsCount: 0,
+    image: '/images/products/rustic-wood-bowl-set-1.jpg',
+    images: gallery('rustic-wood-bowl-set', 2),
+    badge: 'New',
+    woodType: 'Natural Wood',
+    dimensions: '3" x 3" x 1.2" (approx. 7.6 x 7.6 x 3 cm)',
+    finish: 'Smooth Natural Polish',
+    shortDescription: 'Small handcrafted wooden bowl with a rustic grain, for fruits, snacks, dry fruits and desserts.',
+    description: 'A handcrafted bowl made from natural wood, with a rustic grain pattern and a smooth polished finish. No two bowls are exactly alike, so every piece is one of a kind. Lightweight but durable, it serves fruits, snacks, dry fruits, salads and desserts at home, in restaurants and in cafes, and makes a warm gifting option.',
+    features: [
+      'Natural wood with a rustic grain and smooth polished finish',
+      'One-of-a-kind grain pattern on every piece',
+      'Lightweight and durable for everyday use',
+      'Serves fruits, snacks, dry fruits, salads and desserts',
+      'Adds rustic charm to the table, a thoughtful gift'
+    ],
+    inStock: true,
+  },
+  {
+    id: 'prod-33',
+    name: 'Ganesha Leaf Design Wooden Tea Light Holder',
+    category: 'Pooja & Decor',
+    price: 1299,
+    originalPrice: 2999,
+    rating: 0,
+    reviewsCount: 0,
+    image: '/images/products/ganesha-leaf-tea-light-1.jpg',
+    images: gallery('ganesha-leaf-tea-light', 5),
+    badge: 'New',
+    woodType: 'Wood & Metal',
+    dimensions: '20 x 15 x 25 cm (L x W x H)',
+    finish: 'Natural Wood with Metallic Finish',
+    shortDescription: 'Handcrafted Ganesha tea light holder with a leaf design in a circular wooden frame.',
+    description: 'A handcrafted tea light holder with Lord Ganesha carved on a decorative leaf in a metallic finish, set against a natural wooden circular frame. A sturdy wooden stand holds a metal dish for a tea light. Lit, it creates a calm, glowing corner for meditation spaces, prayer rooms or any room that needs a spiritual accent.',
+    features: [
+      'Lord Ganesha on a decorative leaf, metallic finish on natural wood',
+      'Stable wooden stand with a metal tea light dish',
+      'Ideal for altars, meditation corners and living rooms',
+      'Symbol of prosperity and good fortune',
+      'Lightweight at about 450 g'
+    ],
+    inStock: true,
+  },
+  {
+    id: 'prod-34',
+    name: 'Lord Ganesha & Laxmi Ji Statue with Tea Light Holder',
+    category: 'Pooja & Decor',
+    price: 1299,
+    originalPrice: 2999,
+    rating: 0,
+    reviewsCount: 0,
+    image: '/images/products/ganesha-laxmi-tea-light-1.jpg',
+    images: gallery('ganesha-laxmi-tea-light', 6),
+    badge: 'New',
+    woodType: 'Wood & Metal',
+    dimensions: '20 x 15 x 25 cm (L x W x H)',
+    finish: 'Silver-tone Metal on Rustic Wooden Base',
+    shortDescription: 'Silver-tone Ganesha and Laxmi figurines on a rustic wooden base with a tea light holder.',
+    description: 'Lord Ganesha, the remover of obstacles, and Goddess Laxmi, the harbinger of wealth and prosperity, are shown in finely detailed silver-tone metal on a rustic wooden base. A centrally placed tea light holder adds a warm glow. It suits prayer rooms and home altars, and works as a decor piece and a festive gift.',
+    features: [
+      'Detailed silver-tone figurines of Ganesha and Laxmi',
+      'Rustic wooden base for a stable display',
+      'Built-in tea light holder',
+      'Compact enough for home altars and small spaces',
+      'A meaningful gift for Diwali and housewarmings'
+    ],
+    inStock: true,
+  },
+  {
+    id: 'prod-35',
+    name: 'Wooden Ganesha Tea Light Holder with Om Symbol',
+    category: 'Pooja & Decor',
+    price: 1299,
+    originalPrice: 2999,
+    rating: 0,
+    reviewsCount: 0,
+    image: '/images/products/ganesha-om-tea-light-1.jpg',
+    images: gallery('ganesha-om-tea-light', 6),
+    badge: 'New',
+    woodType: 'Wood & Metal',
+    dimensions: '20 x 15 x 25 cm (L x W x H)',
+    finish: 'Natural Wood with Antique-style Metal',
+    shortDescription: 'Circular wooden tea light holder with an antique-style Ganesha figure and the Om symbol.',
+    description: 'A circular wooden frame houses an artistically detailed antique-style metal Ganesha alongside the sacred Om symbol. The sturdy wooden base gives stability and a metal holder takes a tea light. Lit, it turns a meditation corner or prayer room into a calm sanctuary.',
+    features: [
+      'Ganesha figure with the sacred Om symbol in a circular frame',
+      'Antique-style metal on a natural wood finish',
+      'Sturdy wooden platform with a metal tea light holder',
+      'Compact tabletop size',
+      'Suits meditation corners, prayer rooms and living spaces'
+    ],
+    inStock: true,
+  },
+  {
+    id: 'prod-36',
+    name: 'Ram Darbar Idol in Wooden Frame with Diya Holder',
+    category: 'Pooja & Decor',
+    price: 1299,
+    originalPrice: 2999,
+    rating: 0,
+    reviewsCount: 0,
+    image: '/images/products/ram-darbar-idol-1.jpg',
+    images: gallery('ram-darbar-idol', 6),
+    badge: 'New',
+    woodType: 'Wood & Metal',
+    dimensions: '20 x 15 x 25 cm (L x W x H)',
+    finish: 'Metallic Idol with Natural Wood Polish',
+    shortDescription: 'Ram Darbar metal idol (Ram, Sita, Lakshman, Hanuman) in a wooden frame with a diya cup.',
+    description: 'Finely detailed depictions of Lord Ram, Goddess Sita, Lord Lakshman and Lord Hanuman in a metallic finish, set inside an open wooden frame on a solid wooden base. A built-in metal diya cup lets you light a diya or tea light. Ideal for pooja rooms, home temples, offices and gifting.',
+    features: [
+      'Detailed Ram Darbar idol in a metallic finish',
+      'Open wooden frame and solid base for a classic look',
+      'Built-in metal diya cup for pooja',
+      'Gift for Diwali, Navratri, Dussehra, housewarming or weddings',
+      'Natural wood polish, easy to maintain'
+    ],
+    inStock: true,
+  },
+  {
+    id: 'prod-37',
+    name: 'Wooden Kitchen Utensil Set with Holder',
+    category: 'Kitchen Utensils',
+    price: 3000,
+    originalPrice: 3999,
+    rating: 0,
+    reviewsCount: 0,
+    image: '/images/products/wooden-utensil-set-1.jpg',
+    images: gallery('wooden-utensil-set', 7),
+    badge: 'New',
+    woodType: 'Mango Wood',
+    dimensions: '30 x 8 cm (L x W)',
+    finish: 'Natural Wood Grain',
+    shortDescription: '10-piece wooden cooking set with spoons, spatulas, slotted spoons and a matching holder.',
+    description: 'A complete set of wooden cooking tools from Woodmen Design: spoons, spatulas and slotted spoons, each with its own natural grain, plus a matching holder that keeps them organised on the counter. The wood is gentle on non-stick cookware and sturdy enough for everyday cooking.',
+    features: [
+      '10-piece set including a matching wooden holder',
+      'Natural wood, gentle on non-stick surfaces and will not scratch pans',
+      'Spoons, spatulas and slotted spoons for everyday cooking',
+      'Heat-resistant, durable and eco-friendly',
+      'Holder keeps tools within easy reach on the countertop'
+    ],
+    inStock: true,
+  },
 ];
+
+/**
+ * Every photo has a 1:1 version (padded, never cropped) in /images/sq/ - see data/square-images.ts.
+ * Use those in the UI so product cards and galleries show the whole photo with no gaps.
+ */
+const toSquare = (path: string): string => {
+  const sq = path.replace('/images/', '/images/sq/');
+  return SQUARE_IMAGES.has(sq) ? sq : path;
+};
+
+export const PRODUCTS: Product[] = RAW_PRODUCTS.map((p) => ({
+  ...p,
+  image: toSquare(p.image),
+  images: p.images?.map(toSquare),
+}));
 
 export const CATEGORIES = [
   'All',
@@ -495,4 +960,6 @@ export const CATEGORIES = [
   'Serving Trays',
   'Cake Stands',
   'Chopping Boards',
+  'Pooja & Decor',
+  'Kitchen Utensils',
 ] as const;

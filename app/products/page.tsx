@@ -22,7 +22,8 @@ import WishlistDrawer from '@/components/WishlistDrawer';
 import CheckoutModal from '@/components/CheckoutModal';
 import SearchModal from '@/components/SearchModal';
 import FloatingWhatsApp from '@/components/FloatingWhatsApp';
-import { PRODUCTS, CATEGORIES, Product } from '@/data/products';
+import { PRODUCTS, CATEGORIES, Product, woodLabel } from '@/data/products';
+import ProductImageFill from '@/components/ProductImageFill';
 import { useCart } from '@/context/CartContext';
 import { useWishlist } from '@/context/WishlistContext';
 import { useToast } from '@/context/ToastContext';
@@ -209,7 +210,7 @@ function ProductsContent() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 sm:gap-4">
             {/* Category Pills */}
-            <div className="flex items-center gap-2 overflow-x-auto no-scrollbar py-1">
+            <div className="flex items-center gap-2 overflow-x-auto no-scrollbar py-1 min-w-0 md:flex-1 md:flex-wrap md:overflow-visible">
               {CATEGORIES.map((cat) => {
                 const isSelected = selectedCategory === cat;
                 return (
@@ -385,7 +386,6 @@ function ProductsContent() {
                   {/* Top Image: Edge-to-Edge Flush Image (No Inset Padding) */}
                   <div
                     className="relative w-full aspect-square overflow-hidden bg-[#FAF6F0]"
-                    style={{ position: 'relative', width: '100%', height: '230px' }}
                   >
                     {/* Top Badge */}
                     {product.badge && (
@@ -422,16 +422,10 @@ function ProductsContent() {
                     {/* Product Image: Direct Link to Product Page */}
                     <Link
                       href={`/products/${product.id}`}
-                      className="relative w-full h-full block cursor-pointer group-hover:scale-105 transition-transform duration-500"
+                      className="relative w-full h-full block overflow-hidden cursor-pointer group-hover:scale-105 transition-transform duration-500"
                       style={{ position: 'relative', width: '100%', height: '100%' }}
                     >
-                      <Image
-                        src={product.image}
-                        alt={product.name}
-                        fill
-                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 20vw"
-                        className="object-cover"
-                      />
+                      <ProductImageFill src={product.image} alt={product.name} sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 20vw" />
 
                       {/* Subtle View Badge on Hover */}
                       <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
@@ -443,9 +437,9 @@ function ProductsContent() {
                   </div>
 
                   {/* Product Info */}
-                  <div className="p-3.5 sm:p-4 flex-1 flex flex-col justify-between">
+                  <div className="p-2.5 sm:p-4 flex-1 flex flex-col justify-between">
                     <span className="text-xs uppercase tracking-wider text-[#A67B52] font-bold">
-                      {product.woodType.split(' ')[0]} Wood
+                      {woodLabel(product.woodType)}
                     </span>
 
                     {/* Product Title: Direct Link to Product Page */}
@@ -458,20 +452,26 @@ function ProductsContent() {
                     </Link>
 
                     {/* Star Rating & Review Count */}
-                    <div className="flex items-center gap-1.5 mt-2">
-                      <div className="flex items-center text-amber-500">
-                        <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
-                      </div>
-                      <span className="text-xs sm:text-sm font-bold text-[#2A180E]">
-                        {product.rating}
-                      </span>
-                      <span className="text-xs text-stone-500">
-                        ({product.reviewsCount})
-                      </span>
+                    <div className="flex items-center gap-1.5 mt-1 sm:mt-2">
+                      {product.reviewsCount > 0 ? (
+                        <>
+                          <div className="flex items-center text-amber-500">
+                            <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
+                          </div>
+                          <span className="text-xs sm:text-sm font-bold text-[#2A180E]">
+                            {product.rating}
+                          </span>
+                          <span className="text-xs text-stone-500">
+                            ({product.reviewsCount})
+                          </span>
+                        </>
+                      ) : (
+                        <span className="text-xs text-stone-500">No reviews yet</span>
+                      )}
                     </div>
 
                     {/* Price and Action Buttons */}
-                    <div className="mt-3 pt-2.5 border-t border-[#F2ECE3] flex items-center justify-between">
+                    <div className="mt-2 pt-2 sm:mt-3 sm:pt-2.5 border-t border-[#F2ECE3] flex items-center justify-between">
                       <div>
                         <div className="flex items-baseline gap-1.5">
                           <span className="text-base sm:text-lg font-bold text-[#2A180E]">
@@ -488,7 +488,7 @@ function ProductsContent() {
                       {/* Quick Add to Cart Button */}
                       <button
                         onClick={(e) => handleQuickAdd(product, e)}
-                        className={`p-2.5 rounded-xl transition-all shadow ${
+                        className={`p-2 sm:p-2.5 rounded-xl transition-all shadow ${
                           addedId === product.id
                             ? 'bg-emerald-700 text-white scale-110'
                             : 'bg-[#3D2516] hover:bg-[#5C3B24] text-[#FAF6F0] hover:scale-105 active:scale-95'
@@ -505,17 +505,17 @@ function ProductsContent() {
                     </div>
 
                     {/* Action Buttons: View Details (Colored Brand Button) & Buy Now (WhatsApp Green) in 2 Rows */}
-                    <div className="flex flex-col gap-2 mt-2.5">
+                    <div className="flex flex-col gap-1.5 sm:gap-2 mt-2 sm:mt-2.5">
                       <Link
                         href={`/products/${product.id}`}
-                        className="w-full py-2.5 px-3 rounded-xl bg-[#3D2516] hover:bg-[#201309] text-[#FAF6F0] text-xs sm:text-sm font-bold text-center transition-all shadow-sm hover:shadow active:scale-95 flex items-center justify-center cursor-pointer"
+                        className="w-full py-2 sm:py-2.5 px-3 rounded-xl bg-[#3D2516] hover:bg-[#201309] text-[#FAF6F0] text-xs sm:text-sm font-bold text-center transition-all shadow-sm hover:shadow active:scale-95 flex items-center justify-center cursor-pointer"
                       >
                         View Details
                       </Link>
 
                       <button
                         onClick={(e) => handleBuyNow(product, e)}
-                        className="w-full py-2.5 px-3 rounded-xl bg-[#25D366] hover:bg-[#20BD5A] text-white text-xs sm:text-sm font-bold text-center transition-all shadow-sm hover:shadow active:scale-95 flex items-center justify-center gap-2 cursor-pointer"
+                        className="w-full py-2 sm:py-2.5 px-3 rounded-xl bg-[#25D366] hover:bg-[#20BD5A] text-white text-xs sm:text-sm font-bold text-center transition-all shadow-sm hover:shadow active:scale-95 flex items-center justify-center gap-2 cursor-pointer"
                         title="Instant Buy Now"
                       >
                         <WhatsAppIcon className="w-4 h-4 fill-current shrink-0" />

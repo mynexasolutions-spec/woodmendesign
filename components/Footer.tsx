@@ -40,14 +40,17 @@ export default function Footer({ onSelectCategory }: FooterProps) {
           {/* Column 1: Brand & Bio (4 cols on lg) */}
           <div className="lg:col-span-4 space-y-4">
             <Link href="/" className="inline-block group">
-              <div className="relative h-12 sm:h-14 w-44 sm:w-52 transition-transform group-hover:scale-[1.02]">
-                <Image
-                  src="/images/logo.webp"
-                  alt="Woodmen Design Corporation"
-                  fill
-                  className="object-contain object-left"
-                  sizes="(max-width: 640px) 176px, 208px"
-                />
+              {/* Light pill behind the (dark brown) logo so it stays visible on the dark footer */}
+              <div className="inline-flex items-center rounded-xl bg-[#FAF6F0] px-3 py-1.5 shadow-sm ring-1 ring-[#E8DCCE]/50 transition-transform group-hover:scale-[1.02]">
+                <div className="relative h-12 sm:h-14 w-36 sm:w-44">
+                  <Image
+                    src="/images/logo.webp"
+                    alt="Woodmen Design Corporation"
+                    fill
+                    className="object-contain object-center"
+                    sizes="(max-width: 640px) 144px, 176px"
+                  />
+                </div>
               </div>
             </Link>
 

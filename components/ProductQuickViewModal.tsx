@@ -17,6 +17,7 @@ import {
   Minus
 } from 'lucide-react';
 import { Product } from '@/data/products';
+import ProductImageFill from '@/components/ProductImageFill';
 import { useCart } from '@/context/CartContext';
 import { useWishlist } from '@/context/WishlistContext';
 
@@ -89,13 +90,7 @@ export default function ProductQuickViewModal({
               </span>
             )}
 
-            <Image
-              src={product.image}
-              alt={product.name}
-              fill
-              sizes="(max-width: 768px) 100vw, 50vw"
-              className="object-cover transition-transform duration-500 group-hover:scale-105"
-            />
+            <ProductImageFill src={product.image} alt={product.name} sizes="(max-width: 768px) 100vw, 50vw" className="transition-transform duration-500 group-hover:scale-105" />
 
             {/* Subtle bottom tag */}
             <div className="absolute bottom-4 left-4 right-4 z-10 text-center">

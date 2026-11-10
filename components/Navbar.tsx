@@ -121,29 +121,33 @@ export default function Navbar({ onOpenSearch, onSelectCategory }: NavbarProps) 
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 backdrop-blur-md border-b py-3 sm:py-3.5 ${
         isScrolled
-          ? 'bg-[#160D08]/80 border-[#311E13]/80 shadow-md'
-          : 'bg-[#160D08]/25 border-white/10 shadow-none'
+          ? 'border-[#311E13] shadow-md'
+          : 'border-[#311E13]/70 shadow-none'
       }`}
       style={{
-        backgroundColor: isScrolled ? 'rgba(22, 13, 8, 0.80)' : 'rgba(22, 13, 8, 0.22)',
-        backdropFilter: isScrolled ? 'blur(14px)' : 'blur(8px)',
-        WebkitBackdropFilter: isScrolled ? 'blur(14px)' : 'blur(8px)',
-        borderColor: isScrolled ? 'rgba(49, 30, 19, 0.8)' : 'rgba(255, 255, 255, 0.08)'
+        // Solid dark brown at all times so the logo pill and light nav links stay readable on any page
+        backgroundColor: isScrolled ? 'rgba(22, 13, 8, 0.97)' : 'rgba(22, 13, 8, 0.93)',
+        backdropFilter: 'blur(14px)',
+        WebkitBackdropFilter: 'blur(14px)',
+        borderColor: isScrolled ? 'rgba(49, 30, 19, 1)' : 'rgba(49, 30, 19, 0.7)'
       }}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
           {/* Left: Brand Logo */}
           <Link href="/" className="flex items-center group py-0.5">
-            <div className="relative h-11 sm:h-12 w-36 sm:w-44 transition-transform group-hover:scale-[1.02]">
-              <Image
-                src="/images/logo.webp"
-                alt="Woodmen Design Corporation"
-                fill
-                className="object-contain object-left"
-                priority
-                sizes="(max-width: 640px) 144px, 176px"
-              />
+            {/* Light pill behind the (dark brown) logo so it stays visible on the dark navbar */}
+            <div className="flex items-center rounded-xl bg-[#FAF6F0] px-2.5 sm:px-3 py-1 shadow-sm ring-1 ring-[#E8DCCE]/50 transition-transform group-hover:scale-[1.02]">
+              <div className="relative h-11 sm:h-12 w-32 sm:w-40">
+                <Image
+                  src="/images/logo.webp"
+                  alt="Woodmen Design Corporation"
+                  fill
+                  className="object-contain object-center"
+                  priority
+                  sizes="(max-width: 640px) 128px, 160px"
+                />
+              </div>
             </div>
           </Link>
 
