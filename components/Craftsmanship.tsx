@@ -17,20 +17,33 @@ export default function Craftsmanship({ onDiscoverStory }: CraftsmanshipProps) {
           className="relative rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border border-[#3A2216] bg-[#1D1109] lg:min-h-[460px] flex flex-col lg:flex-row justify-end"
           style={{ position: 'relative', overflow: 'hidden' }}
         >
-          {/* Full-bleed Craftsmanship Lathe Image (Hands shaping wooden bowl) */}
-          {/* Mobile: photo sits on top as its own block. Desktop: full-bleed behind the text panel. */}
-          <div className="relative h-60 sm:h-80 lg:absolute lg:inset-0 lg:h-full z-0 overflow-hidden pointer-events-none select-none">
+          {/* Mobile / tablet: photo sits on top as its own block */}
+          <div className="relative h-60 sm:h-80 z-0 overflow-hidden pointer-events-none select-none lg:hidden">
+            <Image
+              src="/images/craftsmanship-lathe.jpg"
+              alt="Skilled artisan shaping solid wooden bowl on lathe with flying wood shavings"
+              fill
+              sizes="100vw"
+              className="object-cover object-center"
+            />
+            <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-[#1D1109] to-transparent" />
+          </div>
+
+          {/* Desktop: full-bleed photo behind the text panel.
+              (Uses the plain `absolute` class + inline style because the global `.relative { !important }`
+              rule in layout.tsx would override a responsive `lg:absolute`.) */}
+          <div
+            className="hidden lg:block absolute inset-0 z-0 overflow-hidden pointer-events-none select-none"
+            style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }}
+          >
             <Image
               src="/images/craftsmanship-lathe.jpg"
               alt="Skilled artisan shaping solid wooden bowl on lathe with flying wood shavings"
               fill
               priority
-              sizes="(max-width: 1024px) 100vw, 70vw"
-              className="object-cover object-center lg:object-left"
+              sizes="70vw"
+              className="object-cover object-left"
             />
-
-            {/* Mobile dark vignette overlay */}
-            <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-[#1D1109] to-transparent lg:hidden" />
           </div>
 
           {/* Right Column: Dark Espresso Container with Organic Curved Leading Edge */}
