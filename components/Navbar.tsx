@@ -7,7 +7,6 @@ import { usePathname, useRouter } from 'next/navigation';
 import {
   Search,
   ShoppingCart,
-  User,
   ChevronDown,
   Menu,
   X,
@@ -17,6 +16,7 @@ import { useCart } from '@/context/CartContext';
 import { useWishlist } from '@/context/WishlistContext';
 import { COLLECTIONS } from '@/data/collections';
 import { PRODUCTS } from '@/data/products';
+import MobileSidebar from '@/components/MobileSidebar';
 
 interface NavbarProps {
   onOpenSearch?: () => void;
@@ -35,6 +35,7 @@ export default function Navbar({ onOpenSearch, onSelectCategory }: NavbarProps) 
   const [navSearchQuery, setNavSearchQuery] = useState('');
 
   const searchContainerRef = useRef<HTMLDivElement>(null);
+  const mobileSearchRef = useRef<HTMLDivElement>(null);
   const searchInputRef = useRef<HTMLInputElement>(null);
 
   const searchResults = navSearchQuery.trim()
@@ -70,10 +71,11 @@ export default function Navbar({ onOpenSearch, onSelectCategory }: NavbarProps) 
     }, 60);
 
     const handleClickOutside = (e: MouseEvent) => {
-      if (
-        searchContainerRef.current &&
-        !searchContainerRef.current.contains(e.target as Node)
-      ) {
+      const target = e.target as Node;
+      // Desktop and mobile search bars are separate elements; a tap inside either one must not close search.
+      const insideDesktop = searchContainerRef.current?.contains(target);
+      const insideMobile = mobileSearchRef.current?.contains(target);
+      if (!insideDesktop && !insideMobile) {
         setInlineSearchOpen(false);
       }
     };
@@ -126,7 +128,7 @@ export default function Navbar({ onOpenSearch, onSelectCategory }: NavbarProps) 
       }`}
       style={{
         // Solid dark brown at all times so the logo pill and light nav links stay readable on any page
-        backgroundColor: isScrolled ? 'rgba(22, 13, 8, 0.97)' : 'rgba(22, 13, 8, 0.93)',
+        backgroundColor: isScrolled ? 'rgba(10, 6, 4, 0.98)' : 'rgba(10, 6, 4, 0.95)',
         backdropFilter: 'blur(14px)',
         WebkitBackdropFilter: 'blur(14px)',
         borderColor: isScrolled ? 'rgba(49, 30, 19, 1)' : 'rgba(49, 30, 19, 0.7)'
@@ -135,17 +137,17 @@ export default function Navbar({ onOpenSearch, onSelectCategory }: NavbarProps) 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
           {/* Left: Brand Logo */}
-          <Link href="/" className="flex items-center group py-0.5">
-            {/* Light pill behind the (dark brown) logo so it stays visible on the dark navbar */}
-            <div className="flex items-center rounded-xl bg-[#FAF6F0] px-2.5 sm:px-3 py-1 shadow-sm ring-1 ring-[#E8DCCE]/50 transition-transform group-hover:scale-[1.02]">
-              <div className="relative h-11 sm:h-12 w-32 sm:w-40">
+          <Link href="/" className="flex items-center group py-0.5 min-w-0 shrink">
+            {/* Light pill behind the copper logo on the dark navbar */}
+            <div className="flex items-center rounded-xl px-2 sm:px-3 py-1 sm:py-1.5 transition-transform group-hover:scale-[1.02] bg-[#FFFDF9] ring-1 ring-[#E8DCCE] shadow-md">
+              <div className="relative h-10 sm:h-14 lg:h-16 w-[min(9.5rem,40vw)] sm:w-52 lg:w-60">
                 <Image
                   src="/images/logo.webp"
                   alt="Woodmen Design Corporation"
                   fill
-                  className="object-contain object-center"
+                  className="object-contain object-left"
                   priority
-                  sizes="(max-width: 640px) 128px, 160px"
+                  sizes="(max-width: 640px) 160px, 240px"
                 />
               </div>
             </div>
@@ -380,7 +382,7 @@ export default function Navbar({ onOpenSearch, onSelectCategory }: NavbarProps) 
           )}
 
           {/* Right: Action Icons */}          {/* Right: Action Icons */}
-          <div className="flex items-center gap-3 sm:gap-4 text-white shrink-0">
+          <div className="flex items-center gap-2.5 sm:gap-4 text-white shrink-0 ml-2">
             {/* Search Icon */}
             {!inlineSearchOpen && (
               <button
@@ -396,16 +398,6 @@ export default function Navbar({ onOpenSearch, onSelectCategory }: NavbarProps) 
                 <Search className="w-5 h-5 stroke-[2] pointer-events-none" />
               </button>
             )}
-
-            {/* Profile / Account Icon - Redirects to /account */}
-            <Link
-              href="/account"
-              className="p-1.5 text-white hover:text-[#E5A855] transition-colors hidden sm:block"
-              aria-label="My Account"
-              title="My Account"
-            >
-              <User className="w-5 h-5 stroke-[2]" />
-            </Link>
 
             {/* Wishlist Heart Icon - Redirects to /wishlist */}
             <Link
@@ -437,18 +429,19 @@ export default function Navbar({ onOpenSearch, onSelectCategory }: NavbarProps) 
 
             {/* Mobile Hamburger Toggle */}
             <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              onClick={() => setMobileMenuOpen(true)}
               className="md:hidden p-1.5 text-stone-300 hover:text-white transition-colors"
-              aria-label="Toggle Navigation Menu"
+              aria-label="Open navigation menu"
+              aria-haspopup="dialog"
             >
-              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              <Menu className="w-6 h-6" />
             </button>
           </div>
         </div>
 
         {/* Mobile Inline Search Bar (Screens < md) */}
         {inlineSearchOpen && (
-          <div className="md:hidden mt-2.5 pt-2 border-t border-white/10 animate-in fade-in slide-in-from-top-1">
+          <div ref={mobileSearchRef} className="md:hidden mt-2.5 pt-2 border-t border-white/10 animate-in fade-in slide-in-from-top-1">
             <form onSubmit={handleSearchSubmit} className="relative">
               <div className="flex items-center w-full bg-[#1E130D] border border-[#E5A855] rounded-full px-3.5 py-1.5 shadow-xl">
                 <Search className="w-4 h-4 text-[#E5A855] shrink-0 mr-2" />
@@ -522,71 +515,15 @@ export default function Navbar({ onOpenSearch, onSelectCategory }: NavbarProps) 
         )}
       </div>
 
-      {/* Mobile Drawer Menu */}
-      {mobileMenuOpen && (
-        <div className="md:hidden bg-[#1C120B]/98 border-t border-[#311E13] px-5 py-5 space-y-3 shadow-2xl backdrop-blur-xl animate-in fade-in slide-in-from-top-2">
-          <Link
-            href="/"
-            onClick={() => setMobileMenuOpen(false)}
-            className={`block py-2 border-b border-[#2C190F] ${
-              isHome ? 'text-amber-300 font-bold' : 'text-stone-300 hover:text-white'
-            }`}
-          >
-            Home
-          </Link>
-          <Link
-            href="/products"
-            onClick={() => setMobileMenuOpen(false)}
-            className={`block py-2 border-b border-[#2C190F] ${
-              isProducts ? 'text-amber-300 font-bold' : 'text-stone-300 hover:text-white'
-            }`}
-          >
-            Products
-          </Link>
-          <div>
-            <Link
-              href="/collections"
-              onClick={() => setMobileMenuOpen(false)}
-              className={`block py-2 ${
-                isCollections ? 'text-amber-300 font-bold' : 'text-stone-300 hover:text-white'
-              }`}
-            >
-              Collections
-            </Link>
-            <div className="pl-2 grid grid-cols-2 gap-1.5 pb-2 border-b border-[#2C190F]">
-              {COLLECTIONS.map((col) => (
-                <Link
-                  key={col.id}
-                  href={`/products?category=${encodeURIComponent(col.name)}`}
-                  onClick={(e) => handleCategorySelect(e, col.name)}
-                  className="text-xs sm:text-sm text-stone-300 hover:text-amber-300 py-1 transition-colors flex items-center justify-between pr-2"
-                >
-                  <span className="truncate">{col.name}</span>
-                  <span className="text-xs text-amber-400/70 font-mono ml-1">{col.itemCount}</span>
-                </Link>
-              ))}
-            </div>
-          </div>
-          <Link
-            href="/about"
-            onClick={() => setMobileMenuOpen(false)}
-            className={`block py-2 border-b border-[#2C190F] ${
-              isAbout ? 'text-amber-300 font-bold' : 'text-stone-300 hover:text-white'
-            }`}
-          >
-            About Us
-          </Link>
-          <Link
-            href="/contact"
-            onClick={() => setMobileMenuOpen(false)}
-            className={`block py-2 border-b border-[#2C190F] ${
-              isContact ? 'text-amber-300 font-bold' : 'text-stone-300 hover:text-white'
-            }`}
-          >
-            Contact
-          </Link>
-        </div>
-      )}
+      {/* Mobile slide-in sidebar (rendered in a portal so the header's blur does not clip it) */}
+      <MobileSidebar
+        open={mobileMenuOpen}
+        onClose={() => setMobileMenuOpen(false)}
+        pathname={pathname}
+        totalItems={totalItems}
+        totalWishlist={totalWishlist}
+        onCategory={handleCategorySelect}
+      />
     </header>
   );
 }

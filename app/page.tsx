@@ -14,7 +14,6 @@ import TrustBar from '@/components/TrustBar';
 import Footer from '@/components/Footer';
 import CartDrawer from '@/components/CartDrawer';
 import WishlistDrawer from '@/components/WishlistDrawer';
-import CheckoutModal from '@/components/CheckoutModal';
 import ProductQuickViewModal from '@/components/ProductQuickViewModal';
 import SearchModal from '@/components/SearchModal';
 import CraftingVideoModal from '@/components/CraftingVideoModal';
@@ -97,7 +96,6 @@ export default function HomePage() {
       <WishlistDrawer />
 
       {/* Checkout Modal */}
-      <CheckoutModal />
 
       {/* Product Quick View Modal */}
       <ProductQuickViewModal

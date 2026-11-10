@@ -13,12 +13,12 @@ import {
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import FloatingWhatsApp from '@/components/FloatingWhatsApp';
-import CheckoutModal from '@/components/CheckoutModal';
 import { woodLabel } from '@/data/products';
 import ProductImageFill from '@/components/ProductImageFill';
 import { useWishlist } from '@/context/WishlistContext';
 import { useCart } from '@/context/CartContext';
 import { useToast } from '@/context/ToastContext';
+import { buyNowOnWhatsApp } from '@/lib/whatsapp';
 
 function WhatsAppIcon({ className = 'w-4 h-4' }: { className?: string }) {
   return (
@@ -31,7 +31,7 @@ function WhatsAppIcon({ className = 'w-4 h-4' }: { className?: string }) {
 export default function WishlistPage() {
   const router = useRouter();
   const { wishlist, removeFromWishlist, clearWishlist } = useWishlist();
-  const { addToCart, setIsCheckoutOpen } = useCart();
+  const { addToCart } = useCart();
   const { showToast } = useToast();
 
   const handleAddToCart = (product: any) => {
@@ -45,8 +45,7 @@ export default function WishlistPage() {
   };
 
   const handleBuyNow = (product: any) => {
-    addToCart(product, 1);
-    setIsCheckoutOpen(true);
+    buyNowOnWhatsApp(product, 1);
   };
 
   const handleAddAllToCart = () => {
@@ -140,7 +139,7 @@ export default function WishlistPage() {
                 >
                   {/* Top Image: Edge-to-Edge */}
                   <div
-                    className="relative w-full aspect-square overflow-hidden bg-[#FAF6F0]"
+                    className="relative w-full aspect-[5/4] sm:aspect-square overflow-hidden bg-[#FAF6F0]"
                   >
                     {/* Remove from Wishlist Button */}
                     <button
@@ -206,6 +205,7 @@ export default function WishlistPage() {
                         href={`/products/${product.id}`}
                         className="w-full py-2 px-3 rounded-xl bg-[#3D2516] hover:bg-[#201309] text-[#FAF6F0] text-xs font-bold text-center transition-all shadow-sm hover:shadow active:scale-95 flex items-center justify-center cursor-pointer"
                       >
+                        
                         View Details
                       </Link>
 
@@ -227,7 +227,6 @@ export default function WishlistPage() {
       </main>
 
       <Footer />
-      <CheckoutModal />
       <FloatingWhatsApp />
     </div>
   );

@@ -95,7 +95,7 @@ export default function ProductQuickViewModal({
             {/* Subtle bottom tag */}
             <div className="absolute bottom-4 left-4 right-4 z-10 text-center">
               <span className="inline-block px-3.5 py-1.5 rounded-full bg-white/90 backdrop-blur-md border border-[#E8DCCE] text-xs sm:text-sm text-[#8C5E37] font-semibold tracking-wide shadow-sm">
-                🌿 Handcrafted in Saharanpur • 100% Solid {product.woodType}
+                🌿 Handcrafted in Amroha • 100% Solid {product.woodType}
               </span>
             </div>
           </div>

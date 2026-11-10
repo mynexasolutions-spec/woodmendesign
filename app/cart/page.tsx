@@ -15,9 +15,9 @@ import {
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import FloatingWhatsApp from '@/components/FloatingWhatsApp';
-import CheckoutModal from '@/components/CheckoutModal';
 import { woodLabel } from '@/data/products';
 import { useCart } from '@/context/CartContext';
+import { orderCartOnWhatsApp } from '@/lib/whatsapp';
 import { useToast } from '@/context/ToastContext';
 
 export default function CartPage() {
@@ -26,9 +26,10 @@ export default function CartPage() {
     removeFromCart,
     updateQuantity,
     subtotal,
+    discount,
+    couponCode,
     shippingFee,
     total,
-    setIsCheckoutOpen,
     clearCart
   } = useCart();
   const { showToast } = useToast();
@@ -222,20 +223,25 @@ export default function CartPage() {
 
               {/* Checkout Button */}
               <button
-                onClick={() => setIsCheckoutOpen(true)}
+                onClick={() =>
+                  orderCartOnWhatsApp(
+                    cart.map((i) => ({ id: i.product.id, name: i.product.name, price: i.product.price, quantity: i.quantity })),
+                    { subtotal, discount, couponCode, shippingFee, total }
+                  )
+                }
                 className="w-full py-3.5 rounded-full bg-gradient-to-r from-[#E5A855] via-[#DF9D44] to-[#CC882E] text-[#180E09] font-bold text-sm sm:text-base tracking-wide shadow-xl hover:scale-[1.02] active:scale-[0.98] transition-all"
               >
-                <span>Proceed to Checkout</span>
+                <span>Order on WhatsApp</span>
               </button>
 
               <div className="pt-3 space-y-2 text-xs sm:text-sm text-stone-600 border-t border-[#F2ECE3]">
                 <div className="flex items-center gap-2">
                   <ShieldCheck className="w-3.5 h-3.5 text-amber-700 shrink-0" />
-                  <span>100% Secure Checkout with Razorpay / UPI</span>
+                  <span>Order is confirmed directly with our artisan on WhatsApp</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Truck className="w-3.5 h-3.5 text-amber-700 shrink-0" />
-                  <span>Dispatched directly from Saharanpur workshop</span>
+                  <span>Dispatched directly from Amroha workshop</span>
                 </div>
               </div>
             </div>
@@ -244,7 +250,6 @@ export default function CartPage() {
       </main>
 
       <Footer />
-      <CheckoutModal />
       <FloatingWhatsApp />
     </div>
   );

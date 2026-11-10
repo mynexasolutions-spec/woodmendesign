@@ -2,7 +2,8 @@
 
 import React from 'react';
 import Image from 'next/image';
-import { X, Sparkles, CheckCircle2, Play, Phone } from 'lucide-react';
+import { X, Sparkles, CheckCircle2, Play } from 'lucide-react';
+import WhatsAppIcon from '@/components/WhatsAppIcon';
 
 interface CraftingVideoModalProps {
   isOpen: boolean;
@@ -54,7 +55,7 @@ export default function CraftingVideoModal({
               <Play className="w-7 h-7 fill-current ml-1" />
             </div>
             <span className="mt-3 text-xs uppercase tracking-widest text-amber-300 font-bold">
-              Artisan Craft Journey • Saharanpur, India
+              Artisan Craft Journey • Amroha, India
             </span>
             <h3 className="font-serif-display text-xl sm:text-2xl font-bold text-white mt-1">
               From Raw Timber to Your Dining Table
@@ -114,7 +115,7 @@ export default function CraftingVideoModal({
               rel="noopener noreferrer"
               className="px-5 py-2.5 rounded-full bg-amber-500 hover:bg-amber-400 text-stone-950 font-bold text-xs flex items-center gap-2 shadow-lg transition-colors"
             >
-              <Phone className="w-3.5 h-3.5" />
+              <WhatsAppIcon className="w-4 h-4" />
               <span>Talk to Workshop: 9720975271</span>
             </a>
           </div>

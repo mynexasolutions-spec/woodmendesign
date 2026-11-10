@@ -18,7 +18,6 @@ import {
   ShieldCheck,
   ChevronDown,
   ExternalLink,
-  MessageCircle,
   PackageCheck,
   Compass
 } from 'lucide-react';
@@ -29,12 +28,14 @@ import CartDrawer from '@/components/CartDrawer';
 import WishlistDrawer from '@/components/WishlistDrawer';
 import SearchModal from '@/components/SearchModal';
 import FloatingWhatsApp from '@/components/FloatingWhatsApp';
+import WhatsAppIcon from '@/components/WhatsAppIcon';
+import { clean, cleanMultiline, isValidIndianPhone, openWhatsApp } from '@/lib/whatsapp';
 import { PRODUCTS } from '@/data/products';
 
 const FAQS = [
   {
     q: 'Do you provide custom branding or laser engraving on products?',
-    a: 'Yes, absolutely. We have an in-house high-precision CO2 laser engraving studio in Saharanpur. We regularly engrave company logos, wedding crests, personalized monograms, and custom family names on bowls, casseroles, chopping boards, and spice boxes with zero blur or grain burn.',
+    a: 'Yes, absolutely. We have an in-house high-precision CO2 laser engraving studio in Amroha. We regularly engrave company logos, wedding crests, personalized monograms, and custom family names on bowls, casseroles, chopping boards, and spice boxes with zero blur or grain burn.',
   },
   {
     q: 'What is the turnaround time for wholesale and bulk orders?',
@@ -53,8 +54,8 @@ const FAQS = [
     a: 'Each piece is individually sealed in protective moisture-barrier shrink wrap, nested in multi-layer shock-absorbing foam, and packaged inside heavy-duty 5-ply corrugated honeycomb cartons. We partner with reliable air and surface couriers (Bluedart, Delhivery, V-Trans) with transit insurance.',
   },
   {
-    q: 'Can I visit your Saharanpur workshop in person?',
-    a: 'We warmly welcome clients, interior designers, and restaurant owners to visit our Saharanpur artisan workshop. You can observe generational woodturners on traditional lathes and select your preferred raw timber logs in person. Please notify us 24 hours in advance to arrange a guided walkthrough.',
+    q: 'Can I visit your Amroha workshop in person?',
+    a: 'We warmly welcome clients, interior designers, and restaurant owners to visit our Amroha artisan workshop. You can observe generational woodturners on traditional lathes and select your preferred raw timber logs in person. Please notify us 24 hours in advance to arrange a guided walkthrough.',
   },
 ];
 
@@ -71,20 +72,33 @@ export default function ContactPage() {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(0);
 
+  const [formError, setFormError] = useState('');
+
+  // No backend: the inquiry is sent to the Woodmen WhatsApp desk as a pre-filled message.
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    setFormError('');
+
+    if (!isValidIndianPhone(formData.phone)) {
+      setFormError('Please enter a valid 10-digit mobile number.');
+      return;
+    }
+
+    const message = [
+      '*New Inquiry - Woodmen Design Corporation*',
+      '',
+      `Name: ${clean(formData.name, 80)}`,
+      `Phone: ${clean(formData.phone, 20)}`,
+      ...(formData.email ? [`Email: ${clean(formData.email, 100)}`] : []),
+      `Topic: ${clean(formData.subject, 60)}`,
+      `Quantity: ${clean(formData.quantity, 40)}`,
+      '',
+      '*Message*',
+      cleanMultiline(formData.message, 1000) || '-',
+    ].join('\n');
+
+    openWhatsApp(message);
     setSubmitted(true);
-    setTimeout(() => {
-      setSubmitted(false);
-      setFormData({
-        name: '',
-        phone: '',
-        email: '',
-        subject: 'General Inquiry',
-        message: '',
-        quantity: '1-10 pieces',
-      });
-    }, 5000);
   };
 
   return (
@@ -137,7 +151,7 @@ export default function ContactPage() {
               <div className="absolute inset-0 bg-gradient-to-t from-[#160E08]/85 via-transparent to-transparent pointer-events-none" />
               <div className="absolute bottom-6 left-6 right-6 text-white space-y-1.5 pointer-events-none">
                 <span className="text-xs uppercase tracking-widest text-[#E5A855] font-bold block">
-                  WOODMEN DESIGN STUDIO &bull; SAHARANPUR
+                  WOODMEN DESIGN STUDIO &bull; AMROHA
                 </span>
                 <h3 className="font-serif-display text-xl sm:text-2xl font-bold text-[#FAF3EB]">
                   Handcrafted from Solid Logs
@@ -155,19 +169,26 @@ export default function ContactPage() {
               Send an Inquiry or Request a Custom Quote
             </h3>
             <p className="text-sm text-stone-600 mb-6 leading-relaxed">
-              Fill out your details below and our lead woodcraft manager will reach out within 2 hours.
+              Fill out your details below and we will open WhatsApp with your inquiry pre-filled — just press Send.
             </p>
 
             {submitted ? (
               <div className="p-8 text-center space-y-3 bg-emerald-50 rounded-2xl border border-emerald-200">
                 <CheckCircle2 className="w-12 h-12 text-emerald-600 mx-auto" />
                 <h4 className="font-serif-display text-xl sm:text-2xl font-bold text-emerald-950">
-                  Inquiry Received!
+                  Inquiry Ready on WhatsApp!
                 </h4>
                 <p className="text-sm text-emerald-800 max-w-sm mx-auto leading-relaxed">
-                  Thank you, <strong>{formData.name}</strong>. Our master craftsman will review your specifications
-                  and contact you at <strong>{formData.phone}</strong> promptly.
+                  Thank you, <strong>{formData.name}</strong>. WhatsApp should have opened with your details —
+                  <strong> press Send there</strong> and our master craftsman will reply on chat promptly.
                 </p>
+                <button
+                  type="button"
+                  onClick={() => setSubmitted(false)}
+                  className="text-xs font-bold text-emerald-800 underline underline-offset-2 hover:text-emerald-950"
+                >
+                  Edit &amp; send again
+                </button>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-5">
@@ -268,8 +289,13 @@ export default function ContactPage() {
                   className="w-full py-4 rounded-xl bg-gradient-to-r from-[#E5A855] via-[#DE983C] to-[#C9842C] text-[#1E120A] font-bold text-sm sm:text-base flex items-center justify-center gap-2 shadow-lg hover:scale-[1.01] active:scale-[0.99] transition-all"
                 >
                   <Send className="w-4 h-4 sm:w-5 sm:h-5" />
-                  <span>Submit Inquiry to Master Artisan</span>
+                  <span>Send Inquiry on WhatsApp</span>
                 </button>
+                {formError && (
+                  <p role="alert" className="text-xs sm:text-sm text-red-700 font-semibold text-center">
+                    {formError}
+                  </p>
+                )}
               </form>
             )}
           </div>
@@ -290,7 +316,7 @@ export default function ContactPage() {
             </h2>
             <p className="mt-3 text-xs sm:text-sm text-[#6B5547] font-light leading-relaxed">
               From intimate personalized wedding favors to multi-thousand unit hotel tableware programs,
-              our Saharanpur workshops deliver master-grade woodcraft with rigorous quality control.
+              our Amroha workshops deliver master-grade woodcraft with rigorous quality control.
             </p>
           </div>
 
@@ -370,7 +396,7 @@ export default function ContactPage() {
                   Experience the Heritage Workshop
                 </h3>
                 <p className="text-xs sm:text-sm text-stone-600 leading-relaxed font-light">
-                  Step inside our Saharanpur woodcraft cluster where the scent of seasoned Sheesham and natural wood shavings fills the air. Watch master craftsmen shape raw timber on classic lathes and hand-select your own timber grain patterns in person.
+                  Step inside our Amroha woodcraft cluster where the scent of seasoned Sheesham and natural wood shavings fills the air. Watch master craftsmen shape raw timber on classic lathes and hand-select your own timber grain patterns in person.
                 </p>
 
                 <div className="space-y-3 pt-2 text-sm text-stone-700">
@@ -378,7 +404,7 @@ export default function ContactPage() {
                     <MapPin className="w-5 h-5 text-amber-800 shrink-0 mt-0.5" />
                     <div>
                       <strong className="text-stone-900 block text-sm">Artisan Workshop Address:</strong>
-                      <span className="text-xs sm:text-sm text-stone-600">Woodmen Design Corporation, National Highway 344 Woodcraft Cluster, Saharanpur, Uttar Pradesh 247001, India</span>
+                      <span className="text-xs sm:text-sm text-stone-600">Woodmen Design Corporation, Woodcraft Cluster, Amroha, Uttar Pradesh 244221, India</span>
                     </div>
                   </div>
                   <div className="flex items-start gap-3">
@@ -391,9 +417,23 @@ export default function ContactPage() {
                 </div>
               </div>
 
+              {/* Google Map (no API key needed for the basic embed) */}
+              <div className="rounded-2xl overflow-hidden border border-[#DFD1C2] shadow-sm bg-stone-100">
+                <iframe
+                  title="Woodmen Design Corporation location - Amroha, Uttar Pradesh"
+                  src="https://www.google.com/maps?q=Amroha,+Uttar+Pradesh,+India&z=13&output=embed"
+                  width="100%"
+                  height="260"
+                  style={{ border: 0 }}
+                  loading="lazy"
+                  allowFullScreen
+                  referrerPolicy="no-referrer-when-downgrade"
+                />
+              </div>
+
               <div className="pt-4 flex flex-col sm:flex-row gap-3">
                 <a
-                  href="https://maps.google.com/?q=Saharanpur+Woodcraft+Cluster"
+                  href="https://www.google.com/maps/search/?api=1&query=Amroha,+Uttar+Pradesh,+India"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-full bg-[#3D2516] hover:bg-[#52331F] text-[#FAF6F0] text-sm font-bold shadow-md transition-all active:scale-95"
@@ -407,7 +447,7 @@ export default function ContactPage() {
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-full bg-white hover:bg-stone-50 border border-[#DFD1C2] text-[#2A180E] text-sm font-bold transition-all shadow-sm active:scale-95"
                 >
-                  <MessageCircle className="w-4 h-4 text-emerald-600" />
+                  <WhatsAppIcon className="w-4 h-4 text-emerald-600" />
                   <span>Schedule Workshop Tour</span>
                 </a>
               </div>
@@ -424,7 +464,7 @@ export default function ContactPage() {
                   Why India&apos;s Leading Brands Partner With Us
                 </h3>
                 <p className="text-sm text-[#D4C3B4] font-light leading-relaxed">
-                  Every consignment leaves our Saharanpur studio backed by documented quality standards, fair-trade artisan wages, and transparent tracking.
+                  Every consignment leaves our Amroha studio backed by documented quality standards, fair-trade artisan wages, and transparent tracking.
                 </p>
 
                 <div className="space-y-4 pt-2">
@@ -535,7 +575,7 @@ export default function ContactPage() {
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2.5 px-7 py-4 rounded-full bg-[#25D366] hover:bg-[#20BD5A] text-white font-bold text-sm sm:text-base shadow-xl hover:shadow-2xl transition-all active:scale-95 shrink-0"
           >
-            <Phone className="w-4 h-4 fill-current" />
+            <WhatsAppIcon className="w-5 h-5" />
             <span>Chat on WhatsApp (+91 9720975271)</span>
           </a>
         </div>

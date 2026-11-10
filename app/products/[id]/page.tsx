@@ -24,7 +24,6 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import CartDrawer from '@/components/CartDrawer';
 import WishlistDrawer from '@/components/WishlistDrawer';
-import CheckoutModal from '@/components/CheckoutModal';
 import SearchModal from '@/components/SearchModal';
 import FloatingWhatsApp from '@/components/FloatingWhatsApp';
 import { PRODUCTS, Product } from '@/data/products';
@@ -33,6 +32,7 @@ import ProductImageFill from '@/components/ProductImageFill';
 import { useCart } from '@/context/CartContext';
 import { useWishlist } from '@/context/WishlistContext';
 import { useToast } from '@/context/ToastContext';
+import { buyNowOnWhatsApp } from '@/lib/whatsapp';
 
 function WhatsAppIcon({ className = 'w-5 h-5' }: { className?: string }) {
   return (
@@ -60,7 +60,7 @@ export default function ProductDetailPage() {
   const productId = params?.id as string;
   const product = PRODUCTS.find((p) => p.id === productId);
 
-  const { addToCart, setIsCheckoutOpen } = useCart();
+  const { addToCart } = useCart();
   const { toggleWishlist, isInWishlist } = useWishlist();
   const { showToast } = useToast();
 
@@ -93,8 +93,7 @@ export default function ProductDetailPage() {
   const handleBuyNowRelated = (rel: Product, e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    addToCart(rel, 1);
-    setIsCheckoutOpen(true);
+    buyNowOnWhatsApp(rel, 1);
   };
 
   if (!product) {
@@ -143,8 +142,7 @@ export default function ProductDetailPage() {
   };
 
   const handleBuyNow = () => {
-    addToCart(product, quantity);
-    setIsCheckoutOpen(true);
+    buyNowOnWhatsApp(product, quantity);
   };
 
   const discountAmount = product.originalPrice ? product.originalPrice - product.price : 0;
@@ -296,7 +294,7 @@ export default function ProductDetailPage() {
                     </span>
                   </>
                 ) : (
-                  <span className="text-xs text-stone-500">No reviews yet</span>
+                  <span className="text-xs font-semibold text-emerald-700 bg-emerald-50 border border-emerald-200 px-1.5 py-0.5 rounded">New Arrival</span>
                 )}
                 <span className="text-stone-300 hidden sm:inline">•</span>
                 <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-800 text-xs font-bold border border-emerald-200">
@@ -325,7 +323,7 @@ export default function ProductDetailPage() {
                   )}
                 </div>
                 <span className="text-xs text-stone-500 mt-1 block">
-                  Inclusive of all taxes • Handcrafted in Saharanpur
+                  Inclusive of all taxes • Handcrafted in Amroha
                 </span>
               </div>
             </div>
@@ -394,7 +392,7 @@ export default function ProductDetailPage() {
                 className="w-full py-3.5 sm:py-4 rounded-2xl bg-[#25D366] hover:bg-[#20BD5A] text-white font-bold text-sm sm:text-base shadow-md hover:shadow-lg transition-all active:scale-[0.99] flex items-center justify-center gap-2"
               >
                 <WhatsAppIcon className="w-5 h-5 text-white shrink-0" />
-                <span>Buy Now with Instant Checkout (₹{(product.price * quantity).toLocaleString('en-IN')})</span>
+                <span>Buy Now on WhatsApp (₹{(product.price * quantity).toLocaleString('en-IN')})</span>
               </button>
             </div>
           </div>
@@ -478,7 +476,7 @@ export default function ProductDetailPage() {
               <p className="max-w-4xl">
                 Every piece of {product.woodType} is personally inspected for natural grain balance.
                 Because genuine wood has unique grain flows, each piece is truly one-of-a-kind. Handcrafted
-                by generational woodturning families in Saharanpur, India.
+                by generational woodturning families in Amroha, India.
               </p>
             )}
 
@@ -525,7 +523,7 @@ export default function ProductDetailPage() {
                 </div>
                 <div className="p-3 bg-white/70 rounded-lg border border-[#EADBCC]/60">
                   <span className="text-xs text-stone-500 block uppercase tracking-wider font-semibold mb-1">Origin</span>
-                  <strong className="text-sm sm:text-base text-stone-800">Saharanpur, UP, India</strong>
+                  <strong className="text-sm sm:text-base text-stone-800">Amroha, UP, India</strong>
                 </div>
               </div>
             )}
@@ -587,7 +585,7 @@ export default function ProductDetailPage() {
                   >
                     {/* Top Flush Image: Edge-to-Edge */}
                     <div
-                      className="relative w-full aspect-square overflow-hidden bg-[#FAF6F0]"
+                      className="relative w-full aspect-[5/4] sm:aspect-square overflow-hidden bg-[#FAF6F0]"
                     >
                       {rel.badge && (
                         <span className="absolute top-3 left-3 z-10 px-2.5 py-0.5 rounded-md bg-[#241710] text-[#E5A855] text-xs font-bold tracking-wider uppercase shadow">
@@ -634,7 +632,7 @@ export default function ProductDetailPage() {
                     </div>
 
                     {/* Card Content */}
-                    <div className="p-3.5 sm:p-4 flex-1 flex flex-col justify-between">
+                    <div className="p-2.5 sm:p-4 flex-1 flex flex-col justify-between">
                       <div>
                         <span className="text-xs uppercase tracking-wider text-[#A67B52] font-bold">
                           {rel.woodType.split(' ')[0]} Wood
@@ -695,17 +693,18 @@ export default function ProductDetailPage() {
                         </div>
 
                         {/* Action Buttons: View Details (Colored Brand Button) & Buy Now (WhatsApp Green) in 2 Rows */}
-                        <div className="flex flex-col gap-2 mt-2.5">
+                        <div className="flex flex-col gap-1.5 sm:gap-2 mt-2 sm:mt-2.5">
                           <Link
                             href={`/products/${rel.id}`}
-                            className="w-full py-2.5 px-3 rounded-xl bg-[#3D2516] hover:bg-[#201309] text-[#FAF6F0] text-xs sm:text-sm font-bold text-center transition-all shadow-sm hover:shadow active:scale-95 flex items-center justify-center cursor-pointer"
+                            className="w-full py-1.5 sm:py-2.5 px-3 rounded-xl bg-[#3D2516] hover:bg-[#201309] text-[#FAF6F0] text-xs sm:text-sm font-bold text-center transition-all shadow-sm hover:shadow active:scale-95 flex items-center justify-center cursor-pointer"
                           >
+                            
                             View Details
                           </Link>
 
                           <button
                             onClick={(e) => handleBuyNowRelated(rel, e)}
-                            className="w-full py-2.5 px-3 rounded-xl bg-[#25D366] hover:bg-[#20BD5A] text-white text-xs sm:text-sm font-bold text-center transition-all shadow-sm hover:shadow active:scale-95 flex items-center justify-center gap-2 cursor-pointer"
+                            className="w-full py-1.5 sm:py-2.5 px-3 rounded-xl bg-[#25D366] hover:bg-[#20BD5A] text-white text-xs sm:text-sm font-bold text-center transition-all shadow-sm hover:shadow active:scale-95 flex items-center justify-center gap-2 cursor-pointer"
                             title="Instant Buy Now"
                           >
                             <WhatsAppIcon className="w-4 h-4 fill-current shrink-0" />
@@ -735,7 +734,6 @@ export default function ProductDetailPage() {
       <Footer />
       <CartDrawer />
       <WishlistDrawer />
-      <CheckoutModal />
       <SearchModal
         isOpen={isSearchOpen}
         onClose={() => setIsSearchOpen(false)}

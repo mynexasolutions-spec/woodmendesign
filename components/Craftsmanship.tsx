@@ -14,14 +14,12 @@ export default function Craftsmanship({ onDiscoverStory }: CraftsmanshipProps) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Panoramic Banner Card with Curved Right Container */}
         <div
-          className="relative rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border border-[#3A2216] bg-[#1D1109] min-h-[380px] sm:min-h-[420px] lg:min-h-[460px] flex flex-col lg:flex-row justify-end"
+          className="relative rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border border-[#3A2216] bg-[#1D1109] lg:min-h-[460px] flex flex-col lg:flex-row justify-end"
           style={{ position: 'relative', overflow: 'hidden' }}
         >
           {/* Full-bleed Craftsmanship Lathe Image (Hands shaping wooden bowl) */}
-          <div
-            className="absolute inset-0 z-0 overflow-hidden pointer-events-none select-none"
-            style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }}
-          >
+          {/* Mobile: photo sits on top as its own block. Desktop: full-bleed behind the text panel. */}
+          <div className="relative h-60 sm:h-80 lg:absolute lg:inset-0 lg:h-full z-0 overflow-hidden pointer-events-none select-none">
             <Image
               src="/images/craftsmanship-lathe.jpg"
               alt="Skilled artisan shaping solid wooden bowl on lathe with flying wood shavings"
@@ -32,11 +30,11 @@ export default function Craftsmanship({ onDiscoverStory }: CraftsmanshipProps) {
             />
 
             {/* Mobile dark vignette overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-[#1D1109] via-[#1D1109]/80 to-transparent lg:hidden" />
+            <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-[#1D1109] to-transparent lg:hidden" />
           </div>
 
           {/* Right Column: Dark Espresso Container with Organic Curved Leading Edge */}
-          <div className="relative z-10 w-full lg:w-[54%] xl:w-[50%] bg-[#1D1109] lg:bg-[#1D1109] p-8 sm:p-12 lg:p-16 flex flex-col justify-center mt-auto lg:mt-0">
+          <div className="relative z-10 w-full lg:w-[54%] xl:w-[50%] bg-[#1D1109] lg:bg-[#1D1109] px-6 pb-8 pt-2 sm:px-10 sm:pb-10 lg:p-16 flex flex-col justify-center lg:mt-0">
             {/* SVG Organic Curved Scoop on the left (Desktop only) */}
             <svg
               className="hidden lg:block absolute top-0 bottom-0 -left-20 xl:-left-28 h-full w-20 xl:w-28 text-[#1D1109] pointer-events-none"

@@ -14,13 +14,13 @@ import {
   Tag
 } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
+import { orderCartOnWhatsApp } from '@/lib/whatsapp';
 
 export default function CartDrawer() {
   const {
     cart,
     isCartOpen,
     setIsCartOpen,
-    setIsCheckoutOpen,
     updateQuantity,
     removeFromCart,
     subtotal,
@@ -278,16 +278,19 @@ export default function CartDrawer() {
               {/* Checkout Button */}
               <button
                 onClick={() => {
+                  orderCartOnWhatsApp(
+                    cart.map((i) => ({ id: i.product.id, name: i.product.name, price: i.product.price, quantity: i.quantity })),
+                    { subtotal, discount, couponCode, shippingFee, total }
+                  );
                   setIsCartOpen(false);
-                  setIsCheckoutOpen(true);
                 }}
                 className="w-full py-3.5 rounded-xl bg-gradient-to-r from-[#E5A855] via-[#DE983C] to-[#C9842C] text-[#1E120A] font-bold text-sm sm:text-base flex items-center justify-center shadow-lg shadow-amber-900/20 hover:scale-[1.01] active:scale-[0.99] transition-all"
               >
-                <span>Proceed to Checkout</span>
+                <span>Order on WhatsApp</span>
               </button>
 
               <p className="text-xs text-center text-stone-500">
-                🔒 Safe & encrypted checkout • Cash on Delivery & UPI available
+                💬 Order goes to our WhatsApp desk • Cash on Delivery & UPI available
               </p>
             </div>
           )}

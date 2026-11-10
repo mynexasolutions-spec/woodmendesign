@@ -57,7 +57,7 @@ export default function BrandShowcase() {
               {/* Editorial Description */}
               <p className="text-xs sm:text-sm text-[#D0BEB0] font-normal leading-relaxed max-w-xl">
                 Replace synthetic plastics and coated cookware with genuine, seasoned Indian hardwoods.
-                Every piece is turned by generational artisans in Saharanpur, blending nature&apos;s raw beauty
+                Every piece is turned by generational artisans in Amroha, blending nature&apos;s raw beauty
                 with everyday culinary durability.
               </p>
 

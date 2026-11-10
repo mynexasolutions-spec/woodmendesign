@@ -10,6 +10,7 @@ import ProductImageFill from '@/components/ProductImageFill';
 import { useCart } from '@/context/CartContext';
 import { useWishlist } from '@/context/WishlistContext';
 import { useToast } from '@/context/ToastContext';
+import { buyNowOnWhatsApp } from '@/lib/whatsapp';
 
 function WhatsAppIcon({ className = 'w-4 h-4' }: { className?: string }) {
   return (
@@ -33,7 +34,7 @@ export default function FeaturedProducts({
   onQuickView,
 }: FeaturedProductsProps) {
   const router = useRouter();
-  const { addToCart, setIsCheckoutOpen } = useCart();
+  const { addToCart } = useCart();
   const { toggleWishlist, isInWishlist } = useWishlist();
   const { showToast } = useToast();
   const [addedId, setAddedId] = useState<string | null>(null);
@@ -56,8 +57,7 @@ export default function FeaturedProducts({
   const handleBuyNow = (product: Product, e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    addToCart(product, 1);
-    setIsCheckoutOpen(true);
+    buyNowOnWhatsApp(product, 1);
   };
 
   const filteredProducts = (
@@ -115,7 +115,7 @@ export default function FeaturedProducts({
               >
                 {/* Top Image: Edge-to-Edge Flush Image (No Inset Padding) */}
                 <div
-                  className="relative w-full aspect-square overflow-hidden bg-[#FAF6F0]"
+                  className="relative w-full aspect-[5/4] sm:aspect-square overflow-hidden bg-[#FAF6F0]"
                 >
                   {/* Badge (Bestseller, Popular, etc.) */}
                   {product.badge && (
@@ -196,7 +196,7 @@ export default function FeaturedProducts({
                         </span>
                       </>
                     ) : (
-                      <span className="text-xs text-stone-500">No reviews yet</span>
+                      <span className="text-xs font-semibold text-emerald-700 bg-emerald-50 border border-emerald-200 px-1.5 py-0.5 rounded">New Arrival</span>
                     )}
                   </div>
 
@@ -237,14 +237,15 @@ export default function FeaturedProducts({
                   <div className="flex flex-col gap-1.5 sm:gap-2 mt-2 sm:mt-2.5">
                     <Link
                       href={`/products/${product.id}`}
-                      className="w-full py-2 sm:py-2.5 px-3 rounded-xl bg-[#3D2516] hover:bg-[#201309] text-[#FAF6F0] text-xs sm:text-sm font-bold text-center transition-all shadow-sm hover:shadow active:scale-95 flex items-center justify-center cursor-pointer"
+                      className="w-full py-1.5 sm:py-2.5 px-3 rounded-xl bg-[#3D2516] hover:bg-[#201309] text-[#FAF6F0] text-xs sm:text-sm font-bold text-center transition-all shadow-sm hover:shadow active:scale-95 flex items-center justify-center cursor-pointer"
                     >
+                      
                       View Details
                     </Link>
 
                     <button
                       onClick={(e) => handleBuyNow(product, e)}
-                      className="w-full py-2 sm:py-2.5 px-3 rounded-xl bg-[#25D366] hover:bg-[#20BD5A] text-white text-xs sm:text-sm font-bold text-center transition-all shadow-sm hover:shadow active:scale-95 flex items-center justify-center gap-2 cursor-pointer"
+                      className="w-full py-1.5 sm:py-2.5 px-3 rounded-xl bg-[#25D366] hover:bg-[#20BD5A] text-white text-xs sm:text-sm font-bold text-center transition-all shadow-sm hover:shadow active:scale-95 flex items-center justify-center gap-2 cursor-pointer"
                       title="Instant Buy Now"
                     >
                       <WhatsAppIcon className="w-4 h-4 fill-current shrink-0" />

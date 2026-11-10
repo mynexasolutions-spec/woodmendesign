@@ -19,7 +19,6 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import CartDrawer from '@/components/CartDrawer';
 import WishlistDrawer from '@/components/WishlistDrawer';
-import CheckoutModal from '@/components/CheckoutModal';
 import SearchModal from '@/components/SearchModal';
 import FloatingWhatsApp from '@/components/FloatingWhatsApp';
 import { PRODUCTS, CATEGORIES, Product, woodLabel } from '@/data/products';
@@ -27,6 +26,7 @@ import ProductImageFill from '@/components/ProductImageFill';
 import { useCart } from '@/context/CartContext';
 import { useWishlist } from '@/context/WishlistContext';
 import { useToast } from '@/context/ToastContext';
+import { buyNowOnWhatsApp } from '@/lib/whatsapp';
 
 function WhatsAppIcon({ className = 'w-4 h-4' }: { className?: string }) {
   return (
@@ -43,7 +43,7 @@ function ProductsContent() {
   const router = useRouter();
   const urlSearch = searchParams ? searchParams.get('search') : null;
   const urlCategory = searchParams ? searchParams.get('category') : null;
-  const { addToCart, setIsCheckoutOpen } = useCart();
+  const { addToCart } = useCart();
   const { toggleWishlist, isInWishlist } = useWishlist();
   const { showToast } = useToast();
 
@@ -52,6 +52,12 @@ function ProductsContent() {
   const [isSearchExpanded, setIsSearchExpanded] = useState<boolean>(!!urlSearch);
   const searchInputRef = useRef<HTMLInputElement>(null);
   const [sortBy, setSortBy] = useState<SortOption>('featured');
+
+  // Keep the on-page search in sync when the navbar search changes ?search= while already on /products
+  useEffect(() => {
+    setSearchQuery(urlSearch || '');
+    setIsSearchExpanded(!!urlSearch);
+  }, [urlSearch]);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [addedId, setAddedId] = useState<string | null>(null);
 
@@ -73,8 +79,7 @@ function ProductsContent() {
   const handleBuyNow = (product: Product, e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    addToCart(product, 1);
-    setIsCheckoutOpen(true);
+    buyNowOnWhatsApp(product, 1);
   };
 
   useEffect(() => {
@@ -385,7 +390,7 @@ function ProductsContent() {
                 >
                   {/* Top Image: Edge-to-Edge Flush Image (No Inset Padding) */}
                   <div
-                    className="relative w-full aspect-square overflow-hidden bg-[#FAF6F0]"
+                    className="relative w-full aspect-[5/4] sm:aspect-square overflow-hidden bg-[#FAF6F0]"
                   >
                     {/* Top Badge */}
                     {product.badge && (
@@ -466,7 +471,7 @@ function ProductsContent() {
                           </span>
                         </>
                       ) : (
-                        <span className="text-xs text-stone-500">No reviews yet</span>
+                        <span className="text-xs font-semibold text-emerald-700 bg-emerald-50 border border-emerald-200 px-1.5 py-0.5 rounded">New Arrival</span>
                       )}
                     </div>
 
@@ -508,14 +513,15 @@ function ProductsContent() {
                     <div className="flex flex-col gap-1.5 sm:gap-2 mt-2 sm:mt-2.5">
                       <Link
                         href={`/products/${product.id}`}
-                        className="w-full py-2 sm:py-2.5 px-3 rounded-xl bg-[#3D2516] hover:bg-[#201309] text-[#FAF6F0] text-xs sm:text-sm font-bold text-center transition-all shadow-sm hover:shadow active:scale-95 flex items-center justify-center cursor-pointer"
+                        className="w-full py-1.5 sm:py-2.5 px-3 rounded-xl bg-[#3D2516] hover:bg-[#201309] text-[#FAF6F0] text-xs sm:text-sm font-bold text-center transition-all shadow-sm hover:shadow active:scale-95 flex items-center justify-center cursor-pointer"
                       >
+                        
                         View Details
                       </Link>
 
                       <button
                         onClick={(e) => handleBuyNow(product, e)}
-                        className="w-full py-2 sm:py-2.5 px-3 rounded-xl bg-[#25D366] hover:bg-[#20BD5A] text-white text-xs sm:text-sm font-bold text-center transition-all shadow-sm hover:shadow active:scale-95 flex items-center justify-center gap-2 cursor-pointer"
+                        className="w-full py-1.5 sm:py-2.5 px-3 rounded-xl bg-[#25D366] hover:bg-[#20BD5A] text-white text-xs sm:text-sm font-bold text-center transition-all shadow-sm hover:shadow active:scale-95 flex items-center justify-center gap-2 cursor-pointer"
                         title="Instant Buy Now"
                       >
                         <WhatsAppIcon className="w-4 h-4 fill-current shrink-0" />
@@ -533,7 +539,6 @@ function ProductsContent() {
       <Footer />
       <CartDrawer />
       <WishlistDrawer />
-      <CheckoutModal />
       <SearchModal
         isOpen={isSearchOpen}
         onClose={() => setIsSearchOpen(false)}

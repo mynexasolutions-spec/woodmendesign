@@ -44,7 +44,7 @@ export default function FloatingWhatsApp() {
               &quot;Namaste! Chat directly with our master woodcraft artisans for orders and custom sizes.&quot;
             </p>
             <p className="text-xs text-stone-300">
-              Online • Saharanpur Guild • Mon–Sat 9am–9pm
+              Online • Amroha Guild • Mon–Sat 9am–9pm
             </p>
           </div>
 
@@ -70,14 +70,29 @@ export default function FloatingWhatsApp() {
         </div>
       )}
 
-      {/* Main floating WhatsApp circular button (Icon Only) */}
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="w-13 h-13 sm:w-14 sm:h-14 w-[52px] h-[52px] sm:w-[56px] sm:h-[56px] rounded-full bg-[#25D366] hover:bg-[#20ba59] text-white shadow-2xl hover:shadow-[#25D366]/50 hover:scale-110 active:scale-95 transition-all flex items-center justify-center border border-white/30"
-        aria-label="Direct WhatsApp Support: 9720975271"
-      >
-        <WhatsAppIcon className="w-7 h-7 text-white" />
-      </button>
+      {/* Main floating WhatsApp circular button with hover tooltip */}
+      <div className="relative group">
+        {/* Tooltip (hidden while the popover is open) */}
+        {!isOpen && (
+          <span
+            role="tooltip"
+            className="pointer-events-none absolute right-full top-1/2 -translate-y-1/2 mr-3 whitespace-nowrap rounded-lg bg-[#241710] border border-[#4E3220] px-3 py-2 text-xs font-semibold text-[#FAF3EB] shadow-xl opacity-0 translate-x-1 transition-all duration-200 group-hover:opacity-100 group-hover:translate-x-0 group-focus-within:opacity-100 group-focus-within:translate-x-0"
+          >
+            Chat with us on WhatsApp
+            <span className="block text-[10px] font-normal text-amber-300/80">Replies within minutes</span>
+            {/* Arrow */}
+            <span className="absolute left-full top-1/2 -translate-y-1/2 -ml-1 h-2 w-2 rotate-45 bg-[#241710] border-r border-t border-[#4E3220]" />
+          </span>
+        )}
+
+        <button
+          onClick={() => setIsOpen(!isOpen)}
+          className="w-13 h-13 sm:w-14 sm:h-14 w-[52px] h-[52px] sm:w-[56px] sm:h-[56px] rounded-full bg-[#25D366] hover:bg-[#20ba59] text-white shadow-2xl hover:shadow-[#25D366]/50 hover:scale-110 active:scale-95 transition-all flex items-center justify-center border border-white/30"
+          aria-label="Direct WhatsApp Support: 9720975271"
+        >
+          <WhatsAppIcon className="w-7 h-7 text-white" />
+        </button>
+      </div>
     </div>
   );
 }

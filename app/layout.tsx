@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://woodmendesign.vercel.app'),
   title: 'Woodmen Design Corporation | Handcrafted Solid Wood Kitchenware & Tableware',
   description:
-    'Authentic Indian Sheesham & Acacia wooden utensils, roti casseroles, masala boxes, serving bowls & trays. Handcrafted in Saharanpur with direct artisan pricing.',
+    'Authentic Indian Sheesham & Acacia wooden utensils, roti casseroles, masala boxes, serving bowls & trays. Handcrafted in Amroha with direct artisan pricing.',
   keywords: [
     'woodmen design',
     'woodmen design corporation',
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     'wooden cake stand',
     'handcrafted kitchenware India',
     'solid wood tableware',
-    'saharanpur woodcraft',
+    'amroha woodcraft',
   ],
   authors: [{ name: 'Woodmen Design Corporation', url: 'https://woodmendesign.vercel.app' }],
   creator: 'Woodmen Design Corporation',
@@ -29,18 +29,18 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       { url: FAVICON_DATA_URI, type: 'image/png' },
-      { url: '/icon.png?v=5', sizes: '192x192', type: 'image/png' },
-      { url: '/favicon.ico?v=5', sizes: 'any' },
+      { url: '/icon.png?v=7', sizes: '192x192', type: 'image/png' },
+      { url: '/favicon.ico?v=7', sizes: 'any' },
     ],
     shortcut: FAVICON_DATA_URI,
     apple: [
-      { url: '/apple-touch-icon.png?v=5', sizes: '180x180', type: 'image/png' },
+      { url: '/apple-touch-icon.png?v=7', sizes: '180x180', type: 'image/png' },
     ],
   },
   openGraph: {
     title: 'Woodmen Design Corporation | Handcrafted Solid Wood Tableware',
     description:
-      'Authentic Indian Sheesham & Acacia wooden utensils, roti casseroles, masala boxes, serving bowls & trays. Handcrafted in Saharanpur with direct artisan pricing.',
+      'Authentic Indian Sheesham & Acacia wooden utensils, roti casseroles, masala boxes, serving bowls & trays. Handcrafted in Amroha with direct artisan pricing.',
     url: 'https://woodmendesign.vercel.app',
     siteName: 'Woodmen Design Corporation',
     images: [
@@ -58,7 +58,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Woodmen Design Corporation | Handcrafted Solid Wood Tableware',
     description:
-      'Authentic Indian Sheesham & Acacia wooden utensils, roti casseroles, masala boxes, serving bowls & trays. Handcrafted in Saharanpur with direct artisan pricing.',
+      'Authentic Indian Sheesham & Acacia wooden utensils, roti casseroles, masala boxes, serving bowls & trays. Handcrafted in Amroha with direct artisan pricing.',
     images: ['/og-image.jpg'],
   },
   alternates: {
@@ -76,9 +76,9 @@ export default function RootLayout({
       <head>
         <link rel="icon" type="image/png" sizes="32x32" href={FAVICON_DATA_URI} />
         <link rel="shortcut icon" href={FAVICON_DATA_URI} />
-        <link rel="icon" href="/favicon.ico?v=5" sizes="any" />
-        <link rel="icon" type="image/png" sizes="192x192" href="/icon.png?v=5" />
-        <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=5" />
+        <link rel="icon" href="/favicon.ico?v=7" sizes="any" />
+        <link rel="icon" type="image/png" sizes="192x192" href="/icon.png?v=7" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=7" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link

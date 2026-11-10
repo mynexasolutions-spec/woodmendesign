@@ -8,7 +8,6 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import CartDrawer from '@/components/CartDrawer';
 import WishlistDrawer from '@/components/WishlistDrawer';
-import CheckoutModal from '@/components/CheckoutModal';
 import SearchModal from '@/components/SearchModal';
 import FloatingWhatsApp from '@/components/FloatingWhatsApp';
 import { COLLECTIONS } from '@/data/collections';
@@ -47,7 +46,7 @@ export default function CollectionsPage() {
               100% Solid Natural Wood
             </span>
             <span className="px-3 py-1 rounded-full bg-white/10 text-amber-200 text-xs border border-white/10">
-              Direct from Saharanpur Artisans
+              Direct from Amroha Artisans
             </span>
           </div>
         </div>
@@ -111,7 +110,6 @@ export default function CollectionsPage() {
       <Footer />
       <CartDrawer />
       <WishlistDrawer />
-      <CheckoutModal />
       <SearchModal
         isOpen={isSearchOpen}
         onClose={() => setIsSearchOpen(false)}
